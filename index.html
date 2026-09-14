@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>饲料原料贸易平台｜首页</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#f3f5f8;
+  color:#172033;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+
+header{
+  background:#142033;
+  color:#fff;
+  padding:22px 20px;
+}
+
+header b{
+  font-size:20px;
+}
+
+header small{
+  display:block;
+  margin-top:6px;
+  color:#a9b7ca;
+}
+
+main{
+  max-width:1000px;
+  margin:auto;
+  padding:24px 16px;
+}
+
+.hero{
+  background:#fff;
+  border:1px solid #e0e6ee;
+  border-radius:14px;
+  padding:24px;
+  margin-bottom:16px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:28px;
+}
+
+.hero p{
+  color:#68768a;
+  line-height:1.8;
+  margin-bottom:0;
+}
+
+.modules{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.module{
+  background:#fff;
+  border:1px solid #e0e6ee;
+  border-radius:14px;
+  padding:20px;
+}
+
+.module h2{
+  margin:0 0 8px;
+  font-size:20px;
+}
+
+.module p{
+  color:#68768a;
+  line-height:1.7;
+  min-height:55px;
+}
+
+.module button{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.module button:hover{
+  background:#1d4ed8;
+}
+
+.note{
+  margin-top:16px;
+  background:#f7faff;
+  border:1px solid #d9e5f8;
+  border-radius:10px;
+  padding:14px;
+  color:#53647a;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.structure{
+  margin-top:16px;
+  background:#172033;
+  color:#dbe5f4;
+  border-radius:10px;
+  padding:16px;
+  font-size:13px;
+  line-height:1.8;
+  overflow:auto;
+}
+
+@media(max-width:600px){
+
+  main{
+    padding:14px 10px;
+  }
+
+  .hero h1{
+    font-size:24px;
+  }
+
+  .modules{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <b>饲料原料贸易平台</b>
+  <small>平台首页 · 模块导航</small>
+</header>
+
+<main>
+
+<section class="hero">
+
+  <h1>饲料原料贸易平台</h1>
+
+  <p>
+    平台首页只负责模块导航，不承载客户、供应商、
+    货源或交易业务数据。
+  </p>
+
+</section>
+
+
+<section class="modules">
+
+  <div class="module">
+
+    <h2>模块01｜客户中心</h2>
+
+    <p>
+      管理客户资料、客户ID、联系人、客户状态、
+      客户详情及客户数据。
+    </p>
+
+    <button onclick="go('module01.html')">
+      进入模块01｜客户中心
+    </button>
+
+  </div>
+
+
+  <div class="module">
+
+    <h2>模块02｜供应商 / 货源中心</h2>
+
+    <p>
+      管理供应商、货源、sourceId、价格、
+      数量、有效期及货源状态。
+    </p>
+
+    <button onclick="go('module02.html')">
+      进入模块02｜供应商 / 货源中心
+    </button>
+
+  </div>
+
+</section>
+
+
+<div class="note">
+
+  <b>当前系统结构：</b><br>
+
+  首页：
+  <b>index.html</b><br>
+
+  模块01：
+  <b>module01.html</b><br>
+
+  模块02：
+  <b>module02.html</b><br><br>
+
+  三个页面使用同一个浏览器 LocalStorage 数据库
+  <b>FEED_TRADE_PLATFORM_DB_V01</b>。
+
+</div>
+
+
+<pre class="structure">index.html
+│
+├── module01.html
+│     └── Customer
+│
+└── module02.html
+      ├── Supplier
+      └── Source
+
+              ↓
+
+        DataCore
+              ↓
+FEED_TRADE_PLATFORM_DB_V01
+
+Customer
+Supplier
+Source
+Demand
+Opportunity
+Quotes
+Trades
+Settlements
+Logs
+
+通过唯一 ID 建立跨模块关系。</pre>
+
+</main>
+
+
+<script>
+
+function go(page){
+
+  window.location.href = page;
+
+}
+
+</script>
+
+</body>
+</html>
