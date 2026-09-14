@@ -1,0 +1,2296 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>饲料原料贸易平台｜模块01客户中心</title>
+
+<style>
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:#f3f5f8;
+  color:#172033;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "PingFang SC","Microsoft YaHei",sans-serif
+}
+
+header{
+  height:62px;
+  background:#142033;
+  color:#fff;
+  padding:0 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+header b{
+  font-size:18px
+}
+
+header small{
+  color:#a9b7ca
+}
+
+main{
+  max-width:1380px;
+  margin:auto;
+  padding:20px
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px
+}
+
+.top h1{
+  margin:0;
+  font-size:24px
+}
+
+.top p{
+  margin:6px 0 0;
+  color:#68768a
+}
+
+button{
+  border:1px solid #d4dbe5;
+  background:#fff;
+  border-radius:7px;
+  padding:8px 12px;
+  cursor:pointer
+}
+
+button.primary{
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb
+}
+
+button.green{
+  background:#059669;
+  color:#fff;
+  border-color:#059669
+}
+
+button.red{
+  color:#b91c1c
+}
+
+/* =========================================================
+   首页模块导航
+   只新增这一组样式，不影响模块01原有功能
+   ========================================================= */
+
+.module-nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px
+}
+
+.module-nav a{
+  display:inline-block;
+  text-decoration:none;
+  border:1px solid #2563eb;
+  background:#2563eb;
+  color:#fff;
+  border-radius:7px;
+  padding:9px 14px;
+  font-size:14px
+}
+
+.module-nav a:hover{
+  background:#1d4ed8;
+}
+
+/* ========================================================= */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:18px 0 12px
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e0e6ee;
+  border-radius:10px;
+  padding:15px
+}
+
+.kpi small{
+  color:#718096
+}
+
+.kpi strong{
+  display:block;
+  font-size:24px;
+  margin:5px 0
+}
+
+.toolbar{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px
+}
+
+.toolbar input,
+.toolbar select{
+  padding:9px;
+  border:1px solid #d4dbe5;
+  border-radius:7px
+}
+
+.toolbar input{
+  flex:1
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:1.5fr .85fr;
+  gap:12px
+}
+
+.tablewrap{
+  overflow:auto
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px
+}
+
+.table th,
+.table td{
+  padding:11px 8px;
+  text-align:left;
+  border-bottom:1px solid #edf0f4;
+  font-size:13px
+}
+
+.table th{
+  color:#66758a;
+  font-weight:500
+}
+
+.tag{
+  display:inline-block;
+  padding:3px 8px;
+  border-radius:99px;
+  font-size:11px;
+  background:#eef2ff;
+  color:#4338ca
+}
+
+.tag.green{
+  background:#ecfdf5;
+  color:#047857
+}
+
+.tag.orange{
+  background:#fff7ed;
+  color:#b45309
+}
+
+.notice{
+  padding:10px 12px;
+  border:1px solid #d9e5f8;
+  background:#f7faff;
+  border-radius:8px;
+  font-size:12px;
+  color:#50627b;
+  margin-bottom:12px
+}
+
+.detail{
+  line-height:1.9
+}
+
+.empty{
+  padding:35px;
+  text-align:center;
+  color:#7b8799
+}
+
+.test{
+  margin-top:12px
+}
+
+.testhead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.testhead h2{
+  font-size:16px;
+  margin:0
+}
+
+.result{
+  display:grid;
+  gap:6px;
+  margin-top:10px
+}
+
+.pass,
+.fail{
+  padding:8px 10px;
+  border-radius:7px;
+  font-size:12px
+}
+
+.pass{
+  background:#ecfdf5;
+  color:#047857
+}
+
+.fail{
+  background:#fef2f2;
+  color:#b91c1c
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#11182788;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px
+}
+
+.modal.show{
+  display:flex
+}
+
+.dialog{
+  background:#fff;
+  width:min(720px,100%);
+  border-radius:12px;
+  padding:18px
+}
+
+.dialog h2{
+  margin:0 0 14px
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+.field label{
+  display:block;
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:4px
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:9px;
+  border:1px solid #d4dbe5;
+  border-radius:7px
+}
+
+.full{
+  grid-column:1/-1
+}
+
+.foot{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:15px
+}
+
+pre{
+  background:#111827;
+  color:#d1d5db;
+  padding:12px;
+  border-radius:8px;
+  overflow:auto;
+  font-size:11px
+}
+
+@media(max-width:900px){
+
+  .cards{
+    grid-template-columns:repeat(3,1fr)
+  }
+
+  .layout{
+    grid-template-columns:1fr
+  }
+
+}
+
+@media(max-width:600px){
+
+  .cards{
+    grid-template-columns:1fr 1fr
+  }
+
+  .form{
+    grid-template-columns:1fr
+  }
+
+  .full{
+    grid-column:auto
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <b>饲料原料贸易平台 · 模块01 客户中心</b>
+  <small>独立可运行 / 数据接口预留 / V0.2</small>
+</header>
+
+<main>
+
+<div class="top">
+
+  <div>
+
+    <h1>客户中心</h1>
+
+    <p>
+      这是可操作测试模块，不是展示原型。
+      所有客户数据写入统一 DataCore。
+    </p>
+
+    <!-- =====================================================
+         模块入口
+         这里只增加模块02入口，不修改模块01业务逻辑
+         ===================================================== -->
+
+    <div class="module-nav">
+
+      <a
+        href="./module02-source.html"
+      >
+        进入模块02｜供应商 / 货源中心
+      </a>
+
+    </div>
+
+    <!-- ===================================================== -->
+
+  </div>
+
+  <div>
+
+    <button
+      onclick="resetData()"
+    >
+      恢复初始测试数据
+    </button>
+
+    <button
+      class="primary"
+      onclick="openAdd()"
+    >
+      ＋ 新增客户
+    </button>
+
+  </div>
+
+</div>
+
+
+<div
+  class="cards"
+  id="kpis"
+></div>
+
+
+<div class="card">
+
+  <div class="toolbar">
+
+    <input
+      id="q"
+      placeholder="搜索客户名称 / 联系人 / 电话 / 区域"
+      oninput="render()"
+    >
+
+    <select
+      id="filter"
+      onchange="render()"
+    >
+
+      <option value="">
+        全部状态
+      </option>
+
+      <option>
+        重点
+      </option>
+
+      <option>
+        正常
+      </option>
+
+      <option>
+        暂停
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="notice">
+
+    <b>本模块验收：</b>
+
+    新增、编辑、搜索、详情、删除、
+    刷新持久化、唯一ID、接口读写、自动测试。
+
+    后续需求/交易模块将通过
+    customerId
+    读取这里的客户。
+
+  </div>
+
+</div>
+
+
+<div
+  class="layout"
+  style="margin-top:12px"
+>
+
+  <div class="card tablewrap">
+
+    <h2
+      style="font-size:16px;margin-top:0"
+    >
+      客户列表
+    </h2>
+
+    <table class="table">
+
+      <thead>
+
+        <tr>
+
+          <th>客户ID</th>
+          <th>客户</th>
+          <th>联系人</th>
+          <th>区域</th>
+          <th>累计需求</th>
+          <th>累计成交</th>
+          <th>贡献毛利</th>
+          <th>应收</th>
+          <th>状态</th>
+          <th>操作</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="tbody"></tbody>
+
+    </table>
+
+  </div>
+
+
+  <div class="card">
+
+    <h2
+      style="font-size:16px;margin-top:0"
+    >
+      客户详情
+    </h2>
+
+    <div
+      id="detail"
+      class="empty"
+    >
+      点击“详情”查看真实数据
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="card test">
+
+  <div class="testhead">
+
+    <h2>
+      🧪 模块自动测试
+    </h2>
+
+    <button
+      class="green"
+      onclick="runTests()"
+    >
+      运行全部测试
+    </button>
+
+  </div>
+
+
+  <p
+    class="muted"
+    style="font-size:12px;color:#718096"
+  >
+    测试会创建临时客户、修改、读取、删除并验证
+    DataCore；完成后自动恢复测试前数据，
+    不污染你的正式数据。
+  </p>
+
+
+  <div
+    id="tests"
+    class="result"
+  >
+
+    <div
+      class="empty"
+      style="padding:15px"
+    >
+      尚未运行测试
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="card test">
+
+  <h2
+    style="font-size:16px;margin-top:0"
+  >
+    🔌 跨模块数据接口预览
+  </h2>
+
+
+  <div class="notice">
+
+    下一模块可以直接调用这些方法，
+    而不需要读取页面 HTML：
+
+  </div>
+
+
+  <pre>
+DataCore.Customer.list()
+DataCore.Customer.get(customerId)
+DataCore.Customer.create(payload)
+DataCore.Customer.update(customerId, payload)
+DataCore.Customer.remove(customerId)
+
+示例：Demand.create({
+  customerId: "C001",
+  materialId: "M001",
+  quantity: 100
+})
+  </pre>
+
+</div>
+
+</main>
+
+
+<div
+  class="modal"
+  id="modal"
+>
+
+  <div class="dialog">
+
+    <h2 id="mt">
+      新增客户
+    </h2>
+
+    <div class="form">
+
+      <div class="field">
+
+        <label>
+          客户名称 *
+        </label>
+
+        <input
+          id="name"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          联系人
+        </label>
+
+        <input
+          id="contact"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          联系电话
+        </label>
+
+        <input
+          id="phone"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          区域
+        </label>
+
+        <input
+          id="region"
+          placeholder="济南"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          客户类型
+        </label>
+
+        <select id="type">
+
+          <option>
+            饲料厂
+          </option>
+
+          <option>
+            养殖企业
+          </option>
+
+          <option>
+            贸易商
+          </option>
+
+          <option>
+            其他
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          状态
+        </label>
+
+        <select id="status">
+
+          <option>
+            正常
+          </option>
+
+          <option>
+            重点
+          </option>
+
+          <option>
+            暂停
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          备注
+        </label>
+
+        <textarea
+          id="note"
+          rows="3"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="foot">
+
+      <button
+        onclick="closeModal()"
+      >
+        取消
+      </button>
+
+      <button
+        class="primary"
+        onclick="saveForm()"
+      >
+        保存
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DataCore v0.2
+   统一数据层：后续模块只通过这里互相调用
+   ========================================================= */
+
+const DataCore = (() => {
+
+  const KEY =
+    'FEED_TRADE_PLATFORM_DB_V01';
+
+
+  const blank = () => ({
+
+    version:'0.2',
+
+    customers:[],
+
+    demands:[],
+
+    sources:[],
+
+    opportunities:[],
+
+    quotes:[],
+
+    trades:[],
+
+    settlements:[],
+
+    logs:[]
+
+  });
+
+
+  function read(){
+
+    try{
+
+      const x =
+        JSON.parse(
+          localStorage.getItem(KEY)
+        );
+
+      return
+        x && x.version
+          ? x
+          : blank();
+
+    }catch(e){
+
+      return blank();
+
+    }
+
+  }
+
+
+  function write(db){
+
+    localStorage.setItem(
+      KEY,
+      JSON.stringify(db)
+    );
+
+    return db;
+
+  }
+
+
+  function uid(prefix){
+
+    return
+      prefix +
+      Date.now()
+        .toString(36)
+        .toUpperCase() +
+      Math.random()
+        .toString(36)
+        .slice(2,6)
+        .toUpperCase();
+
+  }
+
+
+  function api(){
+
+    return {
+
+      Customer:{
+
+        list:() =>
+          read().customers,
+
+
+        get:id =>
+          read()
+            .customers
+            .find(
+              x => x.id === id
+            ) || null,
+
+
+        create:p => {
+
+          const db =
+            read();
+
+          const c = {
+
+            id:uid('C'),
+
+            createdAt:
+              new Date()
+                .toISOString(),
+
+            updatedAt:
+              new Date()
+                .toISOString(),
+
+            demandQty:0,
+
+            tradeQty:0,
+
+            grossProfit:0,
+
+            receivable:0,
+
+            ...p
+
+          };
+
+
+          db.customers.push(c);
+
+
+          db.logs.push({
+
+            at:
+              new Date()
+                .toISOString(),
+
+            action:
+              'Customer.create',
+
+            id:c.id
+
+          });
+
+
+          write(db);
+
+          return c;
+
+        },
+
+
+        update:(id,p) => {
+
+          const db =
+            read();
+
+          const i =
+            db.customers
+              .findIndex(
+                x => x.id === id
+              );
+
+
+          if(i < 0){
+
+            throw Error(
+              '客户不存在'
+            );
+
+          }
+
+
+          db.customers[i] = {
+
+            ...db.customers[i],
+
+            ...p,
+
+            updatedAt:
+              new Date()
+                .toISOString()
+
+          };
+
+
+          write(db);
+
+          return db.customers[i];
+
+        },
+
+
+        remove:id => {
+
+          const db =
+            read();
+
+          const i =
+            db.customers
+              .findIndex(
+                x => x.id === id
+              );
+
+
+          if(i < 0){
+
+            return false;
+
+          }
+
+
+          const c =
+            db.customers[i];
+
+
+          if(
+            c.demandQty ||
+            c.tradeQty ||
+            c.receivable
+          ){
+
+            throw Error(
+              '已有业务关联，禁止删除'
+            );
+
+          }
+
+
+          db.customers.splice(
+            i,
+            1
+          );
+
+
+          db.logs.push({
+
+            at:
+              new Date()
+                .toISOString(),
+
+            action:
+              'Customer.remove',
+
+            id
+
+          });
+
+
+          write(db);
+
+          return true;
+
+        }
+
+      },
+
+
+      DB:{
+
+        get:read,
+
+        replace:write,
+
+        reset:blank
+
+      },
+
+
+      export:() =>
+        JSON.stringify(
+          read(),
+          null,
+          2
+        )
+
+    };
+
+  }
+
+
+  return api();
+
+})();
+
+
+let editingId = null;
+
+let selectedId = null;
+
+
+function money(n){
+
+  return
+    '¥' +
+    Number(n || 0)
+      .toLocaleString('zh-CN');
+
+}
+
+
+function esc(s){
+
+  return String(
+    s ?? ''
+  )
+  .replace(
+    /[&<>\"']/g,
+    m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '\"':'&quot;',
+      "'":'&#39;'
+    }[m])
+  );
+
+}
+
+
+function ensureSeed(){
+
+  if(
+    !DataCore.Customer.list().length
+  ){
+
+    [
+
+      {
+        name:'华牧饲料',
+        contact:'李经理',
+        phone:'13800000001',
+        region:'济南',
+        type:'饲料厂',
+        status:'重点',
+        note:'玉米、豆粕长期采购客户',
+        demandQty:320,
+        tradeQty:220,
+        grossProfit:12600,
+        receivable:88000
+      },
+
+      {
+        name:'丰源饲料',
+        contact:'王经理',
+        phone:'13800000002',
+        region:'济南',
+        type:'饲料厂',
+        status:'正常',
+        note:'豆粕需求为主',
+        demandQty:180,
+        tradeQty:120,
+        grossProfit:7200,
+        receivable:36000
+      },
+
+      {
+        name:'鲁盛养殖',
+        contact:'赵总',
+        phone:'13800000003',
+        region:'泰安',
+        type:'养殖企业',
+        status:'正常',
+        note:'季度采购',
+        demandQty:80,
+        tradeQty:60,
+        grossProfit:3900,
+        receivable:0
+      }
+
+    ]
+    .forEach(
+      DataCore.Customer.create
+    );
+
+  }
+
+}
+
+
+function render(){
+
+  const all =
+    DataCore.Customer.list();
+
+
+  const q =
+    (
+      document
+        .getElementById('q')
+        .value || ''
+    )
+    .trim()
+    .toLowerCase();
+
+
+  const f =
+    document
+      .getElementById('filter')
+      .value;
+
+
+  const a =
+    all.filter(
+      c =>
+        (
+          !q ||
+          [
+            c.id,
+            c.name,
+            c.contact,
+            c.phone,
+            c.region
+          ]
+          .join(' ')
+          .toLowerCase()
+          .includes(q)
+        )
+        &&
+        (
+          !f ||
+          c.status === f
+        )
+    );
+
+
+  const d =
+    all.reduce(
+      (s,c) =>
+        s + c.demandQty,
+      0
+    );
+
+
+  const t =
+    all.reduce(
+      (s,c) =>
+        s + c.tradeQty,
+      0
+    );
+
+
+  const g =
+    all.reduce(
+      (s,c) =>
+        s + c.grossProfit,
+      0
+    );
+
+
+  const ar =
+    all.reduce(
+      (s,c) =>
+        s + c.receivable,
+      0
+    );
+
+
+  document
+    .getElementById('kpis')
+    .innerHTML =
+
+    `
+
+    <div class="card kpi">
+
+      <small>
+        客户总数
+      </small>
+
+      <strong>
+        ${all.length}
+      </strong>
+
+      <small>
+        客户入口
+      </small>
+
+    </div>
+
+
+    <div class="card kpi">
+
+      <small>
+        累计需求
+      </small>
+
+      <strong>
+        ${d} 吨
+      </strong>
+
+      <small>
+        后续由需求模块更新
+      </small>
+
+    </div>
+
+
+    <div class="card kpi">
+
+      <small>
+        累计成交
+      </small>
+
+      <strong>
+        ${t} 吨
+      </strong>
+
+      <small>
+        后续由交易模块更新
+      </small>
+
+    </div>
+
+
+    <div class="card kpi">
+
+      <small>
+        贡献毛利
+      </small>
+
+      <strong>
+        ${money(g)}
+      </strong>
+
+      <small>
+        由交易/结算模块回写
+      </small>
+
+    </div>
+
+
+    <div class="card kpi">
+
+      <small>
+        应收余额
+      </small>
+
+      <strong>
+        ${money(ar)}
+      </strong>
+
+      <small>
+        由结算模块更新
+      </small>
+
+    </div>
+
+    `;
+
+
+  document
+    .getElementById('tbody')
+    .innerHTML =
+
+    a.length
+
+      ?
+
+      a.map(
+        c =>
+
+        `
+
+        <tr>
+
+          <td>
+            ${esc(c.id)}
+          </td>
+
+
+          <td>
+
+            <b>
+              ${esc(c.name)}
+            </b>
+
+            <br>
+
+            <small>
+              ${esc(c.type)}
+            </small>
+
+          </td>
+
+
+          <td>
+            ${esc(c.contact || '-')}
+          </td>
+
+
+          <td>
+            ${esc(c.region || '-')}
+          </td>
+
+
+          <td>
+            ${c.demandQty}吨
+          </td>
+
+
+          <td>
+            ${c.tradeQty}吨
+          </td>
+
+
+          <td>
+            ${money(c.grossProfit)}
+          </td>
+
+
+          <td>
+            ${money(c.receivable)}
+          </td>
+
+
+          <td>
+
+            <span
+              class="tag
+              ${
+                c.status === '重点'
+                  ? 'orange'
+                  : c.status === '正常'
+                    ? 'green'
+                    : ''
+              }"
+            >
+
+              ${esc(c.status)}
+
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <button
+              onclick="showDetail('${c.id}')"
+            >
+              详情
+            </button>
+
+            <button
+              onclick="editClient('${c.id}')"
+            >
+              编辑
+            </button>
+
+          </td>
+
+        </tr>
+
+        `
+      )
+      .join('')
+
+      :
+
+      `
+
+      <tr>
+
+        <td
+          colspan="10"
+          class="empty"
+        >
+          没有匹配客户
+        </td>
+
+      </tr>
+
+      `;
+
+
+  if(
+    selectedId &&
+    DataCore.Customer.get(
+      selectedId
+    )
+  ){
+
+    showDetail(
+      selectedId,
+      false
+    );
+
+  }
+
+}
+
+
+function showDetail(
+  id,
+  scroll = true
+){
+
+  const c =
+    DataCore.Customer.get(id);
+
+
+  if(!c){
+
+    return;
+
+  }
+
+
+  selectedId = id;
+
+
+  document
+    .getElementById('detail')
+    .innerHTML =
+
+    `
+
+    <div class="detail">
+
+      <h3>
+        ${esc(c.name)}
+      </h3>
+
+
+      <div
+        class="muted"
+        style="color:#718096"
+      >
+
+        ID：
+        ${esc(c.id)}
+
+        <br>
+
+        创建：
+        ${
+          new Date(
+            c.createdAt
+          ).toLocaleString()
+        }
+
+      </div>
+
+
+      <hr>
+
+
+      <b>
+        联系人：
+      </b>
+
+      ${esc(c.contact || '-')}
+
+      <br>
+
+
+      <b>
+        电话：
+      </b>
+
+      ${esc(c.phone || '-')}
+
+      <br>
+
+
+      <b>
+        区域：
+      </b>
+
+      ${esc(c.region || '-')}
+
+      <br>
+
+
+      <b>
+        类型：
+      </b>
+
+      ${esc(c.type)}
+
+      <br>
+
+
+      <b>
+        状态：
+      </b>
+
+      ${esc(c.status)}
+
+      <br>
+
+
+      <b>
+        累计需求：
+      </b>
+
+      ${c.demandQty} 吨
+
+      <br>
+
+
+      <b>
+        累计成交：
+      </b>
+
+      ${c.tradeQty} 吨
+
+      <br>
+
+
+      <b>
+        贡献毛利：
+      </b>
+
+      ${money(c.grossProfit)}
+
+      <br>
+
+
+      <b>
+        应收：
+      </b>
+
+      ${money(c.receivable)}
+
+      <br>
+
+
+      <b>
+        备注：
+      </b>
+
+      ${esc(c.note || '-')}
+
+
+      <hr>
+
+
+      <div class="notice">
+
+        接口关系：
+
+        未来 Demand.customerId、
+        Trade.customerId、
+        Settlement.customerId
+
+        都指向
+
+        <b>
+          ${esc(c.id)}
+        </b>。
+
+      </div>
+
+
+      <button
+        onclick="editClient('${c.id}')"
+      >
+        编辑
+      </button>
+
+
+      <button
+        class="red"
+        onclick="deleteClient('${c.id}')"
+      >
+        删除
+      </button>
+
+    </div>
+
+    `;
+
+}
+
+
+function openAdd(){
+
+  editingId = null;
+
+
+  document
+    .getElementById('mt')
+    .textContent =
+      '新增客户';
+
+
+  [
+    'name',
+    'contact',
+    'phone',
+    'region',
+    'note'
+  ]
+  .forEach(
+    id =>
+      document
+        .getElementById(id)
+        .value = ''
+  );
+
+
+  document
+    .getElementById('type')
+    .value =
+      '饲料厂';
+
+
+  document
+    .getElementById('status')
+    .value =
+      '正常';
+
+
+  document
+    .getElementById('modal')
+    .classList
+    .add('show');
+
+}
+
+
+function editClient(id){
+
+  const c =
+    DataCore.Customer.get(id);
+
+
+  if(!c){
+
+    return;
+
+  }
+
+
+  editingId = id;
+
+
+  document
+    .getElementById('mt')
+    .textContent =
+      '编辑客户';
+
+
+  [
+    'name',
+    'contact',
+    'phone',
+    'region',
+    'note'
+  ]
+  .forEach(
+    k =>
+      document
+        .getElementById(k)
+        .value =
+          c[k] || ''
+  );
+
+
+  document
+    .getElementById('type')
+    .value =
+      c.type;
+
+
+  document
+    .getElementById('status')
+    .value =
+      c.status;
+
+
+  document
+    .getElementById('modal')
+    .classList
+    .add('show');
+
+}
+
+
+function saveForm(){
+
+  const name =
+    document
+      .getElementById('name')
+      .value
+      .trim();
+
+
+  if(!name){
+
+    alert(
+      '客户名称不能为空'
+    );
+
+    return;
+
+  }
+
+
+  const p = {
+
+    name,
+
+    contact:
+      document
+        .getElementById('contact')
+        .value
+        .trim(),
+
+    phone:
+      document
+        .getElementById('phone')
+        .value
+        .trim(),
+
+    region:
+      document
+        .getElementById('region')
+        .value
+        .trim(),
+
+    type:
+      document
+        .getElementById('type')
+        .value,
+
+    status:
+      document
+        .getElementById('status')
+        .value,
+
+    note:
+      document
+        .getElementById('note')
+        .value
+        .trim()
+
+  };
+
+
+  try{
+
+    const c =
+      editingId
+
+        ?
+
+        DataCore.Customer.update(
+          editingId,
+          p
+        )
+
+        :
+
+        DataCore.Customer.create(
+          p
+        );
+
+
+    selectedId =
+      c.id;
+
+
+    closeModal();
+
+
+    render();
+
+
+    showDetail(
+      c.id
+    );
+
+
+  }catch(e){
+
+    alert(
+      e.message
+    );
+
+  }
+
+}
+
+
+function deleteClient(id){
+
+  try{
+
+    if(
+      confirm(
+        '确定删除？'
+      )
+    ){
+
+      DataCore.Customer.remove(
+        id
+      );
+
+
+      selectedId =
+        null;
+
+
+      render();
+
+
+      document
+        .getElementById('detail')
+        .innerHTML =
+          '<div class="empty">已删除</div>';
+
+    }
+
+  }catch(e){
+
+    alert(
+      e.message
+    );
+
+  }
+
+}
+
+
+function closeModal(){
+
+  document
+    .getElementById('modal')
+    .classList
+    .remove('show');
+
+}
+
+
+function resetData(){
+
+  if(
+    !confirm(
+      '恢复初始测试数据？当前客户数据将被清空并重新建立。'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  localStorage.removeItem(
+    'FEED_TRADE_PLATFORM_DB_V01'
+  );
+
+
+  ensureSeed();
+
+
+  selectedId =
+    null;
+
+
+  render();
+
+
+  document
+    .getElementById('detail')
+    .innerHTML =
+      '<div class="empty">已恢复初始测试数据</div>';
+
+}
+
+
+function runTests(){
+
+  const box =
+    document
+      .getElementById('tests');
+
+
+  box.innerHTML =
+    '';
+
+
+  const before =
+    JSON.stringify(
+      DataCore.DB.get()
+    );
+
+
+  const out =
+    [];
+
+
+  function test(
+    name,
+    fn
+  ){
+
+    try{
+
+      fn();
+
+
+      out.push(
+
+        `<div class="pass">
+          ✅ ${name}
+        </div>`
+
+      );
+
+    }catch(e){
+
+      out.push(
+
+        `<div class="fail">
+          ❌ ${name}：
+          ${esc(e.message)}
+        </div>`
+
+      );
+
+    }
+
+  }
+
+
+  let id = null;
+
+
+  test(
+    'DataCore 可用且存在 Customer API',
+    () => {
+
+      if(
+        !DataCore.Customer ||
+        !DataCore.Customer.create ||
+        !DataCore.Customer.update ||
+        !DataCore.Customer.remove
+      ){
+
+        throw Error(
+          '接口不完整'
+        );
+
+      }
+
+    }
+  );
+
+
+  test(
+    '新增客户并获得唯一 customerId',
+    () => {
+
+      let c =
+        DataCore.Customer.create({
+
+          name:
+            '自动测试客户',
+
+          contact:
+            '测试',
+
+          region:
+            '测试区',
+
+          type:
+            '饲料厂',
+
+          status:
+            '正常'
+
+        });
+
+
+      id =
+        c.id;
+
+
+      if(
+        !id ||
+        !/^C/.test(id)
+      ){
+
+        throw Error(
+          '没有有效ID'
+        );
+
+      }
+
+    }
+  );
+
+
+  test(
+    'get(customerId) 可以读取刚新增客户',
+    () => {
+
+      let c =
+        DataCore.Customer.get(
+          id
+        );
+
+
+      if(
+        !c ||
+        c.name !==
+          '自动测试客户'
+      ){
+
+        throw Error(
+          '读取失败'
+        );
+
+      }
+
+    }
+  );
+
+
+  test(
+    'update(customerId) 能修改数据',
+    () => {
+
+      let c =
+        DataCore.Customer.update(
+          id,
+          {
+            name:
+              '自动测试客户-已修改'
+          }
+        );
+
+
+      if(
+        c.name !==
+          '自动测试客户-已修改'
+      ){
+
+        throw Error(
+          '修改失败'
+        );
+
+      }
+
+    }
+  );
+
+
+  test(
+    'list() 能看到修改后的客户',
+    () => {
+
+      if(
+        !DataCore.Customer
+          .list()
+          .some(
+            c =>
+              c.id === id &&
+              c.name ===
+                '自动测试客户-已修改'
+          )
+      ){
+
+        throw Error(
+          '列表未同步'
+        );
+
+      }
+
+    }
+  );
+
+
+  test(
+    'remove(customerId) 能删除无业务关联客户',
+    () => {
+
+      if(
+        !DataCore.Customer.remove(
+          id
+        )
+      ){
+
+        throw Error(
+          '删除失败'
+        );
+
+      }
+
+
+      if(
+        DataCore.Customer.get(
+          id
+        )
+      ){
+
+        throw Error(
+          '删除后仍存在'
+        );
+
+      }
+
+    }
+  );
+
+
+  test(
+    '业务客户禁止删除，保护跨模块数据',
+    () => {
+
+      let c =
+        DataCore.Customer.create({
+
+          name:
+            '保护测试',
+
+          demandQty:
+            1
+
+        });
+
+
+      try{
+
+        DataCore.Customer.remove(
+          c.id
+        );
+
+
+        throw Error(
+          '本应禁止删除'
+        );
+
+      }catch(e){
+
+        if(
+          !/禁止删除/.test(
+            e.message
+          )
+        ){
+
+          throw e;
+
+        }
+
+      }finally{
+
+        const db =
+          DataCore.DB.get();
+
+
+        db.customers =
+          db.customers.filter(
+            x =>
+              x.id !== c.id
+          );
+
+
+        DataCore.DB.replace(
+          db
+        );
+
+      }
+
+    }
+  );
+
+
+  localStorage.setItem(
+    'FEED_TRADE_PLATFORM_DB_V01',
+    before
+  );
+
+
+  ensureSeed();
+
+
+  render();
+
+
+  box.innerHTML =
+    out.join('') +
+
+    `
+
+    <div
+      class="notice"
+      style="margin-top:8px"
+    >
+
+      <b>
+        测试结束。
+      </b>
+
+      临时数据已恢复，
+      正式数据未被测试污染。
+
+    </div>
+
+    `;
+
+}
+
+
+ensureSeed();
+
+render();
+
+</script>
+
+</body>
+</html>
