@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>饲料原料贸易平台｜首页</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#f4f6f8;
+  color:#172033;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",
+  "Microsoft YaHei",Arial,sans-serif;
+}
+
+header{
+  background:#172235;
+  color:#fff;
+  padding:18px 20px;
+}
+
+header b{
+  font-size:20px;
+}
+
+header small{
+  display:block;
+  margin-top:5px;
+  color:#aebbd0;
+}
+
+main{
+  max-width:1400px;
+  margin:auto;
+  padding:18px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:24px;
+  margin:0;
+}
+
+h2{
+  font-size:18px;
+  margin:0 0 14px;
+}
+
+p{
+  color:#68768a;
+  line-height:1.7;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e0e5ec;
+  border-radius:10px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+.nav-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.module{
+  display:block;
+  text-decoration:none;
+  color:#172033;
+  background:#fff;
+  border:1px solid #e0e5ec;
+  border-radius:12px;
+  padding:20px;
+  transition:.15s;
+}
+
+.module:hover{
+  border-color:#2563eb;
+  box-shadow:0 4px 15px rgba(15,23,42,.08);
+  transform:translateY(-1px);
+}
+
+.module-number{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:8px;
+}
+
+.module-title{
+  font-size:19px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.module-desc{
+  font-size:13px;
+  color:#68768a;
+  line-height:1.7;
+  min-height:44px;
+}
+
+.module-status{
+  display:inline-block;
+  margin-top:14px;
+  padding:4px 9px;
+  border-radius:20px;
+  background:#ecfdf5;
+  color:#047857;
+  font-size:11px;
+}
+
+.module-arrow{
+  float:right;
+  margin-top:13px;
+  color:#2563eb;
+  font-weight:600;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.connection{
+  padding:12px;
+  border-radius:8px;
+  background:#f7faff;
+  border:1px solid #dce7f7;
+  color:#53647a;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.data-flow{
+  font-family:monospace;
+  background:#111827;
+  color:#d5dbea;
+  padding:15px;
+  border-radius:8px;
+  overflow:auto;
+  font-size:12px;
+  line-height:1.8;
+}
+
+.footer{
+  text-align:center;
+  color:#8793a5;
+  font-size:12px;
+  padding:20px 0;
+}
+
+@media(max-width:900px){
+
+  .nav-grid{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  main{
+    padding:10px;
+  }
+
+  header{
+    padding:15px;
+  }
+
+  h1{
+    font-size:21px;
+  }
+
+  .top{
+    flex-direction:column;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <b>饲料原料贸易平台</b>
+  <small>Feed Trade Platform · 模块化业务系统</small>
+</header>
+
+<main>
+
+  <div class="top">
+    <div>
+      <h1>平台首页</h1>
+      <p>
+        当前系统采用模块化架构。
+        各业务模块可以独立测试，后续通过统一 DataCore 数据接口进行整合。
+      </p>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       模块入口
+       ===================================================== -->
+
+  <div class="card">
+
+    <h2>业务模块</h2>
+
+    <div class="nav-grid">
+
+
+      <!-- 模块01 -->
+
+      <a
+        class="module"
+        href="./module01.html"
+      >
+
+        <div class="module-number">
+          MODULE 01
+        </div>
+
+        <div class="module-title">
+          客户 / 需求中心
+        </div>
+
+        <div class="module-desc">
+          管理客户、客户需求以及相关业务信息。
+          模块01独立运行并保留后续数据接口。
+        </div>
+
+        <span class="module-status">
+          可进入测试
+        </span>
+
+        <span class="module-arrow">
+          进入 →
+        </span>
+
+      </a>
+
+
+      <!-- 模块02 -->
+
+      <a
+        class="module"
+        href="./module02.html"
+      >
+
+        <div class="module-number">
+          MODULE 02
+        </div>
+
+        <div class="module-title">
+          供应商 / 货源中心
+        </div>
+
+        <div class="module-desc">
+          管理供应商、具体货源、规格、产地、
+          数量、价格以及货源状态。
+        </div>
+
+        <span class="module-status">
+          可进入测试
+        </span>
+
+        <span class="module-arrow">
+          进入 →
+        </span>
+
+      </a>
+
+
+      <!-- 模块03 -->
+
+      <a
+        class="module"
+        href="./module03.html"
+      >
+
+        <div class="module-number">
+          MODULE 03
+        </div>
+
+        <div class="module-title">
+          商机 / 业务机会中心
+        </div>
+
+        <div class="module-desc">
+          管理客户需求与货源之间形成的业务机会，
+          为后续报价、合同及成交流程提供数据基础。
+        </div>
+
+        <span class="module-status">
+          可进入测试
+        </span>
+
+        <span class="module-arrow">
+          进入 →
+        </span>
+
+      </a>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       当前系统架构
+       ===================================================== -->
+
+  <div class="info-grid">
+
+
+    <div class="card">
+
+      <h2>当前模块关系</h2>
+
+      <div class="data-flow">
+
+Customer
+   │
+   │ customerId
+   ↓
+Demand
+   │
+   │ demandId
+   ↓
+Opportunity
+   │
+   ├── customerId
+   │
+   └── sourceId
+           ↑
+           │
+Source
+   │
+   │ supplierId
+   ↓
+Supplier
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>数据接口原则</h2>
+
+      <div class="connection">
+
+        <b>模块01</b><br>
+        客户、需求数据
+
+        <br><br>
+
+        <b>模块02</b><br>
+        供应商、货源数据
+
+        <br><br>
+
+        <b>模块03</b><br>
+        商机及客户需求与货源的关联数据
+
+        <br><br>
+
+        <b>最终整合：</b><br>
+
+        Customer +
+        Supplier +
+        Source +
+        Demand +
+        Opportunity
+
+        <br><br>
+
+        ↓
+
+        <br>
+
+        <b>统一 DataCore</b>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =====================================================
+       测试说明
+       ===================================================== -->
+
+  <div class="card">
+
+    <h2>当前测试阶段</h2>
+
+    <p>
+      当前采用“先独立、后整合”的方式开发。
+    </p>
+
+    <div class="connection">
+
+      <b>第一阶段</b>：模块01独立测试<br>
+
+      <b>第二阶段</b>：模块02独立测试<br>
+
+      <b>第三阶段</b>：模块03独立测试<br>
+
+      <b>第四阶段</b>：模块01 + 模块02 + 模块03 数据接口连接<br>
+
+      <b>第五阶段</b>：统一 DataCore<br>
+
+      <b>第六阶段</b>：完整业务流程测试
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    饲料原料贸易平台 · Modular Architecture
+  </div>
+
+</main>
+
+</body>
+</html>
