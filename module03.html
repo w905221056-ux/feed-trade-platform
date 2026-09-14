@@ -1,0 +1,5200 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>饲料原料贸易平台｜模块03</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#f4f6f8;
+  color:#172033;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",
+  "Microsoft YaHei",Arial,sans-serif;
+}
+
+header{
+  background:#172235;
+  color:#fff;
+  padding:16px 18px;
+}
+
+header b{
+  font-size:18px;
+}
+
+header small{
+  display:block;
+  margin-top:5px;
+  color:#aebbd0;
+}
+
+main{
+  max-width:1450px;
+  margin:auto;
+  padding:16px;
+}
+
+h1{
+  font-size:23px;
+  margin:0;
+}
+
+h2{
+  font-size:17px;
+  margin:0 0 14px;
+}
+
+h3{
+  margin-top:0;
+}
+
+p{
+  color:#68768a;
+}
+
+button{
+  border:1px solid #d3dae4;
+  background:#fff;
+  border-radius:7px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#f8fafc;
+}
+
+button.primary{
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb;
+}
+
+button.primary:hover{
+  background:#1d4ed8;
+}
+
+button.green{
+  background:#059669;
+  color:#fff;
+  border-color:#059669;
+}
+
+button.danger{
+  color:#c02626;
+}
+
+button.warning{
+  color:#b45309;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e0e5ec;
+  border-radius:10px;
+  padding:15px;
+}
+
+.kpi small{
+  color:#738096;
+}
+
+.kpi strong{
+  display:block;
+  font-size:24px;
+  margin-top:5px;
+}
+
+.toolbar{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.toolbar input{
+  flex:1;
+}
+
+input,
+select,
+textarea{
+  padding:9px;
+  border:1px solid #d3dae4;
+  border-radius:7px;
+  background:#fff;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:1.65fr .85fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.tablebox{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1100px;
+}
+
+th,
+td{
+  text-align:left;
+  padding:10px 8px;
+  border-bottom:1px solid #edf0f3;
+  font-size:13px;
+  vertical-align:top;
+}
+
+th{
+  color:#6b778c;
+  font-weight:500;
+}
+
+.tag{
+  display:inline-block;
+  padding:3px 8px;
+  border-radius:20px;
+  font-size:11px;
+  background:#eef2ff;
+  color:#4338ca;
+}
+
+.tag.green{
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.tag.orange{
+  background:#fff7ed;
+  color:#b45309;
+}
+
+.tag.red{
+  background:#fef2f2;
+  color:#b91c1c;
+}
+
+.empty{
+  text-align:center;
+  color:#78869a;
+  padding:30px;
+}
+
+.detail{
+  line-height:1.9;
+}
+
+.notice{
+  background:#f7faff;
+  border:1px solid #dce7f7;
+  padding:10px;
+  border-radius:7px;
+  font-size:12px;
+  color:#53647a;
+  line-height:1.7;
+}
+
+.notice.success{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+  color:#047857;
+}
+
+.notice.warn{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#b45309;
+}
+
+.notice.error{
+  background:#fef2f2;
+  border-color:#fecaca;
+  color:#b91c1c;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.dialog{
+  width:min(780px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.field label{
+  font-size:12px;
+  color:#64748b;
+  display:block;
+  margin-bottom:4px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:15px;
+}
+
+.test{
+  margin-top:12px;
+}
+
+.test-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.test-head h2{
+  margin:0;
+}
+
+.result{
+  display:grid;
+  gap:6px;
+  margin-top:10px;
+}
+
+.pass{
+  background:#ecfdf5;
+  color:#047857;
+  padding:8px;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.fail{
+  background:#fef2f2;
+  color:#b91c1c;
+  padding:8px;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.test-summary{
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  font-weight:600;
+  line-height:1.8;
+}
+
+.connection{
+  display:grid;
+  gap:8px;
+}
+
+.connection-item{
+  padding:9px 10px;
+  border-radius:7px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  font-size:12px;
+}
+
+.connection-ok{
+  color:#047857;
+  font-weight:600;
+}
+
+.connection-warn{
+  color:#b45309;
+  font-weight:600;
+}
+
+.match-list{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
+}
+
+.match-item{
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  padding:10px;
+  background:#fafcff;
+}
+
+.match-item strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+pre{
+  background:#111827;
+  color:#d5dbea;
+  padding:12px;
+  border-radius:7px;
+  overflow:auto;
+  font-size:11px;
+  line-height:1.6;
+}
+
+.small{
+  font-size:12px;
+  color:#718096;
+}
+
+@media(max-width:1050px){
+
+  .cards{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  main{
+    padding:10px;
+  }
+
+  .top{
+    flex-direction:column;
+  }
+
+  .top-actions{
+    width:100%;
+  }
+
+  .toolbar{
+    flex-wrap:wrap;
+  }
+
+  .form{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .test-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<b>饲料原料贸易平台</b>
+<small>模块03 · 客户需求 / 交易机会中心 · 独立测试版 V0.3</small>
+</header>
+
+<main>
+
+<div class="top">
+
+<div>
+
+<h1>客户需求 / 交易机会中心</h1>
+
+<p>
+承接模块01客户需求，并读取模块02货源进行匹配。
+模块03独立保存 Demand 与 Opportunity，不直接修改模块01、模块02数据。
+</p>
+
+</div>
+
+<div class="top-actions">
+
+<button
+onclick="location.href='index.html'"
+>
+← 返回首页
+</button>
+
+<button
+onclick="location.href='module01.html'"
+>
+模块01｜客户
+</button>
+
+<button
+onclick="location.href='module02.html'"
+>
+模块02｜货源
+</button>
+
+<button
+class="primary"
+onclick="openAdd()"
+>
+＋ 新增需求
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="cards"
+id="kpi"
+>
+</div>
+
+
+<div class="card">
+
+<div class="toolbar">
+
+<input
+id="search"
+placeholder="搜索客户、需求ID、原料、交货地、需求状态"
+oninput="render()"
+>
+
+<select
+id="statusFilter"
+onchange="render()"
+style="max-width:150px"
+>
+
+<option value="">
+全部状态
+</option>
+
+<option value="待匹配">
+待匹配
+</option>
+
+<option value="匹配中">
+匹配中
+</option>
+
+<option value="已匹配">
+已匹配
+</option>
+
+<option value="已成交">
+已成交
+</option>
+
+<option value="暂停">
+暂停
+</option>
+
+</select>
+
+<button
+onclick="restoreDemo()"
+>
+恢复测试数据
+</button>
+
+</div>
+
+
+<div class="notice">
+
+<b>模块03数据原则：</b>
+
+客户只从模块01读取；
+
+货源只从模块02读取；
+
+Demand、Opportunity由模块03独立保存。
+
+任何匹配、查看、测试行为均不会修改模块01客户和模块02货源。
+
+</div>
+
+</div>
+
+
+<div class="layout">
+
+
+<div class="card tablebox">
+
+<h2>
+客户需求列表
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>需求ID</th>
+<th>客户</th>
+<th>原料</th>
+<th>规格</th>
+<th>需求量</th>
+<th>交货地</th>
+<th>目标价</th>
+<th>到货日期</th>
+<th>状态</th>
+<th>匹配</th>
+<th>操作</th>
+
+</tr>
+
+</thead>
+
+<tbody id="list">
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+需求详情
+</h2>
+
+<div
+id="detail"
+class="empty"
+>
+请选择需求查看详情
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card test">
+
+<div class="test-head">
+
+<div>
+
+<h2>
+🧪 模块03自动测试
+</h2>
+
+<p class="small">
+测试会创建临时需求、读取客户、读取货源、执行匹配、建立Opportunity、编辑、删除，并在结束后恢复测试前数据。
+</p>
+
+</div>
+
+<button
+class="green"
+onclick="runTests()"
+>
+运行模块03测试
+</button>
+
+</div>
+
+<div
+id="testResult"
+class="result"
+>
+
+<div class="empty">
+尚未运行测试
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card test">
+
+<h2>
+🔗 模块01 / 模块02数据接口检查
+</h2>
+
+<div
+id="connectionResult"
+class="connection"
+>
+正在检查……
+</div>
+
+<pre>
+模块01
+Customer
+   │
+   │ customerId
+   ↓
+Demand
+   │
+   │ demandId
+   ↓
+Opportunity
+   │
+   │ sourceId
+   ↑
+Source
+   │
+   │ supplierId
+   ↓
+Supplier
+
+
+模块03当前职责：
+
+Customer
+   ↓
+Demand
+   ↓
+Source Matching
+   ↓
+Opportunity
+
+
+Demand核心字段：
+
+id
+customerId
+material
+spec
+quantity
+delivery
+targetPrice
+requiredDate
+
+
+Opportunity核心字段：
+
+id
+customerId
+demandId
+sourceId
+status
+createdAt
+updatedAt
+</pre>
+
+</div>
+
+
+</main>
+
+
+<div
+class="modal"
+id="modal"
+>
+
+<div class="dialog">
+
+<h2 id="modalTitle">
+新增客户需求
+</h2>
+
+<div class="form">
+
+
+<div class="field full">
+
+<label>
+客户 *
+</label>
+
+<select id="customerId">
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+原料名称 *
+</label>
+
+<input
+id="material"
+placeholder="例如：豆粕、玉米"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+规格
+</label>
+
+<input
+id="spec"
+placeholder="例如：蛋白43%"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+需求数量（吨） *
+</label>
+
+<input
+id="quantity"
+type="number"
+min="0"
+step="0.01"
+placeholder="例如：100"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+交货地 *
+</label>
+
+<input
+id="delivery"
+placeholder="例如：济南"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+目标价格（元/吨）
+</label>
+
+<input
+id="targetPrice"
+type="number"
+min="0"
+step="0.01"
+placeholder="可不填"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+要求到货日期
+</label>
+
+<input
+id="requiredDate"
+type="date"
+>
+
+
+</div>
+
+
+<div class="field">
+
+<label>
+需求状态
+</label>
+
+<select id="status">
+
+<option>
+待匹配
+</option>
+
+<option>
+匹配中
+</option>
+
+<option>
+已匹配
+</option>
+
+<option>
+已成交
+</option>
+
+<option>
+暂停
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+优先级
+</label>
+
+<select id="priority">
+
+<option>
+普通
+</option>
+
+<option>
+重要
+</option>
+
+<option>
+紧急
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+备注
+</label>
+
+<textarea
+id="note"
+rows="3"
+placeholder="客户需求备注"
+></textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="actions">
+
+<button
+onclick="closeModal()"
+>
+取消
+</button>
+
+<button
+class="primary"
+onclick="saveDemand()"
+>
+保存需求
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/*
+============================================================
+模块03独立数据库
+============================================================
+*/
+
+const MODULE03_KEY =
+"FEED_TRADE_MODULE03_V01";
+
+
+const Module03DB = {
+
+createEmpty:function(){
+
+return {
+
+version:"0.3",
+
+demands:[],
+
+opportunities:[],
+
+logs:[]
+
+};
+
+},
+
+
+read:function(){
+
+try{
+
+const raw =
+localStorage.getItem(
+MODULE03_KEY
+);
+
+if(!raw){
+
+return this.createEmpty();
+
+}
+
+const data =
+JSON.parse(raw);
+
+if(
+!data ||
+typeof data !== "object"
+){
+
+return this.createEmpty();
+
+}
+
+if(
+!Array.isArray(data.demands)
+){
+
+data.demands = [];
+
+}
+
+if(
+!Array.isArray(data.opportunities)
+){
+
+data.opportunities = [];
+
+}
+
+if(
+!Array.isArray(data.logs)
+){
+
+data.logs = [];
+
+}
+
+return data;
+
+}catch(error){
+
+return this.createEmpty();
+
+}
+
+},
+
+
+write:function(data){
+
+localStorage.setItem(
+MODULE03_KEY,
+JSON.stringify(data)
+);
+
+},
+
+
+clear:function(){
+
+localStorage.removeItem(
+MODULE03_KEY
+);
+
+}
+
+};
+
+
+/*
+============================================================
+工具
+============================================================
+*/
+
+function uid(prefix){
+
+return prefix +
+"-" +
+Date.now().toString(36).toUpperCase() +
+"-" +
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase();
+
+}
+
+
+function esc(value){
+
+return String(
+value == null ? "" : value
+)
+.replace(
+/[&<>"']/g,
+function(m){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[m];
+
+}
+);
+
+}
+
+
+function money(value){
+
+const n =
+Number(value || 0);
+
+if(!Number.isFinite(n) || n === 0){
+
+return "—";
+
+}
+
+return "¥" +
+n.toLocaleString("zh-CN");
+
+}
+
+
+function normalize(value){
+
+return String(
+value == null ? "" : value
+)
+.trim()
+.toLowerCase();
+
+}
+
+
+function todayString(){
+
+const d =
+new Date();
+
+const year =
+d.getFullYear();
+
+const month =
+String(
+d.getMonth()+1
+)
+.padStart(2,"0");
+
+const day =
+String(
+d.getDate()
+)
+.padStart(2,"0");
+
+return (
+year +
+"-" +
+month +
+"-" +
+day
+);
+
+}
+
+
+/*
+============================================================
+读取模块01
+============================================================
+*/
+
+const MODULE01_KEYS = [
+
+"FEED_TRADE_PLATFORM_DB_V01",
+
+"FEED_TRADE_PLATFORM_DATABASE_V1",
+
+"FEED_TRADE_DATABASE_V1",
+
+"FEED_TRADE_PLATFORM_DB",
+
+"FEED_TRADE_DB"
+
+];
+
+
+function readModule01(){
+
+for(
+let i = 0;
+i < MODULE01_KEYS.length;
+i++
+){
+
+try{
+
+const raw =
+localStorage.getItem(
+MODULE01_KEYS[i]
+);
+
+if(!raw){
+
+continue;
+
+}
+
+const data =
+JSON.parse(raw);
+
+if(
+data &&
+Array.isArray(data.customers)
+){
+
+return {
+
+key:MODULE01_KEYS[i],
+
+data:data,
+
+customers:data.customers
+
+};
+
+}
+
+}catch(error){
+
+}
+
+}
+
+
+return {
+
+key:null,
+
+data:null,
+
+customers:[]
+
+};
+
+}
+
+
+const CustomerAdapter = {
+
+list:function(){
+
+return readModule01()
+.customers;
+
+},
+
+
+get:function(id){
+
+return this
+.list()
+.find(
+function(item){
+
+return item.id === id;
+
+}
+) || null;
+
+},
+
+
+count:function(){
+
+return this.list().length;
+
+}
+
+};
+
+
+/*
+============================================================
+读取模块02
+============================================================
+*/
+
+const MODULE02_KEY =
+"FEED_TRADE_MODULE02_TEST_V2";
+
+
+function readModule02(){
+
+try{
+
+const raw =
+localStorage.getItem(
+MODULE02_KEY
+);
+
+if(!raw){
+
+return {
+
+key:null,
+
+data:null,
+
+suppliers:[],
+
+sources:[]
+
+};
+
+}
+
+const data =
+JSON.parse(raw);
+
+if(
+!data ||
+typeof data !== "object"
+){
+
+return {
+
+key:MODULE02_KEY,
+
+data:null,
+
+suppliers:[],
+
+sources:[]
+
+};
+
+}
+
+if(
+!Array.isArray(data.suppliers)
+){
+
+data.suppliers = [];
+
+}
+
+if(
+!Array.isArray(data.sources)
+){
+
+data.sources = [];
+
+}
+
+return {
+
+key:MODULE02_KEY,
+
+data:data,
+
+suppliers:data.suppliers,
+
+sources:data.sources
+
+};
+
+}catch(error){
+
+return {
+
+key:MODULE02_KEY,
+
+data:null,
+
+suppliers:[],
+
+sources:[]
+
+};
+
+}
+
+}
+
+
+const SourceAdapter = {
+
+list:function(){
+
+return readModule02()
+.sources;
+
+},
+
+
+get:function(id){
+
+return this
+.list()
+.find(
+function(item){
+
+return item.id === id;
+
+}
+) || null;
+
+},
+
+
+supplier:function(id){
+
+const db =
+readModule02();
+
+return db.suppliers
+.find(
+function(item){
+
+return item.id === id;
+
+}
+) || null;
+
+}
+
+};
+
+
+/*
+============================================================
+需求服务
+============================================================
+*/
+
+const DemandService = {
+
+list:function(){
+
+return Module03DB
+.read()
+.demands;
+
+},
+
+
+get:function(id){
+
+return this
+.list()
+.find(
+function(item){
+
+return item.id === id;
+
+}
+) || null;
+
+},
+
+
+create:function(data){
+
+const db =
+Module03DB.read();
+
+const customer =
+CustomerAdapter.get(
+data.customerId
+);
+
+if(!customer){
+
+throw new Error(
+"客户不存在，无法建立需求"
+);
+
+}
+
+
+const demand = {
+
+id:uid("DEM"),
+
+customerId:
+data.customerId,
+
+customerName:
+customer.name || customer.customerName || "",
+
+material:
+data.material || "",
+
+spec:
+data.spec || "",
+
+quantity:Number(
+data.quantity || 0
+),
+
+delivery:
+data.delivery || "",
+
+targetPrice:Number(
+data.targetPrice || 0
+),
+
+requiredDate:
+data.requiredDate || "",
+
+status:
+data.status || "待匹配",
+
+priority:
+data.priority || "普通",
+
+note:
+data.note || "",
+
+matchedSourceId:
+data.matchedSourceId || "",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+if(
+!demand.customerId
+){
+
+throw new Error(
+"customerId不能为空"
+);
+
+}
+
+
+if(
+!demand.material
+){
+
+throw new Error(
+"原料名称不能为空"
+);
+
+}
+
+
+if(
+!Number.isFinite(demand.quantity) ||
+demand.quantity <= 0
+){
+
+throw new Error(
+"需求数量必须大于0"
+);
+
+}
+
+
+db.demands.push(
+demand
+);
+
+db.logs.push({
+
+at:new Date().toISOString(),
+
+action:"Demand.create",
+
+id:demand.id
+
+});
+
+Module03DB.write(
+db
+);
+
+return demand;
+
+},
+
+
+update:function(id,data){
+
+const db =
+Module03DB.read();
+
+const index =
+db.demands.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"需求不存在"
+);
+
+}
+
+
+if(data.customerId){
+
+const customer =
+CustomerAdapter.get(
+data.customerId
+);
+
+if(!customer){
+
+throw new Error(
+"客户不存在"
+);
+
+}
+
+data.customerName =
+customer.name ||
+customer.customerName ||
+"";
+
+}
+
+
+db.demands[index] = {
+
+...db.demands[index],
+
+...data,
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+Module03DB.write(
+db
+);
+
+return db.demands[index];
+
+},
+
+
+remove:function(id){
+
+const db =
+Module03DB.read();
+
+const index =
+db.demands.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"需求不存在"
+);
+
+}
+
+
+const hasOpportunity =
+db.opportunities.some(
+function(item){
+
+return (
+item.demandId === id &&
+item.status !== "已关闭"
+);
+
+}
+);
+
+
+if(hasOpportunity){
+
+throw new Error(
+"该需求已经存在交易机会，不能直接删除"
+);
+
+}
+
+
+db.demands.splice(
+index,
+1
+);
+
+db.logs.push({
+
+at:new Date().toISOString(),
+
+action:"Demand.remove",
+
+id:id
+
+});
+
+Module03DB.write(
+db
+);
+
+return true;
+
+}
+
+};
+
+
+/*
+============================================================
+Opportunity 服务
+============================================================
+*/
+
+const OpportunityService = {
+
+list:function(){
+
+return Module03DB
+.read()
+.opportunities;
+
+},
+
+
+get:function(id){
+
+return this
+.list()
+.find(
+function(item){
+
+return item.id === id;
+
+}
+) || null;
+
+},
+
+
+findByDemand:function(
+demandId
+){
+
+return this
+.list()
+.filter(
+function(item){
+
+return item.demandId === demandId;
+
+}
+);
+
+},
+
+
+create:function(data){
+
+const db =
+Module03DB.read();
+
+const demand =
+DemandService.get(
+data.demandId
+);
+
+if(!demand){
+
+throw new Error(
+"需求不存在"
+);
+
+}
+
+
+const customer =
+CustomerAdapter.get(
+data.customerId
+);
+
+if(!customer){
+
+throw new Error(
+"客户不存在"
+);
+
+}
+
+
+const source =
+SourceAdapter.get(
+data.sourceId
+);
+
+if(!source){
+
+throw new Error(
+"货源不存在"
+);
+
+}
+
+
+if(
+demand.customerId !==
+data.customerId
+){
+
+throw new Error(
+"customerId与Demand不一致"
+);
+
+}
+
+
+const exists =
+db.opportunities.some(
+function(item){
+
+return (
+item.demandId ===
+data.demandId &&
+item.sourceId ===
+data.sourceId &&
+item.status !== "已关闭"
+);
+
+}
+);
+
+
+if(exists){
+
+throw new Error(
+"该需求与货源已经建立交易机会"
+);
+
+}
+
+
+const opportunity = {
+
+id:uid("OPP"),
+
+customerId:
+data.customerId,
+
+demandId:
+data.demandId,
+
+sourceId:
+data.sourceId,
+
+supplierId:
+source.supplierId || "",
+
+material:
+source.material || demand.material || "",
+
+quantity:Number(
+data.quantity ||
+demand.quantity ||
+0
+),
+
+sourcePrice:Number(
+source.price || 0
+),
+
+status:
+data.status || "待跟进",
+
+note:
+data.note || "",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+db.opportunities.push(
+opportunity
+);
+
+db.logs.push({
+
+at:new Date().toISOString(),
+
+action:"Opportunity.create",
+
+id:opportunity.id
+
+});
+
+Module03DB.write(
+db
+);
+
+return opportunity;
+
+},
+
+
+update:function(id,data){
+
+const db =
+Module03DB.read();
+
+const index =
+db.opportunities.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"交易机会不存在"
+);
+
+}
+
+
+db.opportunities[index] = {
+
+...db.opportunities[index],
+
+...data,
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+Module03DB.write(
+db
+);
+
+return db.opportunities[index];
+
+}
+
+};
+
+
+/*
+============================================================
+匹配规则
+============================================================
+
+1. 原料必须匹配
+2. 交货地必须匹配
+3. 货源状态必须为合作中
+4. 货源数量 >= 需求数量
+5. 如果需求有目标价，则货源价格 <= 目标价
+6. 如果需求有到货日期，则货源有效期必须不早于需求日期
+7. 规格有填写时进行规格匹配
+============================================================
+*/
+
+function matchSource(
+demand,
+source
+){
+
+const reasons = [];
+
+
+/*
+原料
+*/
+
+if(
+normalize(demand.material) !==
+normalize(source.material)
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"原料不匹配"
+]
+
+};
+
+}
+
+
+/*
+交货地
+*/
+
+if(
+normalize(demand.delivery) &&
+normalize(source.delivery) &&
+normalize(demand.delivery) !==
+normalize(source.delivery)
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"交货地不匹配"
+]
+
+};
+
+}
+
+
+if(
+normalize(demand.delivery) &&
+!normalize(source.delivery)
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源没有交货地"
+]
+
+};
+
+}
+
+
+/*
+状态
+*/
+
+if(
+source.status !==
+"合作中"
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源当前不是合作中"
+]
+
+};
+
+}
+
+
+/*
+数量
+*/
+
+const demandQty =
+Number(
+demand.quantity || 0
+);
+
+const sourceQty =
+Number(
+source.quantity || 0
+);
+
+
+if(
+sourceQty < demandQty
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源可供数量不足"
+]
+
+};
+
+}
+
+
+/*
+目标价
+*/
+
+const targetPrice =
+Number(
+demand.targetPrice || 0
+);
+
+const sourcePrice =
+Number(
+source.price || 0
+);
+
+
+if(
+targetPrice > 0 &&
+sourcePrice > 0 &&
+sourcePrice > targetPrice
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源价格高于客户目标价"
+]
+
+};
+
+}
+
+
+/*
+规格
+*/
+
+if(
+normalize(demand.spec) &&
+normalize(source.spec)
+){
+
+if(
+normalize(demand.spec) !==
+normalize(source.spec)
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"规格不匹配"
+]
+
+};
+
+}
+
+}
+
+
+if(
+normalize(demand.spec) &&
+!normalize(source.spec)
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源没有填写规格"
+]
+
+};
+
+}
+
+
+/*
+有效期
+*/
+
+if(
+demand.requiredDate &&
+source.validUntil
+){
+
+if(
+source.validUntil <
+demand.requiredDate
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源有效期早于客户要求到货日期"
+]
+
+};
+
+}
+
+}
+
+
+if(
+demand.requiredDate &&
+!source.validUntil
+){
+
+return {
+
+matched:false,
+
+reasons:[
+"货源没有价格有效期"
+]
+
+};
+
+}
+
+
+/*
+全部通过
+*/
+
+reasons.push(
+"原料匹配"
+);
+
+reasons.push(
+"交货地匹配"
+);
+
+reasons.push(
+"数量充足"
+);
+
+if(
+targetPrice > 0
+){
+
+reasons.push(
+"价格满足目标价"
+);
+
+}
+
+if(
+demand.requiredDate
+){
+
+reasons.push(
+"有效期满足要求"
+);
+
+}
+
+
+return {
+
+matched:true,
+
+reasons:reasons
+
+};
+
+}
+
+
+/*
+============================================================
+获取需求匹配货源
+============================================================
+*/
+
+function getMatches(
+demand
+){
+
+const sources =
+SourceAdapter.list();
+
+return sources
+.map(
+function(source){
+
+const result =
+matchSource(
+demand,
+source
+);
+
+return {
+
+source:source,
+
+matched:result.matched,
+
+reasons:result.reasons
+
+};
+
+}
+)
+.filter(
+function(item){
+
+return item.matched;
+
+}
+)
+.sort(
+function(a,b){
+
+const ap =
+Number(
+a.source.price || 0
+);
+
+const bp =
+Number(
+b.source.price || 0
+);
+
+
+/*
+有报价的优先低价
+*/
+
+if(ap > 0 && bp > 0){
+
+return ap - bp;
+
+}
+
+if(ap > 0){
+
+return 1;
+
+}
+
+if(bp > 0){
+
+return -1;
+
+}
+
+return 0;
+
+}
+);
+
+}
+
+
+/*
+============================================================
+页面状态
+============================================================
+*/
+
+let editingId = null;
+
+let selectedId = null;
+
+
+/*
+============================================================
+初始化测试数据
+============================================================
+*/
+
+function initDemo(){
+
+if(
+DemandService.list().length > 0
+){
+
+return;
+
+}
+
+
+const customers =
+CustomerAdapter.list();
+
+
+if(
+customers.length === 0
+){
+
+return;
+
+}
+
+
+const customer =
+customers[0];
+
+
+DemandService.create({
+
+customerId:
+customer.id,
+
+material:"豆粕",
+
+spec:"蛋白43%",
+
+quantity:100,
+
+delivery:"济南",
+
+targetPrice:3200,
+
+requiredDate:"2026-09-25",
+
+status:"待匹配",
+
+priority:"重要",
+
+note:"模块03默认测试需求"
+
+});
+
+}
+
+
+/*
+============================================================
+客户下拉框
+============================================================
+*/
+
+function renderCustomerOptions(
+selectedCustomerId
+){
+
+const select =
+document.getElementById(
+"customerId"
+);
+
+const customers =
+CustomerAdapter.list();
+
+
+if(
+customers.length === 0
+){
+
+select.innerHTML =
+
+`
+
+<option value="">
+当前没有可用客户
+</option>
+
+`;
+
+return;
+
+}
+
+
+select.innerHTML =
+
+`
+
+<option value="">
+请选择客户
+</option>
+
+` +
+
+customers
+.map(
+function(customer){
+
+const name =
+customer.name ||
+customer.customerName ||
+"未命名客户";
+
+return `
+
+<option
+value="${esc(customer.id)}"
+${customer.id === selectedCustomerId ? "selected" : ""}
+>
+
+${esc(name)}
+ · ${esc(customer.id)}
+
+</option>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+/*
+============================================================
+页面渲染
+============================================================
+*/
+
+function render(){
+
+const all =
+DemandService.list();
+
+
+const search =
+document
+.getElementById("search")
+.value
+.trim()
+.toLowerCase();
+
+
+const status =
+document
+.getElementById("statusFilter")
+.value;
+
+
+const filtered =
+all.filter(
+function(item){
+
+const text = [
+
+item.id,
+
+item.customerName,
+
+item.customerId,
+
+item.material,
+
+item.spec,
+
+item.delivery
+
+]
+.join(" ")
+.toLowerCase();
+
+
+const matchSearch =
+!search ||
+text.includes(search);
+
+
+const matchStatus =
+!status ||
+item.status === status;
+
+
+return (
+matchSearch &&
+matchStatus
+);
+
+}
+);
+
+
+/*
+KPI
+*/
+
+const total =
+all.length;
+
+
+const totalQty =
+all.reduce(
+function(sum,item){
+
+return sum +
+Number(item.quantity || 0);
+
+},
+0
+);
+
+
+const waiting =
+all.filter(
+function(item){
+
+return item.status ===
+"待匹配";
+
+}
+).length;
+
+
+const matched =
+all.filter(
+function(item){
+
+return item.status ===
+"已匹配";
+
+}
+).length;
+
+
+const opportunities =
+OpportunityService.list()
+.length;
+
+
+document
+.getElementById("kpi")
+.innerHTML =
+
+`
+
+<div class="card kpi">
+
+<small>
+需求条数
+</small>
+
+<strong>
+${total}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+需求总量
+</small>
+
+<strong>
+${totalQty}
+吨
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+待匹配
+</small>
+
+<strong>
+${waiting}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+已匹配
+</small>
+
+<strong>
+${matched}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+交易机会
+</small>
+
+<strong>
+${opportunities}
+</strong>
+
+</div>
+
+`;
+
+
+/*
+列表
+*/
+
+if(
+filtered.length === 0
+){
+
+document
+.getElementById("list")
+.innerHTML =
+
+`
+
+<tr>
+
+<td
+colspan="11"
+class="empty"
+>
+
+没有找到客户需求
+
+</td>
+
+</tr>
+
+`;
+
+}else{
+
+document
+.getElementById("list")
+.innerHTML =
+
+filtered
+.map(
+function(item){
+
+let tagClass = "";
+
+if(
+item.status === "待匹配"
+){
+
+tagClass = "";
+
+}else if(
+item.status === "匹配中"
+){
+
+tagClass = "orange";
+
+}else if(
+item.status === "已匹配"
+){
+
+tagClass = "green";
+
+}else if(
+item.status === "已成交"
+){
+
+tagClass = "green";
+
+}else if(
+item.status === "暂停"
+){
+
+tagClass = "red";
+
+}
+
+
+const matches =
+getMatches(item);
+
+
+return `
+
+<tr>
+
+<td>
+
+${esc(item.id)}
+
+<br>
+
+<small>
+${esc(item.priority)}
+</small>
+
+</td>
+
+
+<td>
+
+<b>
+${esc(item.customerName)}
+</b>
+
+<br>
+
+<small>
+${esc(item.customerId)}
+</small>
+
+</td>
+
+
+<td>
+${esc(item.material)}
+</td>
+
+
+<td>
+${esc(item.spec || "-")}
+</td>
+
+
+<td>
+${Number(item.quantity || 0)} 吨
+</td>
+
+
+<td>
+${esc(item.delivery || "-")}
+</td>
+
+
+<td>
+${money(item.targetPrice)}
+</td>
+
+
+<td>
+${esc(item.requiredDate || "-")}
+</td>
+
+
+<td>
+
+<span
+class="tag ${tagClass}"
+>
+
+${esc(item.status)}
+
+</span>
+
+</td>
+
+
+<td>
+
+${
+matches.length > 0
+?
+`<span class="tag green">${matches.length} 个</span>`
+:
+`<span class="tag">0 个</span>`
+}
+
+</td>
+
+
+<td>
+
+<button
+onclick="showDetail('${item.id}')"
+>
+详情
+</button>
+
+
+<button
+onclick="editDemand('${item.id}')"
+>
+编辑
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+if(
+selectedId &&
+DemandService.get(selectedId)
+){
+
+showDetail(
+selectedId,
+false
+);
+
+}
+
+
+renderConnection();
+
+}
+
+
+/*
+============================================================
+连接检查
+============================================================
+*/
+
+function renderConnection(){
+
+const box =
+document.getElementById(
+"connectionResult"
+);
+
+
+const module01 =
+readModule01();
+
+
+const module02 =
+readModule02();
+
+
+const customers =
+module01.customers;
+
+
+const sources =
+module02.sources;
+
+
+const opportunities =
+OpportunityService.list();
+
+
+let customerHtml = "";
+
+if(
+module01.key
+){
+
+customerHtml =
+
+`
+
+<div class="connection-item">
+
+<div class="connection-ok">
+✅ 模块01客户接口正常
+</div>
+
+数据库：
+
+<b>
+${esc(module01.key)}
+</b>
+
+<br>
+
+客户数量：
+
+<b>
+${customers.length}
+</b>
+
+</div>
+
+`;
+
+}else{
+
+customerHtml =
+
+`
+
+<div class="connection-item">
+
+<div class="connection-warn">
+⚠️ 未检测到模块01客户数据库
+</div>
+
+模块03仍然可以打开，但新增需求需要先有客户。
+
+</div>
+
+`;
+
+}
+
+
+let sourceHtml = "";
+
+if(
+module02.data &&
+Array.isArray(
+module02.sources
+)
+){
+
+sourceHtml =
+
+`
+
+<div class="connection-item">
+
+<div class="connection-ok">
+✅ 模块02货源接口正常
+</div>
+
+数据库：
+
+<b>
+${esc(MODULE02_KEY)}
+</b>
+
+<br>
+
+供应商：
+
+<b>
+${module02.suppliers.length}
+</b>
+
+<br>
+
+货源：
+
+<b>
+${sources.length}
+</b>
+
+</div>
+
+`;
+
+}else{
+
+sourceHtml =
+
+`
+
+<div class="connection-item">
+
+<div class="connection-warn">
+⚠️ 未检测到模块02货源数据库
+</div>
+
+需求仍然可以建立，但暂时没有货源可以匹配。
+
+</div>
+
+`;
+
+}
+
+
+box.innerHTML =
+
+customerHtml +
+
+sourceHtml +
+
+`
+
+<div class="connection-item">
+
+<div class="connection-ok">
+✅ 模块03独立数据库正常
+</div>
+
+Demand：
+
+<b>
+${DemandService.list().length}
+</b>
+
+<br>
+
+Opportunity：
+
+<b>
+${opportunities.length}
+</b>
+
+</div>
+
+`;
+
+}
+
+
+/*
+============================================================
+详情
+============================================================
+*/
+
+function showDetail(
+id,
+allowRefresh
+){
+
+const demand =
+DemandService.get(id);
+
+
+if(!demand){
+
+return;
+
+}
+
+
+selectedId = id;
+
+
+const customer =
+CustomerAdapter.get(
+demand.customerId
+);
+
+
+const matches =
+getMatches(demand);
+
+
+const demandOpportunities =
+OpportunityService
+.findByDemand(id);
+
+
+let matchesHtml = "";
+
+
+if(
+matches.length === 0
+){
+
+matchesHtml =
+
+`
+
+<div class="notice warn">
+
+当前没有符合条件的货源。
+
+</div>
+
+`;
+
+}else{
+
+matchesHtml =
+
+`
+
+<div class="match-list">
+
+${matches
+.slice(0,10)
+.map(
+function(item){
+
+const source =
+item.source;
+
+return `
+
+<div class="match-item">
+
+<strong>
+
+${esc(source.material)}
+
+ ·
+
+${esc(source.supplierName || "")}
+
+</strong>
+
+货源ID：
+
+${esc(source.id)}
+
+<br>
+
+供应商ID：
+
+${esc(source.supplierId || "-")}
+
+<br>
+
+规格：
+
+${esc(source.spec || "-")}
+
+<br>
+
+可供：
+
+${Number(source.quantity || 0)}
+吨
+
+<br>
+
+价格：
+
+${money(source.price)}
+/吨
+
+<br>
+
+交货地：
+
+${esc(source.delivery || "-")}
+
+<br>
+
+有效期：
+
+${esc(source.validUntil || "-")}
+
+<br>
+
+<button
+class="green"
+onclick="createOpportunityFromSource('${demand.id}','${source.id}')"
+>
+建立交易机会
+</button>
+
+</div>
+
+`;
+
+}
+)
+.join("")}
+
+</div>
+
+`;
+
+}
+
+
+let opportunityHtml = "";
+
+if(
+demandOpportunities.length === 0
+){
+
+opportunityHtml =
+
+`
+
+<div class="small">
+当前尚未建立交易机会。
+</div>
+
+`;
+
+}else{
+
+opportunityHtml =
+
+`
+
+<div class="match-list">
+
+${demandOpportunities
+.map(
+function(item){
+
+return `
+
+<div class="match-item">
+
+<strong>
+${esc(item.id)}
+</strong>
+
+客户ID：
+
+${esc(item.customerId)}
+
+<br>
+
+需求ID：
+
+${esc(item.demandId)}
+
+<br>
+
+货源ID：
+
+${esc(item.sourceId)}
+
+<br>
+
+数量：
+
+${Number(item.quantity || 0)}
+吨
+
+<br>
+
+货源价格：
+
+${money(item.sourcePrice)}
+/吨
+
+<br>
+
+状态：
+
+${esc(item.status)}
+
+</div>
+
+`;
+
+}
+)
+.join("")}
+
+</div>
+
+`;
+
+}
+
+
+document
+.getElementById("detail")
+.innerHTML =
+
+`
+
+<div class="detail">
+
+<h3>
+
+${esc(demand.material)}
+
+ ·
+
+${esc(
+customer
+?
+(
+customer.name ||
+customer.customerName ||
+"未命名客户"
+)
+:
+demand.customerName
+)}
+
+</h3>
+
+
+<div
+class="small"
+>
+
+demandId：
+
+${esc(demand.id)}
+
+<br>
+
+customerId：
+
+${esc(demand.customerId)}
+
+</div>
+
+
+<hr>
+
+
+<b>
+客户：
+</b>
+
+${esc(
+customer
+?
+(
+customer.name ||
+customer.customerName ||
+demand.customerName
+)
+:
+demand.customerName
+)}
+
+<br>
+
+
+<b>
+原料：
+</b>
+
+${esc(demand.material)}
+
+<br>
+
+
+<b>
+规格：
+</b>
+
+${esc(demand.spec || "-")}
+
+<br>
+
+
+<b>
+需求量：
+</b>
+
+${Number(demand.quantity || 0)}
+吨
+
+<br>
+
+
+<b>
+交货地：
+</b>
+
+${esc(demand.delivery || "-")}
+
+<br>
+
+
+<b>
+目标价：
+</b>
+
+${money(demand.targetPrice)}
+/吨
+
+<br>
+
+
+<b>
+要求到货：
+</b>
+
+${esc(demand.requiredDate || "-")}
+
+<br>
+
+
+<b>
+优先级：
+</b>
+
+${esc(demand.priority)}
+
+<br>
+
+
+<b>
+状态：
+</b>
+
+${esc(demand.status)}
+
+<br>
+
+
+<b>
+备注：
+</b>
+
+${esc(demand.note || "-")}
+
+
+<hr>
+
+
+<h3>
+🔎 可匹配货源
+</h3>
+
+${matchesHtml}
+
+
+<hr>
+
+
+<h3>
+💼 已建立交易机会
+</h3>
+
+${opportunityHtml}
+
+
+<hr>
+
+
+<div class="notice">
+
+<b>
+跨模块关系：
+</b>
+
+<br><br>
+
+Customer：
+
+<b>
+${esc(demand.customerId)}
+</b>
+
+↓
+
+Demand：
+
+<b>
+${esc(demand.id)}
+</b>
+
+↓
+
+Source：
+
+匹配后取得 sourceId
+
+↓
+
+Opportunity：
+
+<b>
+customerId + demandId + sourceId
+</b>
+
+</div>
+
+
+<br>
+
+
+<button
+onclick="editDemand('${demand.id}')"
+>
+编辑需求
+</button>
+
+
+<button
+class="danger"
+onclick="deleteDemand('${demand.id}')"
+>
+删除需求
+</button>
+
+
+</div>
+
+`;
+
+}
+
+
+/*
+============================================================
+新增
+============================================================
+*/
+
+function openAdd(){
+
+editingId = null;
+
+
+document
+.getElementById("modalTitle")
+.textContent =
+"新增客户需求";
+
+
+renderCustomerOptions("");
+
+
+[
+"material",
+"spec",
+"quantity",
+"delivery",
+"targetPrice",
+"requiredDate",
+"note"
+]
+.forEach(
+function(id){
+
+document
+.getElementById(id)
+.value = "";
+
+}
+);
+
+
+document
+.getElementById("status")
+.value =
+"待匹配";
+
+
+document
+.getElementById("priority")
+.value =
+"普通";
+
+
+document
+.getElementById("modal")
+.classList
+.add("show");
+
+}
+
+
+/*
+============================================================
+编辑
+============================================================
+*/
+
+function editDemand(id){
+
+const demand =
+DemandService.get(id);
+
+
+if(!demand){
+
+return;
+
+}
+
+
+editingId = id;
+
+
+document
+.getElementById("modalTitle")
+.textContent =
+"编辑客户需求";
+
+
+renderCustomerOptions(
+demand.customerId
+);
+
+
+document
+.getElementById("material")
+.value =
+demand.material || "";
+
+
+document
+.getElementById("spec")
+.value =
+demand.spec || "";
+
+
+document
+.getElementById("quantity")
+.value =
+demand.quantity || "";
+
+
+document
+.getElementById("delivery")
+.value =
+demand.delivery || "";
+
+
+document
+.getElementById("targetPrice")
+.value =
+demand.targetPrice || "";
+
+
+document
+.getElementById("requiredDate")
+.value =
+demand.requiredDate || "";
+
+
+document
+.getElementById("status")
+.value =
+demand.status || "待匹配";
+
+
+document
+.getElementById("priority")
+.value =
+demand.priority || "普通";
+
+
+document
+.getElementById("note")
+.value =
+demand.note || "";
+
+
+document
+.getElementById("modal")
+.classList
+.add("show");
+
+}
+
+
+/*
+============================================================
+保存需求
+============================================================
+*/
+
+function saveDemand(){
+
+const customerId =
+document
+.getElementById("customerId")
+.value;
+
+
+const material =
+document
+.getElementById("material")
+.value
+.trim();
+
+
+const quantity =
+Number(
+document
+.getElementById("quantity")
+.value
+);
+
+
+const delivery =
+document
+.getElementById("delivery")
+.value
+.trim();
+
+
+if(!customerId){
+
+alert(
+"请选择客户"
+);
+
+return;
+
+}
+
+
+if(!material){
+
+alert(
+"原料名称不能为空"
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(quantity) ||
+quantity <= 0
+){
+
+alert(
+"需求数量必须大于0"
+);
+
+return;
+
+}
+
+
+if(!delivery){
+
+alert(
+"交货地不能为空"
+);
+
+return;
+
+}
+
+
+const data = {
+
+customerId:
+customerId,
+
+material:
+material,
+
+spec:
+document
+.getElementById("spec")
+.value
+.trim(),
+
+quantity:
+quantity,
+
+delivery:
+delivery,
+
+targetPrice:
+Number(
+document
+.getElementById("targetPrice")
+.value
+) || 0,
+
+requiredDate:
+document
+.getElementById("requiredDate")
+.value,
+
+status:
+document
+.getElementById("status")
+.value,
+
+priority:
+document
+.getElementById("priority")
+.value,
+
+note:
+document
+.getElementById("note")
+.value
+.trim()
+
+};
+
+
+try{
+
+let demand;
+
+
+if(editingId){
+
+demand =
+DemandService.update(
+editingId,
+data
+);
+
+}else{
+
+demand =
+DemandService.create(
+data
+);
+
+}
+
+
+selectedId =
+demand.id;
+
+
+closeModal();
+
+render();
+
+showDetail(
+demand.id
+);
+
+}catch(error){
+
+alert(
+"保存失败：" +
+error.message
+);
+
+}
+
+}
+
+
+/*
+============================================================
+删除需求
+============================================================
+*/
+
+function deleteDemand(id){
+
+const demand =
+DemandService.get(id);
+
+
+if(!demand){
+
+return;
+
+}
+
+
+const opportunities =
+OpportunityService
+.findByDemand(id)
+.filter(
+function(item){
+
+return item.status !==
+"已关闭";
+
+}
+);
+
+
+if(
+opportunities.length > 0
+){
+
+alert(
+"该需求已经存在交易机会，不能直接删除。\n\n" +
+"请先处理交易机会。"
+);
+
+return;
+
+}
+
+
+const ok =
+confirm(
+"确定删除这条客户需求吗？\n\n" +
+demand.material +
+" / " +
+demand.customerName
+);
+
+
+if(!ok){
+
+return;
+
+}
+
+
+try{
+
+DemandService.remove(id);
+
+selectedId = null;
+
+render();
+
+document
+.getElementById("detail")
+.innerHTML =
+
+`
+
+<div class="empty">
+
+需求已删除
+
+</div>
+
+`;
+
+}catch(error){
+
+alert(
+"删除失败：" +
+error.message
+);
+
+}
+
+}
+
+
+/*
+============================================================
+建立交易机会
+============================================================
+*/
+
+function createOpportunityFromSource(
+demandId,
+sourceId
+){
+
+const demand =
+DemandService.get(
+demandId
+);
+
+const source =
+SourceAdapter.get(
+sourceId
+);
+
+
+if(!demand){
+
+alert(
+"需求不存在"
+);
+
+return;
+
+}
+
+
+if(!source){
+
+alert(
+"货源不存在"
+);
+
+return;
+
+}
+
+
+const match =
+matchSource(
+demand,
+source
+);
+
+
+if(!match.matched){
+
+alert(
+"该货源当前不满足需求条件：\n\n" +
+match.reasons.join("、")
+);
+
+return;
+
+}
+
+
+try{
+
+const opportunity =
+OpportunityService.create({
+
+customerId:
+demand.customerId,
+
+demandId:
+demand.id,
+
+sourceId:
+source.id,
+
+quantity:
+demand.quantity,
+
+status:
+"待跟进",
+
+note:
+"由模块03需求匹配建立"
+
+});
+
+
+DemandService.update(
+demand.id,
+{
+
+status:"已匹配",
+
+matchedSourceId:
+source.id
+
+}
+);
+
+
+alert(
+"交易机会建立成功！\n\n" +
+"Opportunity ID：\n" +
+opportunity.id
+);
+
+
+render();
+
+showDetail(
+demand.id
+);
+
+}catch(error){
+
+alert(
+"建立交易机会失败：" +
+error.message
+);
+
+}
+
+}
+
+
+/*
+============================================================
+关闭弹窗
+============================================================
+*/
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList
+.remove("show");
+
+}
+
+
+/*
+============================================================
+恢复测试数据
+============================================================
+*/
+
+function restoreDemo(){
+
+const ok =
+confirm(
+"恢复模块03测试数据？\n\n" +
+"这会清空模块03当前 Demand 和 Opportunity 数据。\n" +
+"不会修改模块01客户数据。\n" +
+"不会修改模块02货源数据。"
+);
+
+
+if(!ok){
+
+return;
+
+}
+
+
+Module03DB.clear();
+
+
+initDemo();
+
+
+selectedId = null;
+
+
+render();
+
+
+document
+.getElementById("detail")
+.innerHTML =
+
+`
+
+<div class="empty">
+
+模块03测试数据已恢复
+
+</div>
+
+`;
+
+}
+
+
+/*
+============================================================
+自动测试
+============================================================
+*/
+
+function runTests(){
+
+const resultBox =
+document
+.getElementById("testResult");
+
+
+const backup =
+JSON.stringify(
+Module03DB.read()
+);
+
+
+const results = [];
+
+
+let passCount = 0;
+
+let failCount = 0;
+
+
+let testDemandId = null;
+
+let testOpportunityId = null;
+
+
+function test(
+name,
+fn
+){
+
+try{
+
+fn();
+
+passCount++;
+
+results.push(
+
+`
+
+<div class="pass">
+
+✅ ${esc(name)}
+
+</div>
+
+`
+
+);
+
+}catch(error){
+
+failCount++;
+
+results.push(
+
+`
+
+<div class="fail">
+
+❌ ${esc(name)}
+
+<br>
+
+${esc(error.message)}
+
+</div>
+
+`
+
+);
+
+}
+
+}
+
+
+/*
+测试1
+模块03数据库
+*/
+
+test(
+"模块03数据库可以正常读取",
+function(){
+
+const db =
+Module03DB.read();
+
+
+if(
+!db ||
+!Array.isArray(db.demands) ||
+!Array.isArray(db.opportunities)
+){
+
+throw new Error(
+"模块03数据库结构异常"
+);
+
+}
+
+}
+);
+
+
+/*
+测试2
+模块01客户接口
+*/
+
+test(
+"可以读取模块01 Customer 数据",
+function(){
+
+const customers =
+CustomerAdapter.list();
+
+
+if(
+!Array.isArray(customers)
+){
+
+throw new Error(
+"Customer 数据不是数组"
+);
+
+}
+
+
+if(
+customers.length === 0
+){
+
+throw new Error(
+"模块01当前没有客户"
+);
+
+}
+
+
+const customer =
+customers[0];
+
+
+if(
+!customer.id
+){
+
+throw new Error(
+"客户缺少customerId"
+);
+
+}
+
+}
+);
+
+
+/*
+测试3
+模块02货源接口
+*/
+
+test(
+"可以读取模块02 Source 数据",
+function(){
+
+const sources =
+SourceAdapter.list();
+
+
+if(
+!Array.isArray(sources)
+){
+
+throw new Error(
+"Source 数据不是数组"
+);
+
+}
+
+
+if(
+sources.length === 0
+){
+
+throw new Error(
+"模块02当前没有货源"
+);
+
+}
+
+
+const source =
+sources[0];
+
+
+if(
+!source.id
+){
+
+throw new Error(
+"货源缺少sourceId"
+);
+
+}
+
+}
+);
+
+
+/*
+测试4
+Demand创建
+*/
+
+test(
+"Demand可以创建并生成唯一demandId",
+function(){
+
+const customer =
+CustomerAdapter.list()[0];
+
+
+const demand =
+DemandService.create({
+
+customerId:
+customer.id,
+
+material:"自动测试豆粕",
+
+spec:"蛋白43%",
+
+quantity:100,
+
+delivery:"济南",
+
+targetPrice:3300,
+
+requiredDate:"2026-09-20",
+
+status:"待匹配",
+
+priority:"普通",
+
+note:"自动测试需求"
+
+});
+
+
+testDemandId =
+demand.id;
+
+
+if(
+!testDemandId
+){
+
+throw new Error(
+"demandId没有生成"
+);
+
+}
+
+
+if(
+!testDemandId.startsWith("DEM-")
+){
+
+throw new Error(
+"demandId格式错误"
+);
+
+}
+
+}
+);
+
+
+/*
+测试5
+Demand查询
+*/
+
+test(
+"可以通过demandId查询需求",
+function(){
+
+const demand =
+DemandService.get(
+testDemandId
+);
+
+
+if(!demand){
+
+throw new Error(
+"查询不到需求"
+);
+
+}
+
+
+if(
+demand.material !==
+"自动测试豆粕"
+){
+
+throw new Error(
+"需求内容错误"
+);
+
+}
+
+
+if(
+demand.customerId === ""
+){
+
+throw new Error(
+"customerId为空"
+);
+
+}
+
+}
+);
+
+
+/*
+测试6
+Demand重新读取
+*/
+
+test(
+"Demand可以从列表重新读取",
+function(){
+
+const exists =
+DemandService
+.list()
+.some(
+function(item){
+
+return item.id ===
+testDemandId;
+
+}
+);
+
+
+if(!exists){
+
+throw new Error(
+"列表中找不到Demand"
+);
+
+}
+
+}
+);
+
+
+/*
+测试7
+需求编辑
+*/
+
+test(
+"Demand可以编辑",
+function(){
+
+const updated =
+DemandService.update(
+testDemandId,
+{
+
+quantity:120,
+
+targetPrice:3250
+
+}
+);
+
+
+if(
+updated.quantity !== 120
+){
+
+throw new Error(
+"需求数量修改失败"
+);
+
+}
+
+
+if(
+updated.targetPrice !== 3250
+){
+
+throw new Error(
+"目标价格修改失败"
+);
+
+}
+
+}
+);
+
+
+/*
+测试8
+匹配逻辑
+*/
+
+test(
+"需求可以执行货源匹配",
+function(){
+
+const demand =
+DemandService.get(
+testDemandId
+);
+
+
+const source =
+SourceAdapter.list()
+.find(
+function(item){
+
+return (
+normalize(item.material) ===
+normalize(demand.material) &&
+item.status === "合作中" &&
+Number(item.quantity || 0) >=
+Number(demand.quantity || 0)
+);
+
+}
+);
+
+
+if(!source){
+
+throw new Error(
+"当前模块02没有找到满足基本匹配条件的豆粕货源"
+);
+
+}
+
+
+const result =
+matchSource(
+demand,
+source
+);
+
+
+if(!result.matched){
+
+throw new Error(
+"匹配规则返回失败：" +
+result.reasons.join("、")
+);
+
+}
+
+}
+);
+
+
+/*
+测试9
+Opportunity创建
+*/
+
+test(
+"customerId + demandId + sourceId可以建立Opportunity",
+function(){
+
+const demand =
+DemandService.get(
+testDemandId
+);
+
+
+const matches =
+getMatches(
+demand
+);
+
+
+if(
+matches.length === 0
+){
+
+throw new Error(
+"没有可建立Opportunity的匹配货源"
+);
+
+}
+
+
+const source =
+matches[0].source;
+
+
+const opportunity =
+OpportunityService.create({
+
+customerId:
+demand.customerId,
+
+demandId:
+demand.id,
+
+sourceId:
+source.id,
+
+quantity:
+demand.quantity,
+
+status:
+"待跟进",
+
+note:
+"自动测试Opportunity"
+
+});
+
+
+testOpportunityId =
+opportunity.id;
+
+
+if(
+!testOpportunityId
+){
+
+throw new Error(
+"Opportunity ID没有生成"
+);
+
+}
+
+
+if(
+!testOpportunityId.startsWith("OPP-")
+){
+
+throw new Error(
+"Opportunity ID格式错误"
+);
+
+}
+
+
+if(
+opportunity.customerId !==
+demand.customerId
+){
+
+throw new Error(
+"customerId关联错误"
+);
+
+}
+
+
+if(
+opportunity.demandId !==
+demand.id
+){
+
+throw new Error(
+"demandId关联错误"
+);
+
+}
+
+
+if(
+opportunity.sourceId !==
+source.id
+){
+
+throw new Error(
+"sourceId关联错误"
+);
+
+}
+
+}
+);
+
+
+/*
+测试10
+Opportunity重新读取
+*/
+
+test(
+"Opportunity可以通过ID重新读取",
+function(){
+
+const opportunity =
+OpportunityService.get(
+testOpportunityId
+);
+
+
+if(!opportunity){
+
+throw new Error(
+"查询不到Opportunity"
+);
+
+}
+
+
+if(
+opportunity.demandId !==
+testDemandId
+){
+
+throw new Error(
+"Opportunity与Demand关系错误"
+);
+
+}
+
+}
+);
+
+
+/*
+测试11
+跨模块数据没有被修改
+*/
+
+test(
+"模块03不会修改模块01和模块02正式数据",
+function(){
+
+const module01 =
+readModule01();
+
+
+const module02 =
+readModule02();
+
+
+if(
+!Array.isArray(
+module01.customers
+)
+){
+
+throw new Error(
+"模块01数据异常"
+);
+
+}
+
+
+if(
+!Array.isArray(
+module02.sources
+)
+){
+
+throw new Error(
+"模块02数据异常"
+);
+
+}
+
+
+const customer =
+module01.customers[0];
+
+
+const source =
+module02.sources[0];
+
+
+if(
+customer &&
+!customer.id
+){
+
+throw new Error(
+"模块01客户ID异常"
+);
+
+}
+
+
+if(
+source &&
+!source.id
+){
+
+throw new Error(
+"模块02货源ID异常"
+);
+
+}
+
+}
+);
+
+
+/*
+测试12
+删除Opportunity
+*/
+
+test(
+"测试数据中的Opportunity可以删除",
+function(){
+
+const db =
+Module03DB.read();
+
+
+const index =
+db.opportunities.findIndex(
+function(item){
+
+return item.id ===
+testOpportunityId;
+
+}
+);
+
+
+if(index === -1){
+
+throw new Error(
+"找不到测试Opportunity"
+);
+
+}
+
+
+db.opportunities.splice(
+index,
+1
+);
+
+
+Module03DB.write(
+db
+);
+
+
+if(
+OpportunityService.get(
+testOpportunityId
+)
+){
+
+throw new Error(
+"Opportunity删除失败"
+);
+
+}
+
+}
+);
+
+
+/*
+测试13
+删除Demand
+*/
+
+test(
+"测试Demand可以删除",
+function(){
+
+const ok =
+DemandService.remove(
+testDemandId
+);
+
+
+if(!ok){
+
+throw new Error(
+"Demand删除失败"
+);
+
+}
+
+
+if(
+DemandService.get(
+testDemandId
+)
+){
+
+throw new Error(
+"Demand删除后仍然存在"
+);
+
+}
+
+}
+);
+
+
+/*
+恢复测试前数据
+*/
+
+try{
+
+Module03DB.write(
+JSON.parse(backup)
+);
+
+}catch(error){
+
+failCount++;
+
+results.push(
+
+`
+
+<div class="fail">
+
+❌ 测试数据恢复失败：
+
+${esc(error.message)}
+
+</div>
+
+`
+
+);
+
+}
+
+
+/*
+刷新页面
+*/
+
+render();
+
+
+const summaryClass =
+failCount === 0
+?
+"pass"
+:
+"fail";
+
+
+resultBox.innerHTML =
+
+results.join("") +
+
+`
+
+<div
+class="test-summary ${summaryClass}"
+>
+
+模块03自动测试完成：
+
+${passCount} 项通过，
+
+${failCount} 项失败。
+
+<br><br>
+
+${
+failCount === 0
+?
+"🎉 模块03基础功能及跨模块接口测试全部通过。"
+:
+"⚠️ 模块03存在失败项目，请先检查后再进入下一模块。"
+}
+
+<br><br>
+
+测试过程中产生的临时 Demand / Opportunity 已恢复。
+
+模块01客户数据：
+
+<b>
+未修改
+</b>
+
+<br>
+
+模块02货源数据：
+
+<b>
+未修改
+</b>
+
+</div>
+
+`;
+
+}
+
+
+/*
+============================================================
+初始化
+============================================================
+*/
+
+try{
+
+initDemo();
+
+render();
+
+}catch(error){
+
+document
+.getElementById("testResult")
+.innerHTML =
+
+`
+
+<div class="fail">
+
+❌ 模块03初始化失败
+
+<br>
+
+${esc(error.message)}
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
