@@ -1,0 +1,6639 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
+<title>饲料原料贸易平台｜模块03</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:#f4f6f8;
+  color:#172033;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "PingFang SC",
+    "Microsoft YaHei",
+    Arial,
+    sans-serif;
+}
+
+body{
+  min-width:320px;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  border:1px solid #d3dae4;
+  background:#fff;
+  color:#172033;
+  border-radius:7px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#f8fafc;
+}
+
+button.primary{
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb;
+}
+
+button.primary:hover{
+  background:#1d4ed8;
+}
+
+button.success{
+  background:#059669;
+  color:#fff;
+  border-color:#059669;
+}
+
+button.success:hover{
+  background:#047857;
+}
+
+button.danger{
+  color:#b91c1c;
+}
+
+button.small{
+  padding:6px 9px;
+  font-size:12px;
+}
+
+header{
+  background:#172235;
+  color:#fff;
+  padding:15px 18px;
+}
+
+.header-inner{
+  max-width:1500px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.header-title{
+  font-size:18px;
+  font-weight:700;
+}
+
+.header-subtitle{
+  color:#aebbd0;
+  font-size:12px;
+  margin-top:4px;
+}
+
+.header-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.header-actions button{
+  background:#26344b;
+  color:#fff;
+  border-color:#40516b;
+}
+
+.header-actions button:hover{
+  background:#31435e;
+}
+
+main{
+  max-width:1500px;
+  margin:auto;
+  padding:16px;
+}
+
+.page-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.page-top h1{
+  margin:0;
+  font-size:23px;
+}
+
+.page-top p{
+  margin:7px 0 0;
+  color:#68768a;
+  font-size:13px;
+  line-height:1.75;
+}
+
+.page-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e0e5ec;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:12px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+}
+
+.kpi{
+  min-height:96px;
+}
+
+.kpi small{
+  color:#738096;
+  font-size:12px;
+}
+
+.kpi strong{
+  display:block;
+  margin-top:7px;
+  font-size:24px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:13px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:17px;
+}
+
+.section-title .right{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.notice{
+  background:#f7faff;
+  border:1px solid #dce7f7;
+  color:#53647a;
+  border-radius:8px;
+  padding:11px;
+  font-size:12px;
+  line-height:1.75;
+}
+
+.notice.good{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+  color:#047857;
+}
+
+.notice.warn{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#b45309;
+}
+
+.notice.bad{
+  background:#fef2f2;
+  border-color:#fecaca;
+  color:#b91c1c;
+}
+
+.connection-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.connection-item{
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  padding:12px;
+  background:#fafcff;
+}
+
+.connection-item strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.muted{
+  color:#718096;
+  font-size:12px;
+}
+
+.toolbar{
+  display:grid;
+  grid-template-columns:1.5fr repeat(5,1fr) auto auto;
+  gap:8px;
+  align-items:center;
+}
+
+.toolbar input,
+.toolbar select{
+  width:100%;
+  min-width:0;
+}
+
+.search-wrap{
+  position:relative;
+}
+
+.search-wrap input{
+  width:100%;
+}
+
+.filter-info{
+  margin-top:9px;
+  color:#718096;
+  font-size:12px;
+}
+
+.table-scroll{
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  border:1px solid #e6eaf0;
+  border-radius:8px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1350px;
+}
+
+th,
+td{
+  text-align:left;
+  padding:10px 9px;
+  border-bottom:1px solid #edf0f3;
+  font-size:13px;
+  vertical-align:middle;
+  white-space:nowrap;
+}
+
+th{
+  background:#f8fafc;
+  color:#64748b;
+  font-weight:600;
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+tbody tr:hover{
+  background:#fafcff;
+}
+
+tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.id{
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+  font-size:11px;
+  color:#475569;
+}
+
+.tag{
+  display:inline-block;
+  padding:3px 8px;
+  border-radius:20px;
+  font-size:11px;
+  background:#eef2ff;
+  color:#4338ca;
+}
+
+.tag.green{
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.tag.orange{
+  background:#fff7ed;
+  color:#b45309;
+}
+
+.tag.red{
+  background:#fef2f2;
+  color:#b91c1c;
+}
+
+.tag.gray{
+  background:#f1f5f9;
+  color:#64748b;
+}
+
+.tag.blue{
+  background:#eff6ff;
+  color:#1d4ed8;
+}
+
+.empty{
+  text-align:center;
+  color:#78869a;
+  padding:35px 15px;
+}
+
+.score{
+  font-size:16px;
+  font-weight:700;
+}
+
+.score.high{
+  color:#047857;
+}
+
+.score.mid{
+  color:#b45309;
+}
+
+.score.low{
+  color:#64748b;
+}
+
+.match-reason{
+  white-space:normal;
+  min-width:230px;
+  max-width:360px;
+  line-height:1.65;
+  color:#53647a;
+}
+
+.action-cell{
+  white-space:nowrap;
+}
+
+.demand-main{
+  font-weight:700;
+}
+
+.demand-sub{
+  color:#718096;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.source-main{
+  font-weight:700;
+}
+
+.source-sub{
+  color:#718096;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.match-detail{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.detail-item{
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  padding:11px;
+  background:#fafcff;
+}
+
+.detail-item small{
+  display:block;
+  color:#718096;
+  font-size:11px;
+  margin-bottom:5px;
+}
+
+.detail-item strong{
+  font-size:13px;
+}
+
+.match-good{
+  color:#047857;
+}
+
+.match-warn{
+  color:#b45309;
+}
+
+.match-bad{
+  color:#b91c1c;
+}
+
+.rule-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.rule-item{
+  border:1px solid #e2e8f0;
+  border-radius:8px;
+  padding:12px;
+  background:#fafcff;
+  line-height:1.65;
+  font-size:12px;
+}
+
+.rule-item strong{
+  display:block;
+  font-size:13px;
+  margin-bottom:4px;
+}
+
+.test-list{
+  margin-top:12px;
+}
+
+.test-pass,
+.test-fail{
+  padding:9px 10px;
+  border-radius:7px;
+  margin-top:6px;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.test-pass{
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.test-fail{
+  background:#fef2f2;
+  color:#b91c1c;
+}
+
+.test-summary{
+  margin-top:12px;
+  padding:12px;
+  border-radius:8px;
+  font-weight:600;
+}
+
+pre{
+  margin:10px 0 0;
+  background:#111827;
+  color:#d5dbea;
+  padding:13px;
+  border-radius:8px;
+  overflow:auto;
+  font-size:11px;
+  line-height:1.65;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.dialog{
+  width:min(900px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 15px 50px #0004;
+}
+
+.dialog h2{
+  margin:0 0 15px;
+  font-size:18px;
+}
+
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:16px;
+}
+
+.field label{
+  display:block;
+  color:#64748b;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid #d3dae4;
+  border-radius:7px;
+  padding:9px;
+  background:#fff;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.detail-block{
+  margin-top:14px;
+}
+
+.detail-block h3{
+  font-size:14px;
+  margin:0 0 8px;
+}
+
+.reason-list{
+  margin:0;
+  padding-left:20px;
+  color:#53647a;
+  font-size:12px;
+  line-height:1.8;
+}
+
+.no-match{
+  padding:15px;
+  border-radius:8px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#b45309;
+  font-size:12px;
+  line-height:1.7;
+}
+
+@media(max-width:1250px){
+
+  .toolbar{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .toolbar .search-wrap{
+    grid-column:1/-1;
+  }
+
+  .cards{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .connection-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:900px){
+
+  .rule-grid{
+    grid-template-columns:1fr;
+  }
+
+  .match-detail{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:800px){
+
+  main{
+    padding:10px;
+  }
+
+  .page-top{
+    flex-direction:column;
+  }
+
+  .header-inner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .connection-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .toolbar{
+    grid-template-columns:1fr;
+  }
+
+  .toolbar .search-wrap{
+    grid-column:auto;
+  }
+
+  .match-detail{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="header-inner">
+
+<div>
+
+<div class="header-title">
+饲料原料贸易平台
+</div>
+
+<div class="header-subtitle">
+模块03 · 商机匹配中心 · Demand × Source 实时匹配
+</div>
+
+</div>
+
+<div class="header-actions">
+
+<button onclick="goHome()">
+← 返回首页平台
+</button>
+
+<button onclick="refreshAll()">
+刷新数据
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main>
+
+
+<div class="page-top">
+
+<div>
+
+<h1>
+商机匹配中心
+</h1>
+
+<p>
+Module 03 不创建客户需求，也不创建货源。
+本模块只读取 Module 01 的 Demand 与 Module 02 的 Source，
+根据原料、规格、产地、数量、到货地、付款方式、有效期及状态进行实时匹配。
+</p>
+
+</div>
+
+<div class="page-actions">
+
+<button
+class="primary"
+onclick="runMatching()"
+>
+重新执行匹配
+</button>
+
+<button
+onclick="clearFilters()"
+>
+清空筛选
+</button>
+
+</div>
+
+</div>
+
+
+<!-- KPI -->
+
+<div
+class="cards"
+id="kpi"
+></div>
+
+
+<!-- 数据连接 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+模块数据连接
+</h2>
+
+<button onclick="renderConnection()">
+重新检查
+</button>
+
+</div>
+
+<div id="connectionResult"></div>
+
+</div>
+
+
+<!-- 匹配规则 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+匹配规则
+</h2>
+
+</div>
+
+<div class="rule-grid">
+
+<div class="rule-item">
+
+<strong>
+① 原料：硬条件
+</strong>
+
+原料名称经过标准化处理后必须一致。
+原料不一致，不进入有效匹配。
+
+</div>
+
+<div class="rule-item">
+
+<strong>
+② 货源状态：硬条件
+</strong>
+
+货源状态为暂停、关闭或无法识别为有效状态时，
+不进入有效匹配。
+
+</div>
+
+<div class="rule-item">
+
+<strong>
+③ 有效期：硬条件
+</strong>
+
+存在有效期且已经过期的 Source，
+不进入有效匹配。
+
+</div>
+
+<div class="rule-item">
+
+<strong>
+④ 数量：硬条件
+</strong>
+
+Source 可供数量必须大于或等于 Demand 数量，
+才可判定为数量满足。
+
+</div>
+
+<div class="rule-item">
+
+<strong>
+⑤ 规格 / 产地 / 到货地
+</strong>
+
+Demand 有明确要求时，
+Source 对应字段一致则提高匹配度；
+明确冲突则降低匹配度。
+
+</div>
+
+<div class="rule-item">
+
+<strong>
+⑥ 付款方式
+</strong>
+
+Demand 有付款方式要求时，
+Source 相同则提高匹配度。
+无明确要求不作为否决条件。
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 筛选 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+匹配结果筛选
+</h2>
+
+</div>
+
+<div class="toolbar">
+
+<div class="search-wrap">
+
+<input
+id="matchSearch"
+placeholder="搜索 demandId、客户、原料、sourceId、供应商……"
+oninput="renderMatches()"
+>
+
+</div>
+
+
+<select
+id="matchMaterialFilter"
+onchange="renderMatches()"
+>
+
+<option value="">
+全部原料
+</option>
+
+</select>
+
+
+<select
+id="matchCustomerFilter"
+onchange="renderMatches()"
+>
+
+<option value="">
+全部客户
+</option>
+
+</select>
+
+
+<select
+id="matchLevelFilter"
+onchange="renderMatches()"
+>
+
+<option value="">
+全部匹配等级
+</option>
+
+<option value="高匹配">
+高匹配
+</option>
+
+<option value="中匹配">
+中匹配
+</option>
+
+<option value="低匹配">
+低匹配
+</option>
+
+</select>
+
+
+<select
+id="matchStatusFilter"
+onchange="renderMatches()"
+>
+
+<option value="">
+全部结果状态
+</option>
+
+<option value="完全满足">
+完全满足
+</option>
+
+<option value="部分满足">
+部分满足
+</option>
+
+<option value="不满足">
+不满足
+</option>
+
+</select>
+
+
+<select
+id="matchSupplierFilter"
+onchange="renderMatches()"
+>
+
+<option value="">
+全部供应商
+</option>
+
+</select>
+
+
+<button onclick="renderMatches()">
+筛选
+</button>
+
+</div>
+
+<div
+id="matchFilterInfo"
+class="filter-info"
+>
+</div>
+
+</div>
+
+
+<!-- 匹配结果 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+商机匹配结果
+</h2>
+
+<div class="right">
+
+<span
+class="muted"
+id="matchCountText"
+>
+</span>
+
+</div>
+
+</div>
+
+
+<div class="table-scroll">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>匹配等级</th>
+
+<th>匹配分</th>
+
+<th>Demand</th>
+
+<th>客户</th>
+
+<th>原料</th>
+
+<th>需求数量</th>
+
+<th>Source</th>
+
+<th>供应商</th>
+
+<th>货源数量</th>
+
+<th>价格</th>
+
+<th>到货地</th>
+
+<th>匹配状态</th>
+
+<th>匹配说明</th>
+
+<th>操作</th>
+
+</tr>
+
+</thead>
+
+<tbody id="matchList">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<!-- Demand 概览 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+Module 01 需求读取状态
+</h2>
+
+<div class="right">
+
+<span
+class="muted"
+id="demandCountText"
+>
+</span>
+
+</div>
+
+</div>
+
+<div id="demandReadResult"></div>
+
+</div>
+
+
+<!-- Source 概览 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+Module 02 货源读取状态
+</h2>
+
+<div class="right">
+
+<span
+class="muted"
+id="sourceCountText"
+>
+</span>
+
+</div>
+
+</div>
+
+<div id="sourceReadResult"></div>
+
+</div>
+
+
+<!-- 接口结构 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+Module 03 数据接口
+</h2>
+
+</div>
+
+<pre>
+Module 01
+Customer
+   │
+   │ customerId
+   ↓
+Demand
+   │
+   │ demandId
+   │
+   │ material
+   │ specification
+   │ origin
+   │ delivery
+   │ quantity
+   │ payment
+   ↓
+Module 03 Matching Engine
+   ↑
+   │
+   │ sourceId
+   │ supplierId
+   │
+   │ material
+   │ specification
+   │ origin
+   │ delivery
+   │ quantity
+   │ price
+   │ payment
+   │ validUntil
+   │ status
+   │
+Module 02
+Supplier
+   │
+   │ supplierId
+   ↓
+Source
+
+
+Module 03原则：
+
+1. 不复制 Demand 数据作为独立数据库
+2. 不复制 Source 数据作为独立数据库
+3. 不修改 Module 01
+4. 不修改 Module 02
+5. 每次重新匹配时重新读取最新数据
+6. Demand / Source 的原始 ID 永远保持原值
+7. 匹配结果属于计算结果，不作为业务主数据保存
+</pre>
+
+</div>
+
+
+<!-- 自动测试 -->
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+🧪 Module 03 自动化测试
+</h2>
+
+</div>
+
+<div class="notice">
+
+测试只在当前浏览器环境内建立临时的 Module 03 测试数据，
+不会修改 Module 01 与 Module 02 的正式数据库。
+
+测试重点：
+
+<br>
+① Module 01 数据读取
+<br>
+② Module 02 数据读取
+<br>
+③ Demand → Source 匹配
+<br>
+④ 原料硬条件
+<br>
+⑤ 数量判断
+<br>
+⑥ Source 有效期判断
+<br>
+⑦ Source 状态判断
+<br>
+⑧ supplierId 关系
+<br>
+⑨ sourceId 唯一性
+<br>
+⑩ 一条 Demand 对多个 Source
+<br>
+⑪ 一个 Source 可以被多个 Demand 匹配
+<br>
+⑫ Module 01 / Module 02 数据保护
+<br>
+⑬ 测试结束后恢复 Module 03 测试环境
+
+</div>
+
+<button
+class="primary"
+style="margin-top:10px"
+onclick="runTests()"
+>
+运行 Module 03 自动测试
+</button>
+
+<div
+id="testResult"
+>
+</div>
+
+</div>
+
+
+</main>
+
+
+<!-- =========================
+     匹配详情弹窗
+========================= -->
+
+<div
+class="modal"
+id="matchModal"
+>
+
+<div class="dialog">
+
+<h2>
+匹配详情
+</h2>
+
+<div id="matchDetail"></div>
+
+<div class="actions">
+
+<button onclick="closeMatchModal()">
+关闭
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   Module 03
+   核心原则：
+   只读 Module 01 / Module 02
+   不修改两者正式数据
+   ========================================================= */
+
+
+/* =========================================================
+   Module 01 数据库候选 Key
+   ========================================================= */
+
+const MODULE01_KEYS = [
+
+"FEED_TRADE_PLATFORM_DB_V01",
+"FEED_TRADE_PLATFORM_DATABASE_V1",
+"FEED_TRADE_DATABASE_V1",
+"FEED_TRADE_PLATFORM_DB",
+"FEED_TRADE_DB"
+
+];
+
+
+/* =========================================================
+   Module 02 正式数据库 Key
+   与用户提供的 Module 02 保持一致
+   ========================================================= */
+
+const MODULE02_KEY =
+"FEED_TRADE_MODULE02_TEST_V2";
+
+
+/* =========================================================
+   Module 03 自己只保存测试信息
+   正式匹配结果不持久化
+   ========================================================= */
+
+const MODULE03_TEST_KEY =
+"FEED_TRADE_MODULE03_TEST_V1";
+
+
+/* =========================================================
+   工具
+   ========================================================= */
+
+function esc(value){
+
+return String(
+value == null ? "" : value
+)
+.replace(
+/[&<>"']/g,
+function(m){
+
+return {
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[m];
+
+}
+);
+
+}
+
+
+function cloneData(data){
+
+return JSON.parse(
+JSON.stringify(data)
+);
+
+}
+
+
+function normalizeText(value){
+
+return String(
+value == null ? "" : value
+)
+.trim()
+.toLowerCase()
+.replace(/\s+/g,"");
+
+}
+
+
+function normalizeLoose(value){
+
+return String(
+value == null ? "" : value
+)
+.trim()
+.toLowerCase()
+.replace(/\s+/g,"")
+.replace(/[，,、；;|]/g,"/");
+}
+
+
+function money(value){
+
+const n =
+Number(value || 0);
+
+if(
+!Number.isFinite(n)
+){
+
+return "-";
+
+}
+
+return "¥" +
+n.toLocaleString(
+"zh-CN",
+{
+minimumFractionDigits:0,
+maximumFractionDigits:2
+}
+);
+
+}
+
+
+function numberValue(value){
+
+if(
+value === null ||
+value === undefined ||
+value === ""
+){
+
+return 0;
+
+}
+
+const n =
+Number(
+String(value)
+.replace(/,/g,"")
+.trim()
+);
+
+return Number.isFinite(n)
+?
+n
+:
+0;
+
+}
+
+
+function firstValue(object,keys){
+
+if(
+!object ||
+typeof object !== "object"
+){
+
+return "";
+
+}
+
+for(
+let i=0;
+i<keys.length;
+i++
+){
+
+const key =
+keys[i];
+
+if(
+Object.prototype.hasOwnProperty.call(
+object,
+key
+)
+){
+
+const value =
+object[key];
+
+if(
+value !== undefined &&
+value !== null &&
+String(value).trim() !== ""
+){
+
+return value;
+
+}
+
+}
+
+}
+
+return "";
+
+}
+
+
+function uniqueSorted(values){
+
+return Array.from(
+new Set(
+values
+.filter(
+function(value){
+
+return String(
+value == null ? "" : value
+).trim() !== "";
+
+}
+)
+)
+).sort(
+function(a,b){
+
+return String(a)
+.localeCompare(
+String(b),
+"zh-CN"
+);
+
+}
+);
+
+
+}
+
+
+/* =========================================================
+   Module 01 Reader
+   ========================================================= */
+
+const Module01Reader = {
+
+read:function(){
+
+for(
+let i=0;
+i<MODULE01_KEYS.length;
+i++
+){
+
+const key =
+MODULE01_KEYS[i];
+
+try{
+
+const raw =
+localStorage.getItem(key);
+
+if(!raw){
+
+continue;
+
+}
+
+const data =
+JSON.parse(raw);
+
+if(
+!data ||
+typeof data !== "object"
+){
+
+continue;
+
+}
+
+
+/*
+兼容 Demand 位于：
+
+data.demands
+data.Demand
+data.demand
+*/
+
+let demands = [];
+
+if(
+Array.isArray(data.demands)
+){
+
+demands =
+data.demands;
+
+}else if(
+Array.isArray(data.Demand)
+){
+
+demands =
+data.Demand;
+
+}else if(
+Array.isArray(data.demand)
+){
+
+demands =
+data.demand;
+
+}
+
+
+/*
+客户数组
+*/
+
+let customers = [];
+
+if(
+Array.isArray(data.customers)
+){
+
+customers =
+data.customers;
+
+}else if(
+Array.isArray(data.Customers)
+){
+
+customers =
+data.Customers;
+
+}
+
+
+return {
+
+key:key,
+
+data:data,
+
+demands:demands,
+
+customers:customers
+
+};
+
+}catch(error){
+
+console.warn(
+"Module01读取失败：",
+key,
+error
+);
+
+}
+
+}
+
+return {
+
+key:null,
+
+data:null,
+
+demands:[],
+
+customers:[]
+
+};
+
+}
+
+};
+
+
+/* =========================================================
+   Module 02 Reader
+   严格按照 Module 02 提供的数据库结构读取
+   ========================================================= */
+
+const Module02Reader = {
+
+read:function(){
+
+try{
+
+const raw =
+localStorage.getItem(
+MODULE02_KEY
+);
+
+if(!raw){
+
+return {
+
+key:MODULE02_KEY,
+
+data:null,
+
+suppliers:[],
+
+sources:[]
+
+};
+
+}
+
+const data =
+JSON.parse(raw);
+
+if(
+!data ||
+typeof data !== "object"
+){
+
+return {
+
+key:MODULE02_KEY,
+
+data:null,
+
+suppliers:[],
+
+sources:[]
+
+};
+
+}
+
+return {
+
+key:MODULE02_KEY,
+
+data:data,
+
+suppliers:
+Array.isArray(data.suppliers)
+?
+data.suppliers
+:
+[],
+
+sources:
+Array.isArray(data.sources)
+?
+data.sources
+:
+[]
+
+};
+
+}catch(error){
+
+console.error(
+"Module02读取失败：",
+error
+);
+
+return {
+
+key:MODULE02_KEY,
+
+data:null,
+
+suppliers:[],
+
+sources:[]
+
+};
+
+}
+
+}
+
+};
+
+
+/* =========================================================
+   Demand 标准化
+   目的：
+   Module 03 内部使用统一字段
+   不改变 Module 01 原数据
+   ========================================================= */
+
+function normalizeDemand(raw,index){
+
+const demand = {
+
+_raw:raw,
+
+index:index,
+
+id:firstValue(
+raw,
+[
+"id",
+"demandId",
+"ID"
+]
+),
+
+demandId:firstValue(
+raw,
+[
+"demandId",
+"id",
+"ID"
+]
+),
+
+customerId:firstValue(
+raw,
+[
+"customerId",
+"customerID",
+"clientId",
+"clientID"
+]
+),
+
+customerName:firstValue(
+raw,
+[
+"customerName",
+"customer",
+"clientName",
+"client",
+"name"
+]
+),
+
+material:firstValue(
+raw,
+[
+"material",
+"materialName",
+"rawMaterial",
+"rawMaterialName",
+"product",
+"productName"
+]
+),
+
+specification:firstValue(
+raw,
+[
+"specification",
+"spec",
+"requirement",
+"requirements"
+]
+),
+
+origin:firstValue(
+raw,
+[
+"origin",
+"sourceOrigin",
+"placeOfOrigin"
+]
+),
+
+delivery:firstValue(
+raw,
+[
+"delivery",
+"deliveryPlace",
+"arrival",
+"arrivalPlace",
+"destination",
+"deliveryAddress"
+]
+),
+
+quantity:numberValue(
+firstValue(
+raw,
+[
+"quantity",
+"demandQuantity",
+"qty",
+"tons",
+"tonnage"
+]
+)
+),
+
+price:numberValue(
+firstValue(
+raw,
+[
+"price",
+"targetPrice",
+"maxPrice",
+"budgetPrice"
+]
+)
+),
+
+payment:firstValue(
+raw,
+[
+"payment",
+"paymentMethod",
+"payMethod"
+]
+),
+
+validUntil:firstValue(
+raw,
+[
+"validUntil",
+"deadline",
+"requiredDate",
+"deliveryDate"
+]
+),
+
+status:firstValue(
+raw,
+[
+"status",
+"demandStatus"
+]
+),
+
+note:firstValue(
+raw,
+[
+"note",
+"remark",
+"remarks",
+"description"
+]
+)
+
+};
+
+if(
+!demand.id
+){
+
+demand.id =
+"demand-index-" +
+index;
+
+}
+
+if(
+!demand.demandId
+){
+
+demand.demandId =
+demand.id;
+
+}
+
+return demand;
+
+}
+
+
+/* =========================================================
+   Supplier 标准化
+   ========================================================= */
+
+function normalizeSupplier(raw,index){
+
+const id =
+firstValue(
+raw,
+[
+"id",
+"supplierId"
+]
+);
+
+return {
+
+_raw:raw,
+
+index:index,
+
+id:id,
+
+supplierId:
+firstValue(
+raw,
+[
+"supplierId",
+"id"
+]
+),
+
+name:
+firstValue(
+raw,
+[
+"name",
+"supplierName"
+]
+),
+
+contact:
+firstValue(
+raw,
+[
+"contact"
+]
+),
+
+phone:
+firstValue(
+raw,
+[
+"phone"
+]
+),
+
+region:
+firstValue(
+raw,
+[
+"region"
+]
+),
+
+status:
+firstValue(
+raw,
+[
+"status"
+]
+),
+
+note:
+firstValue(
+raw,
+[
+"note"
+]
+)
+
+};
+
+}
+
+
+/* =========================================================
+   Source 标准化
+   ========================================================= */
+
+function normalizeSource(raw,index){
+
+const source = {
+
+_raw:raw,
+
+index:index,
+
+id:firstValue(
+raw,
+[
+"id",
+"sourceId"
+]
+),
+
+sourceId:firstValue(
+raw,
+[
+"sourceId",
+"id"
+]
+),
+
+supplierId:firstValue(
+raw,
+[
+"supplierId"
+]
+),
+
+supplierName:firstValue(
+raw,
+[
+"supplierName"
+]
+),
+
+material:firstValue(
+raw,
+[
+"material",
+"materialName"
+]
+),
+
+specification:firstValue(
+raw,
+[
+"specification",
+"spec"
+]
+),
+
+origin:firstValue(
+raw,
+[
+"origin"
+]
+),
+
+delivery:firstValue(
+raw,
+[
+"delivery"
+]
+),
+
+quantity:numberValue(
+firstValue(
+raw,
+[
+"quantity",
+"qty",
+"tons"
+]
+)
+),
+
+price:numberValue(
+firstValue(
+raw,
+[
+"price"
+]
+)
+),
+
+payment:firstValue(
+raw,
+[
+"payment",
+"paymentMethod"
+]
+),
+
+validUntil:firstValue(
+raw,
+[
+"validUntil"
+]
+),
+
+status:firstValue(
+raw,
+[
+"status"
+]
+),
+
+note:firstValue(
+raw,
+[
+"note"
+]
+)
+
+};
+
+if(
+!source.id
+){
+
+source.id =
+"source-index-" +
+index;
+
+}
+
+if(
+!source.sourceId
+){
+
+source.sourceId =
+source.id;
+
+}
+
+return source;
+
+}
+
+
+/* =========================================================
+   客户名称补充
+   不修改 Module 01
+   ========================================================= */
+
+function enrichDemandCustomer(demand,customers){
+
+if(
+demand.customerName
+){
+
+return demand;
+
+}
+
+if(
+!demand.customerId
+){
+
+return demand;
+
+}
+
+const customer =
+customers.find(
+function(item){
+
+return (
+String(
+firstValue(
+item,
+[
+"id",
+"customerId"
+]
+)
+) ===
+String(
+demand.customerId
+)
+);
+
+}
+);
+
+if(customer){
+
+demand.customerName =
+firstValue(
+customer,
+[
+"name",
+"customerName",
+"companyName",
+"company"
+]
+);
+
+}
+
+return demand;
+
+}
+
+
+/* =========================================================
+   Source供应商补充
+   ========================================================= */
+
+function enrichSourceSupplier(source,suppliers){
+
+if(
+source.supplierName
+){
+
+return source;
+
+}
+
+const supplier =
+suppliers.find(
+function(item){
+
+return (
+String(item.id) ===
+String(source.supplierId)
+||
+String(item.supplierId) ===
+String(source.supplierId)
+);
+
+}
+);
+
+if(supplier){
+
+source.supplierName =
+supplier.name;
+
+}
+
+return source;
+
+}
+
+
+/* =========================================================
+   日期判断
+   ========================================================= */
+
+function parseDateOnly(value){
+
+if(!value){
+
+return null;
+
+}
+
+const text =
+String(value).trim();
+
+const match =
+text.match(
+/^(\d{4})-(\d{1,2})-(\d{1,2})/
+);
+
+if(match){
+
+const y =
+Number(match[1]);
+
+const m =
+Number(match[2]) - 1;
+
+const d =
+Number(match[3]);
+
+const date =
+new Date(
+y,
+m,
+d
+);
+
+date.setHours(
+23,
+59,
+59,
+999
+);
+
+return date;
+
+}
+
+const parsed =
+new Date(text);
+
+if(
+Number.isNaN(
+parsed.getTime()
+)
+){
+
+return null;
+
+}
+
+return parsed;
+
+}
+
+
+function isExpired(validUntil){
+
+if(!validUntil){
+
+return false;
+
+}
+
+const date =
+parseDateOnly(
+validUntil
+);
+
+if(!date){
+
+return false;
+
+}
+
+return date.getTime() <
+Date.now();
+
+}
+
+
+/* =========================================================
+   Source有效状态
+   ========================================================= */
+
+function isActiveSource(source){
+
+const status =
+normalizeText(
+source.status
+);
+
+if(!status){
+
+return false;
+
+}
+
+const inactive = [
+
+"暂停",
+"关闭",
+"停用",
+"失效",
+"无效",
+"已关闭",
+"已暂停"
+
+];
+
+if(
+inactive.includes(status)
+){
+
+return false;
+
+}
+
+const active = [
+
+"合作中",
+"可供",
+"正常",
+"有效",
+"供应中",
+"在售",
+"可交易"
+
+];
+
+return active.includes(status);
+
+}
+
+
+/* =========================================================
+   Demand有效状态
+   如果Demand明确关闭/完成/取消，则不参与
+   ========================================================= */
+
+function isActiveDemand(demand){
+
+const status =
+normalizeText(
+demand.status
+);
+
+if(!status){
+
+return true;
+
+}
+
+const inactive = [
+
+"关闭",
+"取消",
+"已取消",
+"完成",
+"已完成",
+"失效",
+"无效",
+"暂停"
+
+];
+
+return !inactive.includes(status);
+
+}
+
+
+/* =========================================================
+   字段匹配
+   ========================================================= */
+
+function fieldEqual(a,b){
+
+const na =
+normalizeLoose(a);
+
+const nb =
+normalizeLoose(b);
+
+if(
+!na ||
+!nb
+){
+
+return null;
+
+}
+
+return na === nb;
+
+}
+
+
+/* =========================================================
+   核心匹配引擎
+   ========================================================= */
+
+const MatchingEngine = {
+
+
+match:function(demand,source){
+
+const reasons = [];
+
+const warnings = [];
+
+const hardFailures = [];
+
+
+/* -----------------------------------------
+   供应商关系
+----------------------------------------- */
+
+if(
+!source.supplierId
+){
+
+hardFailures.push(
+"货源缺少supplierId"
+);
+
+}
+
+
+/* -----------------------------------------
+   原料
+----------------------------------------- */
+
+const materialEqual =
+fieldEqual(
+demand.material,
+source.material
+);
+
+if(
+!demand.material
+){
+
+hardFailures.push(
+"Demand缺少原料名称"
+);
+
+}else if(
+!source.material
+){
+
+hardFailures.push(
+"Source缺少原料名称"
+);
+
+}else if(
+materialEqual !== true
+){
+
+hardFailures.push(
+"原料名称不一致"
+);
+
+}else{
+
+reasons.push(
+"原料一致"
+);
+
+}
+
+
+/* -----------------------------------------
+   Source状态
+----------------------------------------- */
+
+if(
+!isActiveSource(source)
+){
+
+hardFailures.push(
+"货源状态不可供"
+);
+
+}else{
+
+reasons.push(
+"货源状态有效"
+);
+
+}
+
+
+/* -----------------------------------------
+   有效期
+----------------------------------------- */
+
+if(
+isExpired(
+source.validUntil
+)
+){
+
+hardFailures.push(
+"货源已超过有效期"
+);
+
+}else{
+
+if(
+source.validUntil
+){
+
+reasons.push(
+"货源有效期正常"
+);
+
+}
+
+}
+
+
+/* -----------------------------------------
+   数量
+----------------------------------------- */
+
+const demandQty =
+numberValue(
+demand.quantity
+);
+
+const sourceQty =
+numberValue(
+source.quantity
+);
+
+let quantityStatus =
+"未知";
+
+if(
+demandQty > 0 &&
+sourceQty >= demandQty
+){
+
+quantityStatus =
+"满足";
+
+reasons.push(
+"货源数量满足需求"
+);
+
+}else if(
+demandQty > 0 &&
+sourceQty > 0
+&&
+sourceQty < demandQty
+){
+
+quantityStatus =
+"不足";
+
+warnings.push(
+"货源数量不足"
+);
+
+}else{
+
+quantityStatus =
+"未明确";
+
+warnings.push(
+"需求数量或货源数量未明确"
+);
+
+}
+
+
+/* -----------------------------------------
+   可选条件计分
+----------------------------------------- */
+
+let score = 0;
+
+let scoreMax = 0;
+
+
+/*
+原料：
+已经作为硬条件
+*/
+
+score += 40;
+scoreMax += 40;
+
+
+/*
+数量
+*/
+
+scoreMax += 20;
+
+if(
+quantityStatus === "满足"
+){
+
+score += 20;
+
+}else if(
+quantityStatus === "不足"
+){
+
+score += 5;
+
+}
+
+
+/*
+规格
+*/
+
+if(
+demand.specification
+){
+
+scoreMax += 15;
+
+const equal =
+fieldEqual(
+demand.specification,
+source.specification
+);
+
+if(equal === true){
+
+score += 15;
+
+reasons.push(
+"规格一致"
+);
+
+}else if(
+!source.specification
+){
+
+warnings.push(
+"货源未填写规格"
+);
+
+}else{
+
+warnings.push(
+"规格存在差异"
+);
+
+}
+
+}
+
+
+/*
+产地
+*/
+
+if(
+demand.origin
+){
+
+scoreMax += 10;
+
+const equal =
+fieldEqual(
+demand.origin,
+source.origin
+);
+
+if(equal === true){
+
+score += 10;
+
+reasons.push(
+"产地一致"
+);
+
+}else if(
+!source.origin
+){
+
+warnings.push(
+"货源未填写产地"
+);
+
+}else{
+
+warnings.push(
+"产地存在差异"
+);
+
+}
+
+}
+
+
+/*
+到货地
+*/
+
+if(
+demand.delivery
+){
+
+scoreMax += 10;
+
+const equal =
+fieldEqual(
+demand.delivery,
+source.delivery
+);
+
+if(equal === true){
+
+score += 10;
+
+reasons.push(
+"到货地一致"
+);
+
+}else if(
+!source.delivery
+){
+
+warnings.push(
+"货源未填写到货地"
+);
+
+}else{
+
+warnings.push(
+"到货地存在差异"
+);
+
+}
+
+}
+
+
+/*
+付款方式
+*/
+
+if(
+demand.payment
+){
+
+scoreMax += 5;
+
+const equal =
+fieldEqual(
+demand.payment,
+source.payment
+);
+
+if(equal === true){
+
+score += 5;
+
+reasons.push(
+"付款方式一致"
+);
+
+}else if(
+!source.payment
+){
+
+warnings.push(
+"货源未填写付款方式"
+);
+
+}else{
+
+warnings.push(
+"付款方式存在差异"
+);
+
+}
+
+}
+
+
+/* -----------------------------------------
+   标准化分数
+----------------------------------------- */
+
+let normalizedScore = 0;
+
+if(
+scoreMax > 0
+){
+
+normalizedScore =
+Math.round(
+score / scoreMax * 100
+);
+
+}
+
+
+/* -----------------------------------------
+   匹配状态
+----------------------------------------- */
+
+let status = "不满足";
+
+if(
+hardFailures.length === 0
+){
+
+if(
+quantityStatus === "满足"
+){
+
+status =
+"完全满足";
+
+}else if(
+quantityStatus === "不足"
+){
+
+status =
+"部分满足";
+
+}else{
+
+status =
+"部分满足";
+
+}
+
+}
+
+
+/* -----------------------------------------
+   匹配等级
+----------------------------------------- */
+
+let level = "低匹配";
+
+if(
+status === "完全满足"
+){
+
+if(
+normalizedScore >= 85
+){
+
+level =
+"高匹配";
+
+}else if(
+normalizedScore >= 65
+){
+
+level =
+"中匹配";
+
+}else{
+
+level =
+"低匹配";
+
+}
+
+}else if(
+status === "部分满足"
+){
+
+if(
+normalizedScore >= 70
+){
+
+level =
+"中匹配";
+
+}else{
+
+level =
+"低匹配";
+
+}
+
+}
+
+
+/*
+硬失败时，分数只作为参考，
+不能把硬失败结果伪装成高匹配。
+*/
+
+if(
+hardFailures.length > 0
+){
+
+level =
+"低匹配";
+
+}
+
+
+return {
+
+demand:demand,
+
+source:source,
+
+score:normalizedScore,
+
+level:level,
+
+status:status,
+
+quantityStatus:quantityStatus,
+
+reasons:reasons,
+
+warnings:warnings,
+
+hardFailures:hardFailures,
+
+isValid:
+hardFailures.length === 0
+
+};
+
+},
+
+
+run:function(demands,sources){
+
+const results = [];
+
+demands.forEach(
+function(demand){
+
+if(
+!isActiveDemand(demand)
+){
+
+return;
+
+}
+
+sources.forEach(
+function(source){
+
+const result =
+MatchingEngine.match(
+demand,
+source
+);
+
+results.push(
+result
+);
+
+}
+);
+
+}
+);
+
+return results;
+
+}
+
+};
+
+
+/* =========================================================
+   页面状态
+   ========================================================= */
+
+let allMatches = [];
+
+let currentMatch = null;
+
+
+/* =========================================================
+   读取标准化数据
+   ========================================================= */
+
+function loadBusinessData(){
+
+const module01 =
+Module01Reader.read();
+
+const module02 =
+Module02Reader.read();
+
+const demands =
+module01.demands
+.map(
+function(item,index){
+
+return normalizeDemand(
+item,
+index
+);
+
+}
+)
+.map(
+function(item){
+
+return enrichDemandCustomer(
+item,
+module01.customers
+);
+
+}
+);
+
+const suppliers =
+module02.suppliers
+.map(
+function(item,index){
+
+return normalizeSupplier(
+item,
+index
+);
+
+}
+);
+
+const sources =
+module02.sources
+.map(
+function(item,index){
+
+return enrichSourceSupplier(
+normalizeSource(
+item,
+index
+),
+suppliers
+);
+
+}
+);
+
+return {
+
+module01:module01,
+
+module02:module02,
+
+demands:demands,
+
+suppliers:suppliers,
+
+sources:sources
+
+};
+
+}
+
+
+/* =========================================================
+   执行匹配
+   ========================================================= */
+
+function runMatching(){
+
+const data =
+loadBusinessData();
+
+allMatches =
+MatchingEngine.run(
+data.demands,
+data.sources
+);
+
+refreshFilterOptions();
+
+renderKPI();
+
+renderSourcesInfo(
+data
+);
+
+renderDemandsInfo(
+data
+);
+
+renderMatches();
+
+renderConnection();
+
+}
+
+
+/* =========================================================
+   KPI
+   ========================================================= */
+
+function renderKPI(){
+
+const data =
+loadBusinessData();
+
+const demands =
+data.demands;
+
+const sources =
+data.sources;
+
+const matches =
+allMatches;
+
+
+/*
+有效需求
+*/
+
+const activeDemands =
+demands.filter(
+function(demand){
+
+return isActiveDemand(
+demand
+);
+
+}
+);
+
+
+/*
+有效Source
+*/
+
+const activeSources =
+sources.filter(
+function(source){
+
+return (
+isActiveSource(source)
+&&
+!isExpired(
+source.validUntil
+)
+);
+
+}
+);
+
+
+/*
+有完全满足结果的Demand
+*/
+
+const fullyMatchedDemandIds =
+new Set(
+matches
+.filter(
+function(item){
+
+return (
+item.status ===
+"完全满足"
+);
+
+}
+)
+.map(
+function(item){
+
+return item.demand.demandId;
+
+}
+)
+);
+
+
+/*
+完全匹配条数
+*/
+
+const fullMatches =
+matches.filter(
+function(item){
+
+return item.status ===
+"完全满足";
+
+}
+).length;
+
+
+/*
+部分匹配
+*/
+
+const partialMatches =
+matches.filter(
+function(item){
+
+return item.status ===
+"部分满足";
+
+}
+).length;
+
+
+/*
+供应商
+*/
+
+const supplierCount =
+data.suppliers.length;
+
+
+document.getElementById(
+"kpi"
+).innerHTML =
+
+`
+
+<div class="card kpi">
+
+<small>
+有效需求
+</small>
+
+<strong>
+${activeDemands.length}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+有效货源
+</small>
+
+<strong>
+${activeSources.length}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+参与匹配货源
+</small>
+
+<strong>
+${
+new Set(
+matches.map(
+function(item){
+
+return item.source.sourceId;
+
+}
+)
+).size
+}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+完全满足
+</small>
+
+<strong>
+${fullMatches}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+部分满足
+</small>
+
+<strong>
+${partialMatches}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+已有匹配需求
+</small>
+
+<strong>
+${fullyMatchedDemandIds.size}
+</strong>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   筛选选项
+   ========================================================= */
+
+function refreshFilterOptions(){
+
+const data =
+loadBusinessData();
+
+const demands =
+data.demands;
+
+const sources =
+data.sources;
+
+
+/*
+原料
+*/
+
+const materialSelect =
+document.getElementById(
+"matchMaterialFilter"
+);
+
+const currentMaterial =
+materialSelect.value;
+
+materialSelect.innerHTML =
+
+`
+<option value="">
+全部原料
+</option>
+` +
+
+uniqueSorted(
+demands
+.concat(
+sources
+)
+.map(
+function(item){
+
+return item.material;
+
+}
+)
+)
+.map(
+function(value){
+
+return `
+<option value="${esc(value)}">
+${esc(value)}
+</option>
+`;
+
+}
+)
+.join("");
+
+materialSelect.value =
+currentMaterial;
+
+
+/*
+客户
+*/
+
+const customerSelect =
+document.getElementById(
+"matchCustomerFilter"
+);
+
+const currentCustomer =
+customerSelect.value;
+
+customerSelect.innerHTML =
+
+`
+<option value="">
+全部客户
+</option>
+` +
+
+uniqueSorted(
+demands.map(
+function(item){
+
+return item.customerName;
+
+}
+)
+)
+.map(
+function(value){
+
+return `
+<option value="${esc(value)}">
+${esc(value)}
+</option>
+`;
+
+}
+)
+.join("");
+
+customerSelect.value =
+currentCustomer;
+
+
+/*
+供应商
+*/
+
+const supplierSelect =
+document.getElementById(
+"matchSupplierFilter"
+);
+
+const currentSupplier =
+supplierSelect.value;
+
+supplierSelect.innerHTML =
+
+`
+<option value="">
+全部供应商
+</option>
+` +
+
+data.suppliers
+.map(
+function(item){
+
+return `
+<option value="${esc(
+item.supplierId ||
+item.id
+)}">
+
+${esc(
+item.name ||
+item.supplierName ||
+item.supplierId
+)}
+
+</option>
+`;
+
+}
+)
+.join("");
+
+supplierSelect.value =
+currentSupplier;
+
+}
+
+
+/* =========================================================
+   匹配列表
+   ========================================================= */
+
+function renderMatches(){
+
+const search =
+normalizeText(
+document.getElementById(
+"matchSearch"
+).value
+);
+
+const material =
+document.getElementById(
+"matchMaterialFilter"
+).value;
+
+const customer =
+document.getElementById(
+"matchCustomerFilter"
+).value;
+
+const level =
+document.getElementById(
+"matchLevelFilter"
+).value;
+
+const status =
+document.getElementById(
+"matchStatusFilter"
+).value;
+
+const supplierId =
+document.getElementById(
+"matchSupplierFilter"
+).value;
+
+
+const filtered =
+allMatches.filter(
+function(item){
+
+const demand =
+item.demand;
+
+const source =
+item.source;
+
+
+const searchText = [
+
+demand.demandId,
+
+demand.id,
+
+demand.customerId,
+
+demand.customerName,
+
+demand.material,
+
+demand.specification,
+
+source.sourceId,
+
+source.id,
+
+source.supplierId,
+
+source.supplierName,
+
+source.material,
+
+source.specification,
+
+source.origin,
+
+source.delivery
+
+]
+.join(" ");
+
+
+const okSearch =
+!search ||
+normalizeText(
+searchText
+)
+.includes(
+search
+);
+
+
+const okMaterial =
+!material ||
+normalizeText(
+demand.material
+) ===
+normalizeText(material);
+
+
+const okCustomer =
+!customer ||
+normalizeText(
+demand.customerName
+) ===
+normalizeText(customer);
+
+
+const okLevel =
+!level ||
+item.level === level;
+
+
+const okStatus =
+!status ||
+item.status === status;
+
+
+const okSupplier =
+!supplierId ||
+source.supplierId ===
+supplierId;
+
+
+return (
+okSearch &&
+okMaterial &&
+okCustomer &&
+okLevel &&
+okStatus &&
+okSupplier
+);
+
+}
+);
+
+
+/*
+优先：
+完全满足
+高分
+*/
+
+filtered.sort(
+function(a,b){
+
+if(
+a.status !== b.status
+){
+
+const order = {
+
+"完全满足":0,
+"部分满足":1,
+"不满足":2
+
+};
+
+return (
+order[a.status] -
+order[b.status]
+);
+
+}
+
+return (
+b.score -
+a.score
+);
+
+}
+);
+
+
+const box =
+document.getElementById(
+"matchList"
+);
+
+
+if(
+filtered.length === 0
+){
+
+box.innerHTML =
+
+`
+<tr>
+
+<td
+colspan="14"
+class="empty"
+>
+
+暂无符合条件的匹配结果
+
+</td>
+
+</tr>
+`;
+
+}else{
+
+box.innerHTML =
+filtered
+.map(
+function(item,index){
+
+return renderMatchRow(
+item,
+index
+);
+
+}
+)
+.join("");
+
+}
+
+
+document.getElementById(
+"matchCountText"
+).textContent =
+"显示 " +
+filtered.length +
+" / " +
+allMatches.length +
+" 条";
+
+
+document.getElementById(
+"matchFilterInfo"
+).textContent =
+
+(
+search ||
+material ||
+customer ||
+level ||
+status ||
+supplierId
+)
+
+?
+
+"当前正在使用筛选条件。"
+
+:
+
+"当前显示全部匹配计算结果。";
+
+}
+
+
+/* =========================================================
+   匹配行
+   ========================================================= */
+
+function renderMatchRow(item,index){
+
+let scoreClass =
+"low";
+
+if(
+item.level === "高匹配"
+){
+
+scoreClass =
+"high";
+
+}else if(
+item.level === "中匹配"
+){
+
+scoreClass =
+"mid";
+
+}
+
+
+let statusClass =
+"gray";
+
+if(
+item.status ===
+"完全满足"
+){
+
+statusClass =
+"green";
+
+}else if(
+item.status ===
+"部分满足"
+){
+
+statusClass =
+"orange";
+
+}else{
+
+statusClass =
+"red";
+
+}
+
+
+const explanation = [];
+
+
+if(
+item.reasons.length
+){
+
+explanation.push(
+item.reasons.join("、")
+);
+
+}
+
+
+if(
+item.warnings.length
+){
+
+explanation.push(
+"注意：" +
+item.warnings.join("、")
+);
+
+}
+
+
+if(
+item.hardFailures.length
+){
+
+explanation.push(
+"不满足：" +
+item.hardFailures.join("、")
+);
+
+}
+
+
+return `
+
+<tr>
+
+<td>
+
+<span class="tag ${
+item.level === "高匹配"
+?
+"green"
+:
+item.level === "中匹配"
+?
+"orange"
+:
+"gray"
+}">
+
+${esc(
+item.level
+)}
+
+</span>
+
+</td>
+
+
+<td>
+
+<span class="score ${scoreClass}">
+
+${item.score}
+
+</span>
+
+</td>
+
+
+<td>
+
+<div class="demand-main">
+
+${esc(
+item.demand.demandId
+)}
+
+</div>
+
+<div class="demand-sub">
+
+${esc(
+item.demand.customerId ||
+"-"
+)}
+
+</div>
+
+</td>
+
+
+<td>
+
+${esc(
+item.demand.customerName ||
+"-"
+)}
+
+</td>
+
+
+<td>
+
+${esc(
+item.demand.material ||
+"-"
+)}
+
+</td>
+
+
+<td>
+
+${
+item.demand.quantity > 0
+?
+Number(
+item.demand.quantity
+).toLocaleString(
+"zh-CN"
+)
+:
+"-"
+}
+
+</td>
+
+
+<td>
+
+<div class="source-main">
+
+${esc(
+item.source.sourceId
+)}
+
+</div>
+
+<div class="source-sub">
+
+${esc(
+item.source.material
+)}
+
+</div>
+
+</td>
+
+
+<td>
+
+<b>
+
+${esc(
+item.source.supplierName ||
+"-"
+)}
+
+</b>
+
+<br>
+
+<span class="id">
+
+${esc(
+item.source.supplierId ||
+"-"
+)}
+
+</span>
+
+</td>
+
+
+<td>
+
+${Number(
+item.source.quantity || 0
+).toLocaleString(
+"zh-CN"
+)}
+
+</td>
+
+
+<td>
+
+${money(
+item.source.price
+)}
+
+</td>
+
+
+<td>
+
+${esc(
+item.source.delivery ||
+"-"
+)}
+
+</td>
+
+
+<td>
+
+<span class="tag ${statusClass}">
+
+${esc(
+item.status
+)}
+
+</span>
+
+</td>
+
+
+<td>
+
+<div class="match-reason">
+
+${esc(
+explanation.join("；") ||
+"无"
+)}
+
+</div>
+
+</td>
+
+
+<td class="action-cell">
+
+<button
+class="small"
+onclick="openMatchDetail(${index})"
+>
+
+详情
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+/* =========================================================
+   打开匹配详情
+   ========================================================= */
+
+function openMatchDetail(index){
+
+const search =
+normalizeText(
+document.getElementById(
+"matchSearch"
+).value
+);
+
+const material =
+document.getElementById(
+"matchMaterialFilter"
+).value;
+
+const customer =
+document.getElementById(
+"matchCustomerFilter"
+).value;
+
+const level =
+document.getElementById(
+"matchLevelFilter"
+).value;
+
+const status =
+document.getElementById(
+"matchStatusFilter"
+).value;
+
+const supplierId =
+document.getElementById(
+"matchSupplierFilter"
+).value;
+
+
+const filtered =
+allMatches
+.filter(
+function(item){
+
+const demand =
+item.demand;
+
+const source =
+item.source;
+
+const searchText = [
+
+demand.demandId,
+demand.customerName,
+demand.material,
+source.sourceId,
+source.supplierName,
+source.material
+
+]
+.join(" ");
+
+
+return (
+
+(
+!search ||
+normalizeText(
+searchText
+)
+.includes(search)
+)
+
+&&
+
+(
+!material ||
+normalizeText(
+demand.material
+) ===
+normalizeText(material)
+)
+
+&&
+
+(
+!customer ||
+normalizeText(
+demand.customerName
+) ===
+normalizeText(customer)
+)
+
+&&
+(
+!level ||
+item.level === level
+)
+
+&&
+(
+!status ||
+item.status === status
+)
+
+&&
+(
+!supplierId ||
+source.supplierId === supplierId
+)
+
+);
+
+}
+)
+.sort(
+function(a,b){
+
+if(
+a.status !== b.status
+){
+
+const order = {
+
+"完全满足":0,
+"部分满足":1,
+"不满足":2
+
+};
+
+return (
+order[a.status] -
+order[b.status]
+);
+
+}
+
+return b.score - a.score;
+
+}
+);
+
+
+const item =
+filtered[index];
+
+if(!item){
+
+alert(
+"找不到该匹配结果"
+);
+
+return;
+
+}
+
+currentMatch =
+item;
+
+
+const demand =
+item.demand;
+
+const source =
+item.source;
+
+
+document.getElementById(
+"matchDetail"
+).innerHTML =
+
+`
+
+<div class="notice ${
+item.status === "完全满足"
+?
+"good"
+:
+item.status === "部分满足"
+?
+"warn"
+:
+"bad"
+}">
+
+<b>
+${esc(item.level)}
+</b>
+
+&nbsp;&nbsp;
+
+匹配分：
+<b>
+${item.score}
+</b>
+
+&nbsp;&nbsp;
+
+结果：
+<b>
+${esc(item.status)}
+</b>
+
+</div>
+
+
+<div class="detail-block">
+
+<h3>
+Demand · 客户需求
+</h3>
+
+<div class="match-detail">
+
+<div class="detail-item">
+
+<small>
+demandId
+</small>
+
+<strong class="id">
+${esc(demand.demandId)}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+customerId
+</small>
+
+<strong class="id">
+${esc(demand.customerId || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+客户
+</small>
+
+<strong>
+${esc(demand.customerName || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+原料
+</small>
+
+<strong>
+${esc(demand.material || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+规格
+</small>
+
+<strong>
+${esc(demand.specification || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+需求数量
+</small>
+
+<strong>
+${
+demand.quantity > 0
+?
+Number(
+demand.quantity
+).toLocaleString("zh-CN")
++
+" 吨"
+:
+"-"
+}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+产地
+</small>
+
+<strong>
+${esc(demand.origin || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+到货地
+</small>
+
+<strong>
+${esc(demand.delivery || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+付款方式
+</small>
+
+<strong>
+${esc(demand.payment || "-")}
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="detail-block">
+
+<h3>
+Source · 供应商货源
+</h3>
+
+<div class="match-detail">
+
+<div class="detail-item">
+
+<small>
+sourceId
+</small>
+
+<strong class="id">
+${esc(source.sourceId)}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+supplierId
+</small>
+
+<strong class="id">
+${esc(source.supplierId || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+供应商
+</small>
+
+<strong>
+${esc(source.supplierName || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+原料
+</small>
+
+<strong>
+${esc(source.material || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+规格
+</small>
+
+<strong>
+${esc(source.specification || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+货源数量
+</small>
+
+<strong>
+${Number(
+source.quantity || 0
+).toLocaleString("zh-CN")}
+吨
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+产地
+</small>
+
+<strong>
+${esc(source.origin || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+到货地
+</small>
+
+<strong>
+${esc(source.delivery || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+价格
+</small>
+
+<strong>
+${money(source.price)}
+/吨
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+付款方式
+</small>
+
+<strong>
+${esc(source.payment || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+有效期
+</small>
+
+<strong>
+${esc(source.validUntil || "-")}
+</strong>
+
+</div>
+
+<div class="detail-item">
+
+<small>
+状态
+</small>
+
+<strong>
+${esc(source.status || "-")}
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="detail-block">
+
+<h3>
+匹配分析
+</h3>
+
+<ul class="reason-list">
+
+${
+item.reasons.length
+?
+item.reasons
+.map(
+function(text){
+
+return `
+<li>
+<span class="match-good">
+${esc(text)}
+</span>
+</li>
+`;
+
+}
+)
+.join("")
+:
+""
+}
+
+${
+item.warnings
+.map(
+function(text){
+
+return `
+<li>
+<span class="match-warn">
+${esc(text)}
+</span>
+</li>
+`;
+
+}
+)
+.join("")
+}
+
+${
+item.hardFailures
+.map(
+function(text){
+
+return `
+<li>
+<span class="match-bad">
+${esc(text)}
+</span>
+</li>
+`;
+
+}
+)
+.join("")
+}
+
+</ul>
+
+</div>
+
+`;
+
+
+document.getElementById(
+"matchModal"
+).classList.add(
+"show"
+);
+
+}
+
+
+function closeMatchModal(){
+
+document.getElementById(
+"matchModal"
+).classList.remove(
+"show"
+);
+
+currentMatch =
+null;
+
+}
+
+
+/* =========================================================
+   Module 01读取状态
+   ========================================================= */
+
+function renderDemandsInfo(data){
+
+const box =
+document.getElementById(
+"demandReadResult"
+);
+
+document.getElementById(
+"demandCountText"
+).textContent =
+"读取 " +
+data.demands.length +
+" 条";
+
+
+if(
+!data.module01.key
+){
+
+box.innerHTML =
+
+`
+
+<div class="notice warn">
+
+⚠️ 未找到 Module 01 数据库。
+
+Module 03 当前无法读取正式 Demand。
+
+请确认 Module 01 已经产生正式业务数据，
+且使用的是当前平台数据库。
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+if(
+data.demands.length === 0
+){
+
+box.innerHTML =
+
+`
+
+<div class="notice warn">
+
+已找到 Module 01 数据库：
+
+<span class="id">
+${esc(data.module01.key)}
+</span>
+
+但当前没有读取到 Demand。
+
+请先在 Module 01 建立客户需求。
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+const active =
+data.demands.filter(
+function(item){
+
+return isActiveDemand(item);
+
+}
+).length;
+
+
+box.innerHTML =
+
+`
+
+<div class="notice good">
+
+✅ Module 01 Demand 接口正常。
+
+<br>
+
+数据库：
+
+<span class="id">
+${esc(data.module01.key)}
+</span>
+
+<br>
+
+Demand总数：
+
+<b>
+${data.demands.length}
+</b>
+
+<br>
+
+有效Demand：
+
+<b>
+${active}
+</b>
+
+<br>
+
+Module 03只读取数据，不修改 Module 01。
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   Module 02读取状态
+   ========================================================= */
+
+function renderSourcesInfo(data){
+
+const box =
+document.getElementById(
+"sourceReadResult"
+);
+
+document.getElementById(
+"sourceCountText"
+).textContent =
+"读取 " +
+data.sources.length +
+" 条";
+
+
+if(
+!data.module02.data
+){
+
+box.innerHTML =
+
+`
+
+<div class="notice warn">
+
+⚠️ 未找到 Module 02 数据库：
+
+<span class="id">
+${esc(MODULE02_KEY)}
+</span>
+
+请确认 module02.html 已经正常运行，
+并且存在 Module 02 数据。
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+const active =
+data.sources.filter(
+function(item){
+
+return (
+isActiveSource(item)
+&&
+!isExpired(item.validUntil)
+);
+
+}
+).length;
+
+
+box.innerHTML =
+
+`
+
+<div class="notice good">
+
+✅ Module 02 Source 接口正常。
+
+<br>
+
+数据库：
+
+<span class="id">
+${esc(MODULE02_KEY)}
+</span>
+
+<br>
+
+Source总数：
+
+<b>
+${data.sources.length}
+</b>
+
+<br>
+
+当前有效Source：
+
+<b>
+${active}
+</b>
+
+<br>
+
+供应商：
+
+<b>
+${data.suppliers.length}
+</b>
+
+<br>
+
+Module 03只读取数据，不修改 Module 02。
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   数据连接检查
+   ========================================================= */
+
+function renderConnection(){
+
+const data =
+loadBusinessData();
+
+const demands =
+data.demands;
+
+const sources =
+data.sources;
+
+const suppliers =
+data.suppliers;
+
+
+/*
+有效supplier关系
+*/
+
+const validSupplierRelations =
+sources.filter(
+function(source){
+
+return suppliers.some(
+function(supplier){
+
+return (
+supplier.id ===
+source.supplierId
+||
+supplier.supplierId ===
+source.supplierId
+);
+
+}
+)
+;
+}
+).length;
+
+
+/*
+Source ID唯一性
+*/
+
+const sourceIds =
+sources
+.map(
+function(source){
+
+return source.sourceId;
+
+}
+)
+.filter(
+function(id){
+
+return !!id;
+
+}
+);
+
+
+const duplicateSourceIds =
+sourceIds.filter(
+function(id,index){
+
+return (
+sourceIds.indexOf(id) !==
+index
+);
+
+}
+).length;
+
+
+/*
+Demand ID唯一性
+*/
+
+const demandIds =
+demands
+.map(
+function(demand){
+
+return demand.demandId;
+
+}
+)
+.filter(
+function(id){
+
+return !!id;
+
+}
+);
+
+
+const duplicateDemandIds =
+demandIds.filter(
+function(id,index){
+
+return (
+demandIds.indexOf(id) !==
+index
+);
+
+}
+).length;
+
+
+let html = "";
+
+
+html +=
+
+`
+
+<div class="connection-grid">
+
+
+<div class="connection-item">
+
+<strong>
+
+${
+data.module01.key
+?
+"✅"
+:
+"⚠️"
+}
+
+Module 01
+
+</strong>
+
+<div class="muted">
+
+Demand：
+
+${demands.length}
+
+条
+
+</div>
+
+</div>
+
+
+<div class="connection-item">
+
+<strong>
+
+${
+data.module02.data
+?
+"✅"
+:
+"⚠️"
+}
+
+Module 02
+
+</strong>
+
+<div class="muted">
+
+Source：
+
+${sources.length}
+
+条
+
+</div>
+
+</div>
+
+
+<div class="connection-item">
+
+<strong>
+
+${
+validSupplierRelations ===
+sources.length
+?
+"✅"
+:
+"⚠️"
+}
+
+supplierId
+
+</strong>
+
+<div class="muted">
+
+有效：
+
+${validSupplierRelations}
+/
+${sources.length}
+
+</div>
+
+</div>
+
+
+<div class="connection-item">
+
+<strong>
+
+${
+duplicateSourceIds === 0
+?
+"✅"
+:
+"⚠️"
+}
+
+sourceId
+
+</strong>
+
+<div class="muted">
+
+重复：
+
+${duplicateSourceIds}
+
+</div>
+
+</div>
+
+
+</div>
+
+`;
+
+
+if(
+!data.module01.key
+){
+
+html +=
+
+`
+
+<div
+class="notice warn"
+style="margin-top:10px"
+>
+
+Module 01 数据库未找到，
+因此当前无法形成正式 Demand × Source 匹配。
+
+</div>
+
+`;
+
+}else if(
+!data.module02.data
+){
+
+html +=
+
+`
+
+<div
+class="notice warn"
+style="margin-top:10px"
+>
+
+Module 02 数据库未找到，
+因此当前无法读取正式 Source。
+
+</div>
+
+`;
+
+}else if(
+duplicateSourceIds > 0
+){
+
+html +=
+
+`
+
+<div
+class="notice bad"
+style="margin-top:10px"
+>
+
+⚠️ Module 02 存在重复 sourceId。
+
+Module 03不会修改 Source，
+重复ID需要回到 Module 02 处理。
+
+</div>
+
+`;
+
+}else if(
+duplicateDemandIds > 0
+){
+
+html +=
+
+`
+
+<div
+class="notice bad"
+style="margin-top:10px"
+>
+
+⚠️ Module 01 存在重复 demandId。
+
+Module 03不会修改 Demand，
+重复ID需要回到 Module 01 处理。
+
+</div>
+
+`;
+
+}else if(
+validSupplierRelations !==
+sources.length
+){
+
+html +=
+
+`
+
+<div
+class="notice bad"
+style="margin-top:10px"
+>
+
+⚠️ 检测到 Source 存在无效 supplierId。
+
+这些 Source 无法可靠追溯到供应商。
+
+Module 03不会自动修复，
+避免破坏 Module 02 正式数据。
+
+</div>
+
+`;
+
+}else{
+
+html +=
+
+`
+
+<div
+class="notice good"
+style="margin-top:10px"
+>
+
+✅ Module 03 数据接口正常。
+
+<br>
+
+Demand：
+
+<b>
+${demands.length}
+</b>
+
+<br>
+
+Source：
+
+<b>
+${sources.length}
+</b>
+
+<br>
+
+供应商关联：
+
+<b>
+${validSupplierRelations}
+/
+${sources.length}
+</b>
+
+<br>
+
+重复 sourceId：
+
+<b>
+0
+</b>
+
+<br>
+
+重复 demandId：
+
+<b>
+${duplicateDemandIds}
+</b>
+
+<br><br>
+
+当前匹配结果：
+
+<b>
+${allMatches.length}
+</b>
+
+条。
+
+</div>
+
+`;
+
+}
+
+
+document.getElementById(
+"connectionResult"
+).innerHTML =
+html;
+
+}
+
+
+/* =========================================================
+   清空筛选
+   ========================================================= */
+
+function clearFilters(){
+
+document.getElementById(
+"matchSearch"
+).value = "";
+
+document.getElementById(
+"matchMaterialFilter"
+).value = "";
+
+document.getElementById(
+"matchCustomerFilter"
+).value = "";
+
+document.getElementById(
+"matchLevelFilter"
+).value = "";
+
+document.getElementById(
+"matchStatusFilter"
+).value = "";
+
+document.getElementById(
+"matchSupplierFilter"
+).value = "";
+
+renderMatches();
+
+}
+
+
+/* =========================================================
+   刷新
+   ========================================================= */
+
+function refreshAll(){
+
+runMatching();
+
+}
+
+
+/* =========================================================
+   首页
+   ========================================================= */
+
+function goHome(){
+
+window.location.href =
+"index.html";
+
+}
+
+
+/* =========================================================
+   Module 03 自动测试
+   ========================================================= */
+
+function runTests(){
+
+const resultBox =
+document.getElementById(
+"testResult"
+);
+
+resultBox.innerHTML =
+"正在执行 Module 03 自动测试……";
+
+
+/*
+完整备份：
+
+Module 01
+Module 02
+Module 03 test key
+*/
+
+const module01Snapshots = {};
+
+for(
+let i=0;
+i<MODULE01_KEYS.length;
+i++
+){
+
+const key =
+MODULE01_KEYS[i];
+
+module01Snapshots[key] =
+localStorage.getItem(key);
+
+}
+
+
+const before02 =
+localStorage.getItem(
+MODULE02_KEY
+);
+
+
+const before03 =
+localStorage.getItem(
+MODULE03_TEST_KEY
+);
+
+
+const results = [];
+
+let pass = 0;
+
+let fail = 0;
+
+
+function test(name,fn){
+
+try{
+
+fn();
+
+pass++;
+
+results.push(
+
+`
+
+<div class="test-pass">
+
+✅ ${esc(name)}
+
+</div>
+
+`
+
+);
+
+}catch(error){
+
+fail++;
+
+results.push(
+
+`
+
+<div class="test-fail">
+
+❌ ${esc(name)}
+
+<br>
+
+${esc(error.message)}
+
+</div>
+
+`
+
+);
+
+}
+
+}
+
+
+/* =========================================================
+   1 Module 01 Reader
+   ========================================================= */
+
+test(
+"Module 01读取器结构正常",
+function(){
+
+const data =
+Module01Reader.read();
+
+if(
+!data ||
+!Array.isArray(data.demands) ||
+!Array.isArray(data.customers)
+){
+
+throw new Error(
+"Module 01读取器返回结构异常"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   2 Module 02 Reader
+   ========================================================= */
+
+test(
+"Module 02读取器结构正常",
+function(){
+
+const data =
+Module02Reader.read();
+
+if(
+!data ||
+!Array.isArray(data.suppliers) ||
+!Array.isArray(data.sources)
+){
+
+throw new Error(
+"Module 02读取器返回结构异常"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   3 Demand标准化
+========================================================= */
+
+let testDemand =
+null;
+
+test(
+"Demand标准化接口正常",
+function(){
+
+testDemand =
+normalizeDemand(
+{
+
+id:"DEM-TEST-001",
+
+customerId:
+"CUS-TEST-001",
+
+customerName:
+"测试客户",
+
+material:
+"豆粕",
+
+specification:
+"蛋白43%",
+
+origin:
+"山东",
+
+delivery:
+"济南",
+
+quantity:
+500,
+
+payment:
+"现款",
+
+status:
+"进行中"
+
+},
+0
+);
+
+if(
+testDemand.demandId !==
+"DEM-TEST-001"
+){
+
+throw new Error(
+"demandId读取错误"
+);
+
+}
+
+if(
+testDemand.material !==
+"豆粕"
+){
+
+throw new Error(
+"material读取错误"
+);
+
+}
+
+if(
+testDemand.quantity !==
+500
+){
+
+throw new Error(
+"quantity读取错误"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   4 Source标准化
+========================================================= */
+
+let testSource =
+null;
+
+test(
+"Source标准化接口正常",
+function(){
+
+testSource =
+normalizeSource(
+{
+
+id:"SRC-TEST-001",
+
+sourceId:
+"SRC-TEST-001",
+
+supplierId:
+"SUP-TEST-001",
+
+supplierName:
+"测试供应商",
+
+material:
+"豆粕",
+
+specification:
+"蛋白43%",
+
+origin:
+"山东",
+
+delivery:
+"济南",
+
+quantity:
+600,
+
+price:
+3000,
+
+payment:
+"现款",
+
+validUntil:
+"2099-12-31",
+
+status:
+"可供"
+
+},
+0
+);
+
+if(
+testSource.sourceId !==
+"SRC-TEST-001"
+){
+
+throw new Error(
+"sourceId读取错误"
+);
+
+}
+
+if(
+testSource.supplierId !==
+"SUP-TEST-001"
+){
+
+throw new Error(
+"supplierId读取错误"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   5 原料完全一致
+========================================================= */
+
+test(
+"原料一致可以形成有效匹配",
+function(){
+
+const result =
+MatchingEngine.match(
+testDemand,
+testSource
+);
+
+if(
+!result.isValid
+){
+
+throw new Error(
+"原料一致但匹配被判定为无效："
++
+result.hardFailures.join("、")
+);
+
+}
+
+if(
+result.status !==
+"完全满足"
+){
+
+throw new Error(
+"数量充足且条件一致时未判定为完全满足"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   6 原料不一致
+========================================================= */
+
+test(
+"原料不一致必须拒绝有效匹配",
+function(){
+
+const source =
+cloneData(
+testSource
+);
+
+source.material =
+"玉米";
+
+const result =
+MatchingEngine.match(
+testDemand,
+source
+);
+
+if(
+result.isValid
+){
+
+throw new Error(
+"原料不一致仍被判定为有效匹配"
+);
+
+}
+
+if(
+!result.hardFailures.includes(
+"原料名称不一致"
+)
+){
+
+throw new Error(
+"没有正确识别原料不一致"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   7 数量不足
+========================================================= */
+
+test(
+"货源数量不足不能判定为完全满足",
+function(){
+
+const source =
+cloneData(
+testSource
+);
+
+source.quantity =
+300;
+
+const result =
+MatchingEngine.match(
+testDemand,
+source
+);
+
+if(
+result.status ===
+"完全满足"
+){
+
+throw new Error(
+"数量不足却判定为完全满足"
+);
+
+}
+
+if(
+result.status !==
+"部分满足"
+){
+
+throw new Error(
+"数量不足未正确判定为部分满足"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   8 Source暂停
+========================================================= */
+
+test(
+"暂停货源不能进入有效匹配",
+function(){
+
+const source =
+cloneData(
+testSource
+);
+
+source.status =
+"暂停";
+
+const result =
+MatchingEngine.match(
+testDemand,
+source
+);
+
+if(
+result.isValid
+){
+
+throw new Error(
+"暂停货源仍被判定为有效匹配"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   9 Source关闭
+========================================================= */
+
+test(
+"关闭货源不能进入有效匹配",
+function(){
+
+const source =
+cloneData(
+testSource
+);
+
+source.status =
+"关闭";
+
+const result =
+MatchingEngine.match(
+testDemand,
+source
+);
+
+if(
+result.isValid
+){
+
+throw new Error(
+"关闭货源仍被判定为有效匹配"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   10 Source过期
+========================================================= */
+
+test(
+"过期货源不能进入有效匹配",
+function(){
+
+const source =
+cloneData(
+testSource
+);
+
+source.validUntil =
+"2000-01-01";
+
+const result =
+MatchingEngine.match(
+testDemand,
+source
+);
+
+if(
+result.isValid
+){
+
+throw new Error(
+"过期货源仍被判定为有效匹配"
+);
+
+}
+
+if(
+!result.hardFailures.includes(
+"货源已超过有效期"
+)
+){
+
+throw new Error(
+"没有正确识别过期货源"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   11 supplierId
+========================================================= */
+
+test(
+"Source必须具备supplierId",
+function(){
+
+const source =
+cloneData(
+testSource
+);
+
+source.supplierId =
+"";
+
+const result =
+MatchingEngine.match(
+testDemand,
+source
+);
+
+if(
+result.isValid
+){
+
+throw new Error(
+"缺少supplierId仍然被判定为有效匹配"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   12 sourceId唯一性逻辑
+========================================================= */
+
+test(
+"sourceId唯一性检查正常",
+function(){
+
+const sources = [
+
+{
+sourceId:"SRC-001"
+},
+
+{
+sourceId:"SRC-002"
+},
+
+{
+sourceId:"SRC-001"
+}
+
+];
+
+const ids =
+sources.map(
+function(item){
+
+return item.sourceId;
+
+}
+);
+
+const duplicates =
+ids.filter(
+function(id,index){
+
+return ids.indexOf(id) !== index;
+
+}
+);
+
+if(
+duplicates.length !== 1
+){
+
+throw new Error(
+"sourceId重复检测错误"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   13 一Demand多Source
+========================================================= */
+
+test(
+"一条Demand可以匹配多个Source",
+function(){
+
+const source1 =
+cloneData(
+testSource
+);
+
+const source2 =
+cloneData(
+testSource
+);
+
+source1.sourceId =
+"SRC-A";
+
+source2.sourceId =
+"SRC-B";
+
+const results =
+MatchingEngine.run(
+[
+testDemand
+],
+[
+source1,
+source2
+]
+);
+
+if(
+results.length !== 2
+){
+
+throw new Error(
+"一Demand多Source匹配失败"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   14 多Demand一Source
+========================================================= */
+
+test(
+"一个Source可以被多个Demand匹配",
+function(){
+
+const demand1 =
+cloneData(
+testDemand
+);
+
+const demand2 =
+cloneData(
+testDemand
+);
+
+demand1.demandId =
+"DEM-A";
+
+demand2.demandId =
+"DEM-B";
+
+const results =
+MatchingEngine.run(
+[
+demand1,
+demand2
+],
+[
+testSource
+]
+);
+
+if(
+results.length !== 2
+){
+
+throw new Error(
+"多Demand一Source匹配失败"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   15 不修改Module01
+========================================================= */
+
+test(
+"匹配引擎不会修改Module01",
+function(){
+
+const before = {};
+
+MODULE01_KEYS.forEach(
+function(key){
+
+before[key] =
+module01Snapshots[key];
+
+}
+);
+
+
+/*
+执行真实读取和匹配
+*/
+
+const data =
+loadBusinessData();
+
+MatchingEngine.run(
+data.demands,
+data.sources
+);
+
+
+MODULE01_KEYS.forEach(
+function(key){
+
+const after =
+localStorage.getItem(key);
+
+if(
+after !==
+before[key]
+){
+
+throw new Error(
+"检测到Module01数据被修改：" +
+key
+);
+
+}
+
+}
+);
+
+}
+);
+
+
+/* =========================================================
+   16 不修改Module02
+========================================================= */
+
+test(
+"匹配引擎不会修改Module02",
+function(){
+
+const before =
+localStorage.getItem(
+MODULE02_KEY
+);
+
+const data =
+loadBusinessData();
+
+MatchingEngine.run(
+data.demands,
+data.sources
+);
+
+const after =
+localStorage.getItem(
+MODULE02_KEY
+);
+
+if(
+after !==
+before
+){
+
+throw new Error(
+"检测到Module02数据被修改"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   17 正式匹配结果不写入业务数据库
+========================================================= */
+
+test(
+"正式匹配结果不会写入Module01/Module02",
+function(){
+
+const data =
+loadBusinessData();
+
+const result =
+MatchingEngine.run(
+data.demands,
+data.sources
+);
+
+if(
+!Array.isArray(result)
+){
+
+throw new Error(
+"匹配结果不是数组"
+);
+
+}
+
+const after01 = {};
+
+MODULE01_KEYS.forEach(
+function(key){
+
+after01[key] =
+localStorage.getItem(key);
+
+}
+);
+
+const after02 =
+localStorage.getItem(
+MODULE02_KEY
+);
+
+
+MODULE01_KEYS.forEach(
+function(key){
+
+if(
+after01[key] !==
+module01Snapshots[key]
+){
+
+throw new Error(
+"Module01发生变化"
+);
+
+}
+
+}
+);
+
+
+if(
+after02 !==
+before02
+){
+
+throw new Error(
+"Module02发生变化"
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+   恢复 Module03测试状态
+========================================================= */
+
+if(
+before03 === null
+){
+
+localStorage.removeItem(
+MODULE03_TEST_KEY
+);
+
+}else{
+
+localStorage.setItem(
+MODULE03_TEST_KEY,
+before03
+);
+
+}
+
+
+/*
+重新加载正式业务数据
+*/
+
+refreshAll();
+
+
+const summaryClass =
+fail === 0
+?
+"good"
+:
+"bad";
+
+
+resultBox.innerHTML =
+
+results.join("") +
+
+`
+
+<div class="test-summary notice ${summaryClass}">
+
+Module 03 自动测试完成。
+
+<br><br>
+
+<b>
+${pass} 项通过，
+${fail} 项失败。
+</b>
+
+<br><br>
+
+${
+fail === 0
+?
+"🎉 Demand读取、Source读取、原料匹配、数量判断、状态判断、有效期判断、supplierId关系、一对多匹配及Module01/02数据保护全部通过。"
+:
+"⚠️ 存在失败项目，请根据上面的具体错误处理。"
+}
+
+<br><br>
+
+Module 01：
+
+未修改
+
+<br>
+
+Module 02：
+
+未修改
+
+<br>
+
+Module 03：
+
+测试环境已恢复
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   点击遮罩关闭详情
+========================================================= */
+
+document.addEventListener(
+"click",
+function(event){
+
+const modal =
+document.getElementById(
+"matchModal"
+);
+
+if(
+event.target === modal
+){
+
+closeMatchModal();
+
+}
+
+}
+);
+
+
+/* =========================================================
+   浏览器Storage变化
+   其他模块在同一浏览器标签页写入数据后，
+   Module03不主动改动数据。
+   用户点击刷新即可重新计算。
+========================================================= */
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+MODULE01_KEYS.includes(
+event.key
+)
+||
+event.key ===
+MODULE02_KEY
+){
+
+refreshAll();
+
+}
+
+}
+);
+
+
+/* =========================================================
+   初始化
+========================================================= */
+
+try{
+
+refreshAll();
+
+}catch(error){
+
+console.error(
+"Module03初始化失败：",
+error
+);
+
+document.getElementById(
+"matchList"
+).innerHTML =
+
+`
+
+<tr>
+
+<td
+colspan="14"
+class="empty"
+>
+
+Module 03 初始化失败：
+
+<br><br>
+
+${esc(error.message)}
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
