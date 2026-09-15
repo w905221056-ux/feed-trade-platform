@@ -1,0 +1,4415 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>饲料原料贸易平台｜模块01</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#f4f6f8;
+  color:#172033;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "PingFang SC",
+    "Microsoft YaHei",
+    Arial,
+    sans-serif;
+}
+
+header{
+  background:#172235;
+  color:#fff;
+  padding:16px 18px;
+}
+
+header b{
+  font-size:18px;
+}
+
+header small{
+  display:block;
+  margin-top:5px;
+  color:#aebbd0;
+}
+
+main{
+  max-width:1450px;
+  margin:auto;
+  padding:16px;
+}
+
+h1{
+  font-size:23px;
+  margin:0;
+}
+
+h2{
+  font-size:17px;
+  margin:0 0 14px;
+}
+
+h3{
+  margin-top:0;
+}
+
+p{
+  color:#68768a;
+}
+
+button{
+  border:1px solid #d3dae4;
+  background:#fff;
+  border-radius:7px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#f8fafc;
+}
+
+button.primary{
+  background:#2563eb;
+  color:#fff;
+  border-color:#2563eb;
+}
+
+button.primary:hover{
+  background:#1d4ed8;
+}
+
+button.success{
+  background:#059669;
+  color:#fff;
+  border-color:#059669;
+}
+
+button.success:hover{
+  background:#047857;
+}
+
+button.danger{
+  color:#c02626;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:16px 0;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e0e5ec;
+  border-radius:10px;
+  padding:15px;
+}
+
+.kpi small{
+  color:#738096;
+}
+
+.kpi strong{
+  display:block;
+  font-size:24px;
+  margin-top:5px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:1.25fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+.toolbar{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.toolbar input{
+  flex:1;
+}
+
+input,
+select,
+textarea{
+  padding:9px;
+  border:1px solid #d3dae4;
+  border-radius:7px;
+  background:#fff;
+}
+
+input,
+select,
+textarea,
+button{
+  font:inherit;
+}
+
+.tablebox{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1150px;
+}
+
+th,
+td{
+  text-align:left;
+  padding:10px 8px;
+  border-bottom:1px solid #edf0f3;
+  font-size:13px;
+  vertical-align:top;
+}
+
+th{
+  color:#6b778c;
+  font-weight:500;
+}
+
+.tag{
+  padding:3px 8px;
+  border-radius:20px;
+  font-size:11px;
+  background:#eef2ff;
+  color:#4338ca;
+  white-space:nowrap;
+}
+
+.tag.green{
+  background:#ecfdf5;
+  color:#047857;
+}
+
+.tag.orange{
+  background:#fff7ed;
+  color:#b45309;
+}
+
+.tag.red{
+  background:#fef2f2;
+  color:#b91c1c;
+}
+
+.tag.gray{
+  background:#f1f5f9;
+  color:#64748b;
+}
+
+.empty{
+  text-align:center;
+  color:#78869a;
+  padding:30px;
+}
+
+.detail{
+  line-height:1.9;
+}
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+
+.detail-item{
+  background:#f8fafc;
+  border:1px solid #e6ebf1;
+  border-radius:7px;
+  padding:9px;
+}
+
+.detail-item .label{
+  color:#718096;
+  font-size:11px;
+}
+
+.detail-item .value{
+  margin-top:3px;
+  font-weight:600;
+}
+
+.notice{
+  background:#f7faff;
+  border:1px solid #dce7f7;
+  padding:10px;
+  border-radius:7px;
+  font-size:12px;
+  color:#53647a;
+  line-height:1.7;
+}
+
+.notice.good{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+  color:#047857;
+}
+
+.notice.warn{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#b45309;
+}
+
+.notice.bad{
+  background:#fef2f2;
+  border-color:#fecaca;
+  color:#b91c1c;
+}
+
+.customer-box{
+  border:1px solid #e2e8f0;
+  border-radius:9px;
+  padding:12px;
+  margin-bottom:10px;
+  background:#fff;
+}
+
+.customer-title{
+  font-weight:700;
+  font-size:15px;
+}
+
+.customer-meta{
+  color:#64748b;
+  font-size:12px;
+  line-height:1.7;
+  margin-top:5px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.dialog{
+  width:min(850px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.field label{
+  font-size:12px;
+  color:#64748b;
+  display:block;
+  margin-bottom:4px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:15px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.section-title h2{
+  margin:0;
+}
+
+.small{
+  font-size:12px;
+  color:#718096;
+}
+
+.interface{
+  margin-top:12px;
+}
+
+pre{
+  background:#111827;
+  color:#d5dbea;
+  padding:12px;
+  border-radius:7px;
+  overflow:auto;
+  font-size:11px;
+  line-height:1.6;
+}
+
+@media(max-width:1000px){
+
+  .cards{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  main{
+    padding:10px;
+  }
+
+  .top{
+    flex-direction:column;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<b>饲料原料贸易平台</b>
+
+<small>
+模块01 · 客户与真实需求中心 · V1.0
+</small>
+
+</header>
+
+
+<main>
+
+
+<div class="top">
+
+<div>
+
+<h1>
+客户 / 真实需求中心
+</h1>
+
+<p>
+模块01负责建立真实客户及客户具体采购需求。
+每一条需求均生成独立 demandId，供模块03直接读取并进行货源匹配。
+</p>
+
+</div>
+
+
+<div class="top-actions">
+
+<button onclick="goHome()">
+返回首页平台
+</button>
+
+<button onclick="restoreDemo()">
+恢复模块01测试数据
+</button>
+
+<button
+class="primary"
+onclick="openAddCustomer()"
+>
+＋ 新增客户
+</button>
+
+<button
+class="success"
+onclick="openAddDemand()"
+>
+＋ 新增客户需求
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="cards" id="kpi">
+</div>
+
+
+
+<div class="card">
+
+<div class="toolbar">
+
+<input
+id="search"
+placeholder="搜索客户、客户ID、需求ID、原料、规格、产地、到货地"
+oninput="render()"
+>
+
+<select
+id="statusFilter"
+onchange="render()"
+style="max-width:150px"
+>
+
+<option value="">
+全部需求状态
+</option>
+
+<option value="待匹配">
+待匹配
+</option>
+
+<option value="匹配中">
+匹配中
+</option>
+
+<option value="已匹配">
+已匹配
+</option>
+
+<option value="已报价">
+已报价
+</option>
+
+<option value="成交">
+成交
+</option>
+
+<option value="关闭">
+关闭
+</option>
+
+</select>
+
+
+<select
+id="customerFilter"
+onchange="render()"
+style="max-width:180px"
+>
+
+<option value="">
+全部客户
+</option>
+
+</select>
+
+
+<button onclick="render()">
+刷新
+</button>
+
+</div>
+
+
+<div class="notice">
+
+<b>模块01 → 模块03 固定数据接口：</b>
+
+<br>
+
+Customer：
+
+<b>customerId</b>
+
+<br>
+
+Demand：
+
+<b>demandId + customerId + material + specification + origin + quantity + delivery + arrivalDate + targetPrice + paymentMethod</b>
+
+<br><br>
+
+<b>重要：</b>
+
+模块03不重新创建客户需求。
+
+模块03只读取这里已经建立的真实 Demand，
+
+再根据模块02货源进行一对多匹配。
+
+</div>
+
+</div>
+
+
+
+<div class="layout">
+
+
+<div class="card tablebox">
+
+<div class="section-title">
+
+<h2>
+客户具体需求
+</h2>
+
+<span
+class="small"
+id="demandCountText"
+>
+</span>
+
+</div>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>需求ID</th>
+
+<th>客户</th>
+
+<th>原料</th>
+
+<th>规格</th>
+
+<th>数量</th>
+
+<th>产地要求</th>
+
+<th>到货地</th>
+
+<th>到货日期</th>
+
+<th>目标价</th>
+
+<th>付款方式</th>
+
+<th>状态</th>
+
+<th>操作</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="demandList">
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+需求详情
+</h2>
+
+
+<div
+id="detail"
+class="empty"
+>
+请选择左侧一条具体需求
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card interface">
+
+<h2>
+客户档案
+</h2>
+
+<div id="customerList">
+</div>
+
+</div>
+
+
+
+<div class="card interface">
+
+<h2>
+🔗 模块01 → 模块03 数据接口
+</h2>
+
+
+<div class="notice good">
+
+模块03读取本模块的：
+
+<br><br>
+
+Customer：
+
+<b>customerId</b>
+
+<br>
+
+Demand：
+
+<b>demandId</b>
+
+<br>
+
+关联关系：
+
+<b>Demand.customerId → Customer.id</b>
+
+<br><br>
+
+模块03后续通过：
+
+<b>Demand.material</b>
+
+匹配模块02：
+
+<b>Source.material</b>
+
+<br>
+
+再结合规格、数量、产地、交货地、日期、价格等条件筛选货源。
+
+</div>
+
+
+<pre>
+模块01
+
+Customer
+│
+├── id
+├── name
+├── contact
+├── phone
+└── note
+      │
+      │ customerId
+      ↓
+Demand
+│
+├── id = demandId
+├── customerId
+├── material
+├── specification
+├── origin
+├── quantity
+├── delivery
+├── arrivalDate
+├── targetPrice
+├── paymentMethod
+├── status
+└── note
+      │
+      │ demandId + customerId
+      ↓
+模块03
+客户需求 → 货源匹配 → 一对多 Opportunity
+
+
+固定原则：
+
+一个 Customer
+    ↓
+可以有多条 Demand
+
+一条 Demand
+    ↓
+可以匹配多条 Source
+
+一条 Demand
+    ↓
+可以形成多个 Opportunity
+
+模块03
+    ↓
+不重新建立 Demand
+
+模块03
+    ↓
+不修改 Customer
+
+模块03
+    ↓
+不修改 Demand 的基础信息
+</pre>
+
+</div>
+
+
+
+</main>
+
+
+
+<!-- ======================================================
+新增/编辑客户
+====================================================== -->
+
+<div
+class="modal"
+id="customerModal"
+>
+
+<div class="dialog">
+
+<h2 id="customerModalTitle">
+新增客户
+</h2>
+
+
+<div class="form">
+
+
+<div class="field">
+
+<label>
+客户名称 *
+</label>
+
+<input
+id="customerName"
+placeholder="例如：济南XX饲料有限公司"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+联系人
+</label>
+
+<input
+id="customerContact"
+placeholder="联系人姓名"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+联系电话
+</label>
+
+<input
+id="customerPhone"
+placeholder="联系电话"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+客户类型
+</label>
+
+<select id="customerType">
+
+<option value="饲料厂">
+饲料厂
+</option>
+
+<option value="养殖企业">
+养殖企业
+</option>
+
+<option value="贸易商">
+贸易商
+</option>
+
+<option value="其他">
+其他
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+备注
+</label>
+
+<textarea
+id="customerNote"
+rows="3"
+placeholder="客户备注"
+></textarea>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button onclick="closeCustomerModal()">
+取消
+</button>
+
+<button
+class="primary"
+onclick="saveCustomer()"
+>
+保存客户
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ======================================================
+新增/编辑需求
+====================================================== -->
+
+<div
+class="modal"
+id="demandModal"
+>
+
+<div class="dialog">
+
+<h2 id="demandModalTitle">
+新增客户具体需求
+</h2>
+
+
+<div class="notice">
+
+这里建立的是客户真实采购需求。
+
+保存后生成唯一：
+
+<b>demandId</b>
+
+该需求将直接成为模块03的匹配输入。
+
+</div>
+
+
+<div class="form" style="margin-top:12px">
+
+
+<div class="field">
+
+<label>
+客户 *
+</label>
+
+<select id="demandCustomerId">
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+原料名称 *
+</label>
+
+<input
+id="demandMaterial"
+placeholder="例如：豆粕"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+规格要求 *
+</label>
+
+<input
+id="demandSpecification"
+placeholder="例如：蛋白43%、水分≤12%"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+需求数量（吨） *
+</label>
+
+<input
+id="demandQuantity"
+type="number"
+min="0"
+step="0.01"
+placeholder="例如：100"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+产地要求
+</label>
+
+<input
+id="demandOrigin"
+placeholder="例如：山东 / 东北 / 不限"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+到货地 *
+</label>
+
+<input
+id="demandDelivery"
+placeholder="例如：济南市历城区"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+到货日期
+</label>
+
+<input
+id="demandArrivalDate"
+type="date"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+目标价（元/吨）
+</label>
+
+<input
+id="demandTargetPrice"
+type="number"
+min="0"
+step="0.01"
+placeholder="例如：3200"
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+付款方式
+</label>
+
+<select id="demandPaymentMethod">
+
+<option value="">
+请选择
+</option>
+
+<option value="现款">
+现款
+</option>
+
+<option value="货到付款">
+货到付款
+</option>
+
+<option value="预付款">
+预付款
+</option>
+
+<option value="账期30天">
+账期30天
+</option>
+
+<option value="账期60天">
+账期60天
+</option>
+
+<option value="账期90天">
+账期90天
+</option>
+
+<option value="其他">
+其他
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+需求状态
+</label>
+
+<select id="demandStatus">
+
+<option value="待匹配">
+待匹配
+</option>
+
+<option value="匹配中">
+匹配中
+</option>
+
+<option value="已匹配">
+已匹配
+</option>
+
+<option value="已报价">
+已报价
+</option>
+
+<option value="成交">
+成交
+</option>
+
+<option value="关闭">
+关闭
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+备注 / 特殊要求
+</label>
+
+<textarea
+id="demandNote"
+rows="4"
+placeholder="例如：要求近期到货；接受分批；要求正规发票；对蛋白、水分、灰分等有特殊要求"
+></textarea>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button onclick="closeDemandModal()">
+取消
+</button>
+
+<button
+class="primary"
+onclick="saveDemand()"
+>
+保存需求
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+/*
+============================================================
+模块01 V1.0
+============================================================
+
+核心原则：
+
+1. Customer是真实客户档案
+2. Demand是真实客户采购需求
+3. 一个Customer可以拥有多个Demand
+4. 每个Demand必须有唯一demandId
+5. Demand是模块03的真实输入
+6. 模块03不新增Demand
+7. 模块03只读取本模块数据
+8. Demand必须包含足够的业务字段用于后续匹配
+
+============================================================
+*/
+
+
+const MODULE01_KEY =
+"FEED_TRADE_PLATFORM_DB_V01";
+
+
+const HOME_URL =
+"index.html";
+
+
+/*
+============================================================
+数据库结构
+============================================================
+*/
+
+const Module01DB = {
+
+createEmpty:function(){
+
+return {
+
+version:"1.0",
+
+customers:[],
+
+demands:[],
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+},
+
+
+read:function(){
+
+try{
+
+const raw =
+localStorage.getItem(
+MODULE01_KEY
+);
+
+if(!raw){
+
+return this.createEmpty();
+
+}
+
+const data =
+JSON.parse(raw);
+
+if(
+!data ||
+typeof data !== "object"
+){
+
+return this.createEmpty();
+
+}
+
+if(
+!Array.isArray(data.customers)
+){
+
+data.customers = [];
+
+}
+
+if(
+!Array.isArray(data.demands)
+){
+
+data.demands = [];
+
+}
+
+return data;
+
+}catch(error){
+
+console.error(
+"模块01数据库读取失败",
+error
+);
+
+return this.createEmpty();
+
+}
+
+},
+
+
+write:function(data){
+
+data.version =
+"1.0";
+
+data.updatedAt =
+new Date().toISOString();
+
+localStorage.setItem(
+
+MODULE01_KEY,
+
+JSON.stringify(data)
+
+);
+
+}
+
+};
+
+
+
+/*
+============================================================
+工具
+============================================================
+*/
+
+function uid(prefix){
+
+return (
+
+prefix +
+
+"-" +
+
+Date.now()
+.toString(36)
+.toUpperCase() +
+
+"-" +
+
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase()
+
+);
+
+}
+
+
+function esc(value){
+
+return String(
+value == null
+?
+""
+:
+value
+)
+.replace(
+/[&<>"']/g,
+function(m){
+
+return {
+
+"&":"&amp;",
+
+"<":"&lt;",
+
+">":"&gt;",
+
+'"':"&quot;",
+
+"'":"&#39;"
+
+}[m];
+
+}
+);
+
+}
+
+
+function money(value){
+
+const n =
+Number(value || 0);
+
+if(!n){
+
+return "—";
+
+}
+
+return "¥" +
+n.toLocaleString(
+"zh-CN",
+{
+minimumFractionDigits:0,
+maximumFractionDigits:2
+}
+);
+
+}
+
+
+function normalize(value){
+
+return String(
+value == null
+?
+""
+:
+value
+)
+.trim()
+.toLowerCase()
+.replace(
+/\s+/g,
+""
+);
+
+}
+
+
+function clone(data){
+
+return JSON.parse(
+JSON.stringify(data)
+);
+
+}
+
+
+
+/*
+============================================================
+Customer Service
+============================================================
+*/
+
+const CustomerService = {
+
+list:function(){
+
+return Module01DB
+.read()
+.customers;
+
+},
+
+
+get:function(id){
+
+return this.list()
+.find(
+function(item){
+
+return item.id === id;
+
+}
+)
+||
+null;
+
+},
+
+
+create:function(data){
+
+const name =
+String(
+data.name || ""
+).trim();
+
+if(!name){
+
+throw new Error(
+"客户名称不能为空"
+);
+
+}
+
+const db =
+Module01DB.read();
+
+const customer = {
+
+id:uid("CUS"),
+
+name:name,
+
+contact:
+String(
+data.contact || ""
+).trim(),
+
+phone:
+String(
+data.phone || ""
+).trim(),
+
+type:
+data.type ||
+"饲料厂",
+
+note:
+String(
+data.note || ""
+).trim(),
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+db.customers.push(
+customer
+);
+
+Module01DB.write(
+db
+);
+
+return customer;
+
+},
+
+
+update:function(id,data){
+
+const db =
+Module01DB.read();
+
+const index =
+db.customers.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"客户不存在"
+);
+
+}
+
+const name =
+String(
+data.name || ""
+).trim();
+
+if(!name){
+
+throw new Error(
+"客户名称不能为空"
+);
+
+}
+
+db.customers[index].name =
+name;
+
+db.customers[index].contact =
+String(
+data.contact || ""
+).trim();
+
+db.customers[index].phone =
+String(
+data.phone || ""
+).trim();
+
+db.customers[index].type =
+data.type ||
+"饲料厂";
+
+db.customers[index].note =
+String(
+data.note || ""
+).trim();
+
+db.customers[index].updatedAt =
+new Date().toISOString();
+
+Module01DB.write(
+db
+);
+
+return db.customers[index];
+
+},
+
+
+remove:function(id){
+
+const db =
+Module01DB.read();
+
+const hasDemand =
+db.demands.some(
+function(item){
+
+return item.customerId === id;
+
+}
+);
+
+if(hasDemand){
+
+throw new Error(
+"该客户已经存在具体采购需求，不能直接删除客户。请先处理该客户的需求。"
+);
+
+}
+
+const index =
+db.customers.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"客户不存在"
+);
+
+}
+
+db.customers.splice(
+index,
+1
+);
+
+Module01DB.write(
+db
+);
+
+return true;
+
+}
+
+};
+
+
+
+/*
+============================================================
+Demand Service
+============================================================
+*/
+
+const DemandService = {
+
+list:function(){
+
+return Module01DB
+.read()
+.demands;
+
+},
+
+
+get:function(id){
+
+return this.list()
+.find(
+function(item){
+
+return item.id === id;
+
+}
+)
+||
+null;
+
+},
+
+
+create:function(data){
+
+const db =
+Module01DB.read();
+
+
+const customer =
+db.customers.find(
+function(item){
+
+return item.id ===
+data.customerId;
+
+}
+);
+
+
+if(!customer){
+
+throw new Error(
+"客户无效，找不到对应customerId"
+);
+
+}
+
+
+const material =
+String(
+data.material || ""
+).trim();
+
+
+if(!material){
+
+throw new Error(
+"原料名称不能为空"
+);
+
+}
+
+
+const specification =
+String(
+data.specification || ""
+).trim();
+
+
+if(!specification){
+
+throw new Error(
+"规格要求不能为空"
+);
+
+}
+
+
+const quantity =
+Number(
+data.quantity
+);
+
+
+if(
+!Number.isFinite(quantity) ||
+quantity <= 0
+){
+
+throw new Error(
+"需求数量必须大于0"
+);
+
+}
+
+
+const delivery =
+String(
+data.delivery || ""
+).trim();
+
+
+if(!delivery){
+
+throw new Error(
+"到货地不能为空"
+);
+
+}
+
+
+const demand = {
+
+id:uid("DEM"),
+
+customerId:
+customer.id,
+
+customerName:
+customer.name,
+
+material:
+material,
+
+specification:
+specification,
+
+origin:
+String(
+data.origin || ""
+).trim(),
+
+quantity:
+quantity,
+
+delivery:
+delivery,
+
+arrivalDate:
+data.arrivalDate ||
+"",
+
+targetPrice:
+Number(
+data.targetPrice || 0
+),
+
+paymentMethod:
+data.paymentMethod ||
+"",
+
+status:
+data.status ||
+"待匹配",
+
+note:
+String(
+data.note || ""
+).trim(),
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+db.demands.push(
+demand
+);
+
+Module01DB.write(
+db
+);
+
+return demand;
+
+},
+
+
+update:function(id,data){
+
+const db =
+Module01DB.read();
+
+const index =
+db.demands.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"需求不存在"
+);
+
+}
+
+
+const demand =
+db.demands[index];
+
+
+if(data.customerId){
+
+const customer =
+db.customers.find(
+function(item){
+
+return item.id ===
+data.customerId;
+
+}
+);
+
+if(!customer){
+
+throw new Error(
+"customerId无效"
+);
+
+}
+
+demand.customerId =
+customer.id;
+
+demand.customerName =
+customer.name;
+
+}
+
+
+if(
+data.material !== undefined
+){
+
+const material =
+String(
+data.material
+).trim();
+
+if(!material){
+
+throw new Error(
+"原料名称不能为空"
+);
+
+}
+
+demand.material =
+material;
+
+}
+
+
+if(
+data.specification !== undefined
+){
+
+const specification =
+String(
+data.specification
+).trim();
+
+if(!specification){
+
+throw new Error(
+"规格要求不能为空"
+);
+
+}
+
+demand.specification =
+specification;
+
+}
+
+
+if(
+data.quantity !== undefined
+){
+
+const quantity =
+Number(
+data.quantity
+);
+
+if(
+!Number.isFinite(quantity) ||
+quantity <= 0
+){
+
+throw new Error(
+"需求数量必须大于0"
+);
+
+}
+
+demand.quantity =
+quantity;
+
+}
+
+
+if(
+data.origin !== undefined
+){
+
+demand.origin =
+String(
+data.origin || ""
+).trim();
+
+}
+
+
+if(
+data.delivery !== undefined
+){
+
+const delivery =
+String(
+data.delivery || ""
+).trim();
+
+if(!delivery){
+
+throw new Error(
+"到货地不能为空"
+);
+
+}
+
+demand.delivery =
+delivery;
+
+}
+
+
+if(
+data.arrivalDate !== undefined
+){
+
+demand.arrivalDate =
+data.arrivalDate || "";
+
+}
+
+
+if(
+data.targetPrice !== undefined
+){
+
+demand.targetPrice =
+Number(
+data.targetPrice || 0
+);
+
+}
+
+
+if(
+data.paymentMethod !== undefined
+){
+
+demand.paymentMethod =
+data.paymentMethod || "";
+
+}
+
+
+if(
+data.status !== undefined
+){
+
+demand.status =
+data.status || "待匹配";
+
+}
+
+
+if(
+data.note !== undefined
+){
+
+demand.note =
+String(
+data.note || ""
+).trim();
+
+}
+
+
+demand.updatedAt =
+new Date().toISOString();
+
+
+Module01DB.write(
+db
+);
+
+return demand;
+
+},
+
+
+remove:function(id){
+
+const db =
+Module01DB.read();
+
+const index =
+db.demands.findIndex(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+if(index === -1){
+
+throw new Error(
+"需求不存在"
+);
+
+}
+
+
+db.demands.splice(
+index,
+1
+);
+
+Module01DB.write(
+db
+);
+
+return true;
+
+}
+
+};
+
+
+
+/*
+============================================================
+页面状态
+============================================================
+*/
+
+let selectedDemandId =
+null;
+
+let editingCustomerId =
+null;
+
+let editingDemandId =
+null;
+
+
+
+/*
+============================================================
+返回首页
+============================================================
+*/
+
+function goHome(){
+
+window.location.href =
+HOME_URL;
+
+}
+
+
+
+/*
+============================================================
+客户弹窗
+============================================================
+*/
+
+function openAddCustomer(){
+
+editingCustomerId =
+null;
+
+document
+.getElementById(
+"customerModalTitle"
+)
+.textContent =
+"新增客户";
+
+
+document
+.getElementById(
+"customerName"
+)
+.value = "";
+
+
+document
+.getElementById(
+"customerContact"
+)
+.value = "";
+
+
+document
+.getElementById(
+"customerPhone"
+)
+.value = "";
+
+
+document
+.getElementById(
+"customerType"
+)
+.value =
+"饲料厂";
+
+
+document
+.getElementById(
+"customerNote"
+)
+.value = "";
+
+
+document
+.getElementById(
+"customerModal"
+)
+.classList
+.add("show");
+
+}
+
+
+function editCustomer(id){
+
+const customer =
+CustomerService.get(id);
+
+if(!customer){
+
+return;
+
+}
+
+editingCustomerId =
+id;
+
+
+document
+.getElementById(
+"customerModalTitle"
+)
+.textContent =
+"编辑客户";
+
+
+document
+.getElementById(
+"customerName"
+)
+.value =
+customer.name || "";
+
+
+document
+.getElementById(
+"customerContact"
+)
+.value =
+customer.contact || "";
+
+
+document
+.getElementById(
+"customerPhone"
+)
+.value =
+customer.phone || "";
+
+
+document
+.getElementById(
+"customerType"
+)
+.value =
+customer.type ||
+"饲料厂";
+
+
+document
+.getElementById(
+"customerNote"
+)
+.value =
+customer.note || "";
+
+
+document
+.getElementById(
+"customerModal"
+)
+.classList
+.add("show");
+
+}
+
+
+function closeCustomerModal(){
+
+document
+.getElementById(
+"customerModal"
+)
+.classList
+.remove("show");
+
+}
+
+
+
+function saveCustomer(){
+
+try{
+
+const data = {
+
+name:
+document
+.getElementById(
+"customerName"
+)
+.value,
+
+contact:
+document
+.getElementById(
+"customerContact"
+)
+.value,
+
+phone:
+document
+.getElementById(
+"customerPhone"
+)
+.value,
+
+type:
+document
+.getElementById(
+"customerType"
+)
+.value,
+
+note:
+document
+.getElementById(
+"customerNote"
+)
+.value
+
+};
+
+
+if(editingCustomerId){
+
+CustomerService.update(
+editingCustomerId,
+data
+);
+
+}else{
+
+CustomerService.create(
+data
+);
+
+}
+
+closeCustomerModal();
+
+render();
+
+}catch(error){
+
+alert(
+"保存客户失败：\n\n" +
+error.message
+);
+
+}
+
+}
+
+
+
+/*
+============================================================
+客户删除
+============================================================
+*/
+
+function deleteCustomer(id){
+
+const customer =
+CustomerService.get(id);
+
+if(!customer){
+
+return;
+
+}
+
+if(
+!confirm(
+"确定删除客户：\n\n" +
+customer.name +
+"？"
+)
+){
+
+return;
+
+}
+
+try{
+
+CustomerService.remove(id);
+
+render();
+
+}catch(error){
+
+alert(
+"删除客户失败：\n\n" +
+error.message
+);
+
+}
+
+}
+
+
+
+/*
+============================================================
+需求客户下拉框
+============================================================
+*/
+
+function fillDemandCustomers(){
+
+const select =
+document
+.getElementById(
+"demandCustomerId"
+);
+
+const customers =
+CustomerService.list();
+
+
+if(customers.length === 0){
+
+select.innerHTML =
+
+`
+<option value="">
+当前没有客户，请先新增客户
+</option>
+`;
+
+return;
+
+}
+
+
+select.innerHTML =
+customers
+.map(
+function(customer){
+
+return `
+
+<option value="${esc(customer.id)}">
+
+${esc(customer.name)}
+｜${esc(customer.id)}
+
+</option>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+
+/*
+============================================================
+需求弹窗
+============================================================
+*/
+
+function openAddDemand(){
+
+const customers =
+CustomerService.list();
+
+
+if(customers.length === 0){
+
+alert(
+"当前没有客户。\n\n请先新增客户，再建立客户具体需求。"
+);
+
+openAddCustomer();
+
+return;
+
+}
+
+
+editingDemandId =
+null;
+
+
+document
+.getElementById(
+"demandModalTitle"
+)
+.textContent =
+"新增客户具体需求";
+
+
+fillDemandCustomers();
+
+
+document
+.getElementById(
+"demandCustomerId"
+)
+.value =
+customers[0].id;
+
+
+document
+.getElementById(
+"demandMaterial"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandSpecification"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandQuantity"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandOrigin"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandDelivery"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandArrivalDate"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandTargetPrice"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandPaymentMethod"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandStatus"
+)
+.value =
+"待匹配";
+
+
+document
+.getElementById(
+"demandNote"
+)
+.value = "";
+
+
+document
+.getElementById(
+"demandModal"
+)
+.classList
+.add("show");
+
+}
+
+
+
+function editDemand(id){
+
+const demand =
+DemandService.get(id);
+
+if(!demand){
+
+return;
+
+}
+
+editingDemandId =
+id;
+
+
+document
+.getElementById(
+"demandModalTitle"
+)
+.textContent =
+"编辑客户具体需求";
+
+
+fillDemandCustomers();
+
+
+document
+.getElementById(
+"demandCustomerId"
+)
+.value =
+demand.customerId;
+
+
+document
+.getElementById(
+"demandMaterial"
+)
+.value =
+demand.material;
+
+
+document
+.getElementById(
+"demandSpecification"
+)
+.value =
+demand.specification;
+
+
+document
+.getElementById(
+"demandQuantity"
+)
+.value =
+demand.quantity;
+
+
+document
+.getElementById(
+"demandOrigin"
+)
+.value =
+demand.origin;
+
+
+document
+.getElementById(
+"demandDelivery"
+)
+.value =
+demand.delivery;
+
+
+document
+.getElementById(
+"demandArrivalDate"
+)
+.value =
+demand.arrivalDate;
+
+
+document
+.getElementById(
+"demandTargetPrice"
+)
+.value =
+demand.targetPrice || "";
+
+
+document
+.getElementById(
+"demandPaymentMethod"
+)
+.value =
+demand.paymentMethod;
+
+
+document
+.getElementById(
+"demandStatus"
+)
+.value =
+demand.status;
+
+
+document
+.getElementById(
+"demandNote"
+)
+.value =
+demand.note;
+
+
+document
+.getElementById(
+"demandModal"
+)
+.classList
+.add("show");
+
+}
+
+
+
+function closeDemandModal(){
+
+document
+.getElementById(
+"demandModal"
+)
+.classList
+.remove("show");
+
+}
+
+
+
+/*
+============================================================
+保存需求
+============================================================
+*/
+
+function saveDemand(){
+
+try{
+
+const data = {
+
+customerId:
+document
+.getElementById(
+"demandCustomerId"
+)
+.value,
+
+material:
+document
+.getElementById(
+"demandMaterial"
+)
+.value,
+
+specification:
+document
+.getElementById(
+"demandSpecification"
+)
+.value,
+
+quantity:
+Number(
+document
+.getElementById(
+"demandQuantity"
+)
+.value
+),
+
+origin:
+document
+.getElementById(
+"demandOrigin"
+)
+.value,
+
+delivery:
+document
+.getElementById(
+"demandDelivery"
+)
+.value,
+
+arrivalDate:
+document
+.getElementById(
+"demandArrivalDate"
+)
+.value,
+
+targetPrice:
+Number(
+document
+.getElementById(
+"demandTargetPrice"
+)
+.value
+) || 0,
+
+paymentMethod:
+document
+.getElementById(
+"demandPaymentMethod"
+)
+.value,
+
+status:
+document
+.getElementById(
+"demandStatus"
+)
+.value,
+
+note:
+document
+.getElementById(
+"demandNote"
+)
+.value
+
+};
+
+
+let demand;
+
+
+if(editingDemandId){
+
+demand =
+DemandService.update(
+editingDemandId,
+data
+);
+
+}else{
+
+demand =
+DemandService.create(
+data
+);
+
+}
+
+
+selectedDemandId =
+demand.id;
+
+
+closeDemandModal();
+
+render();
+
+showDemand(
+demand.id
+);
+
+}catch(error){
+
+alert(
+"保存需求失败：\n\n" +
+error.message
+);
+
+}
+
+}
+
+
+
+/*
+============================================================
+删除需求
+============================================================
+*/
+
+function deleteDemand(id){
+
+const demand =
+DemandService.get(id);
+
+if(!demand){
+
+return;
+
+}
+
+
+if(
+!confirm(
+"确定删除这条客户需求吗？\n\n" +
+
+"需求ID：" +
+demand.id +
+
+"\n客户：" +
+demand.customerName +
+
+"\n原料：" +
+demand.material
+)
+){
+
+return;
+
+}
+
+
+try{
+
+DemandService.remove(
+id
+);
+
+if(
+selectedDemandId === id
+){
+
+selectedDemandId =
+null;
+
+}
+
+render();
+
+
+document
+.getElementById(
+"detail"
+)
+.innerHTML =
+
+`
+<div class="empty">
+需求已删除
+</div>
+`;
+
+}catch(error){
+
+alert(
+"删除需求失败：\n\n" +
+error.message
+);
+
+}
+
+}
+
+
+
+/*
+============================================================
+需求详情
+============================================================
+*/
+
+function showDemand(id){
+
+const demand =
+DemandService.get(id);
+
+if(!demand){
+
+return;
+
+}
+
+
+selectedDemandId =
+id;
+
+
+document
+.getElementById(
+"detail"
+)
+.innerHTML =
+
+`
+
+<div class="detail">
+
+<h3>
+
+${esc(demand.material)}
+
+<br>
+
+<span class="small">
+
+${esc(demand.customerName)}
+
+</span>
+
+</h3>
+
+
+<div class="notice good">
+
+这是模块01产生的真实客户需求。
+
+<br>
+
+模块03将使用：
+
+<b>${esc(demand.id)}</b>
+
+作为后续匹配的 demandId。
+
+</div>
+
+
+<div class="detail-grid">
+
+
+<div class="detail-item">
+
+<div class="label">
+需求ID
+</div>
+
+<div class="value">
+${esc(demand.id)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+客户ID
+</div>
+
+<div class="value">
+${esc(demand.customerId)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+客户
+</div>
+
+<div class="value">
+${esc(demand.customerName)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+原料
+</div>
+
+<div class="value">
+${esc(demand.material)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+规格要求
+</div>
+
+<div class="value">
+${esc(demand.specification)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+需求数量
+</div>
+
+<div class="value">
+${demand.quantity} 吨
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+产地要求
+</div>
+
+<div class="value">
+${esc(demand.origin || "不限")}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+到货地
+</div>
+
+<div class="value">
+${esc(demand.delivery)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+到货日期
+</div>
+
+<div class="value">
+${esc(demand.arrivalDate || "未指定")}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+目标价
+</div>
+
+<div class="value">
+${money(demand.targetPrice)}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+付款方式
+</div>
+
+<div class="value">
+${esc(demand.paymentMethod || "未指定")}
+</div>
+
+</div>
+
+
+<div class="detail-item">
+
+<div class="label">
+状态
+</div>
+
+<div class="value">
+
+<span class="tag ${statusClass(demand.status)}">
+
+${esc(demand.status)}
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div style="margin-top:12px">
+
+<b>
+需求备注
+</b>
+
+<div class="notice" style="margin-top:6px">
+
+${esc(demand.note || "无")}
+
+</div>
+
+</div>
+
+
+<div style="margin-top:14px">
+
+<button
+class="primary"
+onclick="editDemand('${esc(demand.id)}')"
+>
+编辑需求
+</button>
+
+
+<button
+class="danger"
+onclick="deleteDemand('${esc(demand.id)}')"
+>
+删除需求
+</button>
+
+</div>
+
+
+<div style="margin-top:15px">
+
+<div class="notice">
+
+<b>模块03接口数据：</b>
+
+<br><br>
+
+customerId：
+
+${esc(demand.customerId)}
+
+<br>
+
+demandId：
+
+${esc(demand.id)}
+
+<br>
+
+material：
+
+${esc(demand.material)}
+
+<br>
+
+specification：
+
+${esc(demand.specification)}
+
+<br>
+
+origin：
+
+${esc(demand.origin)}
+
+<br>
+
+quantity：
+
+${demand.quantity}
+
+<br>
+
+delivery：
+
+${esc(demand.delivery)}
+
+<br>
+
+arrivalDate：
+
+${esc(demand.arrivalDate)}
+
+<br>
+
+targetPrice：
+
+${demand.targetPrice}
+
+<br>
+
+paymentMethod：
+
+${esc(demand.paymentMethod)}
+
+</div>
+
+</div>
+
+
+</div>
+
+`;
+
+}
+
+
+
+/*
+============================================================
+状态样式
+============================================================
+*/
+
+function statusClass(status){
+
+if(
+status === "已匹配" ||
+status === "成交"
+){
+
+return "green";
+
+}
+
+if(
+status === "关闭"
+){
+
+return "red";
+
+}
+
+if(
+status === "待匹配" ||
+status === "匹配中"
+){
+
+return "orange";
+
+}
+
+return "";
+
+}
+
+
+
+/*
+============================================================
+客户筛选器
+============================================================
+*/
+
+function renderCustomerFilter(){
+
+const select =
+document
+.getElementById(
+"customerFilter"
+);
+
+const current =
+select.value;
+
+const customers =
+CustomerService.list();
+
+
+select.innerHTML =
+
+`
+
+<option value="">
+全部客户
+</option>
+
+` +
+
+customers
+.map(
+function(customer){
+
+return `
+
+<option value="${esc(customer.id)}">
+
+${esc(customer.name)}
+
+</option>
+
+`;
+
+}
+)
+.join("");
+
+
+if(
+customers.some(
+function(customer){
+
+return customer.id ===
+current;
+
+}
+)
+){
+
+select.value =
+current;
+
+}
+
+}
+
+
+
+/*
+============================================================
+主渲染
+============================================================
+*/
+
+function render(){
+
+const db =
+Module01DB.read();
+
+const demands =
+db.demands;
+
+const customers =
+db.customers;
+
+
+renderCustomerFilter();
+
+
+const searchEl =
+document
+.getElementById(
+"search"
+);
+
+
+const statusEl =
+document
+.getElementById(
+"statusFilter"
+);
+
+
+const customerEl =
+document
+.getElementById(
+"customerFilter"
+);
+
+
+const search =
+searchEl
+?
+normalize(
+searchEl.value
+)
+:
+"";
+
+
+const status =
+statusEl
+?
+statusEl.value
+:
+"";
+
+
+const customerId =
+customerEl
+?
+customerEl.value
+:
+"";
+
+
+const filtered =
+demands.filter(
+function(demand){
+
+const text = [
+
+demand.id,
+
+demand.customerId,
+
+demand.customerName,
+
+demand.material,
+
+demand.specification,
+
+demand.origin,
+
+demand.delivery,
+
+demand.paymentMethod,
+
+demand.note
+
+]
+.join(" ");
+
+
+const searchOK =
+!search ||
+normalize(text)
+.includes(search);
+
+
+const statusOK =
+!status ||
+demand.status ===
+status;
+
+
+const customerOK =
+!customerId ||
+demand.customerId ===
+customerId;
+
+
+return (
+searchOK &&
+statusOK &&
+customerOK
+);
+
+}
+);
+
+
+
+/*
+KPI
+*/
+
+const waiting =
+demands.filter(
+function(item){
+
+return item.status ===
+"待匹配";
+
+}
+).length;
+
+
+const matched =
+demands.filter(
+function(item){
+
+return (
+item.status === "已匹配" ||
+item.status === "已报价"
+);
+
+}
+).length;
+
+
+const deal =
+demands.filter(
+function(item){
+
+return item.status ===
+"成交";
+
+}
+).length;
+
+
+document
+.getElementById(
+"kpi"
+)
+.innerHTML =
+
+`
+
+<div class="card kpi">
+
+<small>
+客户数
+</small>
+
+<strong>
+${customers.length}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+具体需求数
+</small>
+
+<strong>
+${demands.length}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+待匹配需求
+</small>
+
+<strong>
+${waiting}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+已匹配 / 已报价
+</small>
+
+<strong>
+${matched}
+</strong>
+
+</div>
+
+
+<div class="card kpi">
+
+<small>
+成交需求
+</small>
+
+<strong>
+${deal}
+</strong>
+
+</div>
+
+`;
+
+
+document
+.getElementById(
+"demandCountText"
+)
+.textContent =
+
+"当前显示 " +
+filtered.length +
+" / " +
+demands.length +
+" 条需求";
+
+
+/*
+需求表
+*/
+
+const tbody =
+document
+.getElementById(
+"demandList"
+);
+
+
+if(filtered.length === 0){
+
+tbody.innerHTML =
+
+`
+
+<tr>
+
+<td
+colspan="12"
+class="empty"
+>
+
+暂无符合条件的客户具体需求。
+
+<br><br>
+
+请先点击“新增客户”建立客户，
+
+再点击“新增客户需求”建立真实采购需求。
+
+</td>
+
+</tr>
+
+`;
+
+}else{
+
+tbody.innerHTML =
+filtered
+.map(
+function(demand){
+
+return `
+
+<tr>
+
+
+<td>
+
+<b>
+${esc(demand.id)}
+</b>
+
+<br>
+
+<small>
+${esc(
+formatDateTime(
+demand.createdAt
+)
+)}
+</small>
+
+</td>
+
+
+<td>
+
+<b>
+${esc(demand.customerName)}
+</b>
+
+<br>
+
+<small>
+${esc(demand.customerId)}
+</small>
+
+</td>
+
+
+<td>
+
+<b>
+${esc(demand.material)}
+</b>
+
+</td>
+
+
+<td>
+
+${esc(
+demand.specification
+)}
+
+</td>
+
+
+<td>
+
+<b>
+${demand.quantity}
+</b>
+
+吨
+
+</td>
+
+
+<td>
+
+${esc(
+demand.origin ||
+"不限"
+)}
+
+</td>
+
+
+<td>
+
+${esc(
+demand.delivery
+)}
+
+</td>
+
+
+<td>
+
+${esc(
+demand.arrivalDate ||
+"未指定"
+)}
+
+</td>
+
+
+<td>
+
+${money(
+demand.targetPrice
+)}
+
+</td>
+
+
+<td>
+
+${esc(
+demand.paymentMethod ||
+"未指定"
+)}
+
+</td>
+
+
+<td>
+
+<span class="tag ${statusClass(demand.status)}">
+
+${esc(
+demand.status
+)}
+
+</span>
+
+</td>
+
+
+<td>
+
+<button
+onclick="showDemand('${esc(demand.id)}')"
+>
+详情
+</button>
+
+
+<button
+onclick="editDemand('${esc(demand.id)}')"
+>
+编辑
+</button>
+
+</td>
+
+
+</tr>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+renderCustomers();
+
+}
+
+
+
+/*
+============================================================
+客户列表
+============================================================
+*/
+
+function renderCustomers(){
+
+const box =
+document
+.getElementById(
+"customerList"
+);
+
+const customers =
+CustomerService.list();
+
+
+if(customers.length === 0){
+
+box.innerHTML =
+
+`
+
+<div class="empty">
+
+暂无客户。
+
+<br><br>
+
+请点击“新增客户”。
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+box.innerHTML =
+customers
+.map(
+function(customer){
+
+const demandCount =
+DemandService
+.list()
+.filter(
+function(demand){
+
+return demand.customerId ===
+customer.id;
+
+}
+)
+.length;
+
+
+return `
+
+<div class="customer-box">
+
+<div class="customer-title">
+
+${esc(customer.name)}
+
+</div>
+
+
+<div class="customer-meta">
+
+customerId：
+
+${esc(customer.id)}
+
+<br>
+
+联系人：
+
+${esc(customer.contact || "—")}
+
+<br>
+
+电话：
+
+${esc(customer.phone || "—")}
+
+<br>
+
+客户类型：
+
+${esc(customer.type || "—")}
+
+<br>
+
+具体需求：
+
+<b>
+${demandCount}
+</b>
+
+条
+
+<br>
+
+备注：
+
+${esc(customer.note || "—")}
+
+</div>
+
+
+<div style="margin-top:9px">
+
+<button
+onclick="editCustomer('${esc(customer.id)}')"
+>
+编辑客户
+</button>
+
+
+<button
+class="danger"
+onclick="deleteCustomer('${esc(customer.id)}')"
+>
+删除客户
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+
+/*
+============================================================
+日期格式
+============================================================
+*/
+
+function formatDateTime(value){
+
+if(!value){
+
+return "";
+
+}
+
+try{
+
+const d =
+new Date(value);
+
+if(
+Number.isNaN(
+d.getTime()
+)
+){
+
+return "";
+
+}
+
+return d
+.toLocaleString(
+"zh-CN"
+);
+
+}catch(error){
+
+return "";
+
+}
+
+}
+
+
+
+/*
+============================================================
+恢复测试数据
+============================================================
+*/
+
+function restoreDemo(){
+
+if(
+!confirm(
+"确定恢复模块01测试数据吗？\n\n" +
+
+"这会清空模块01当前客户和具体需求，\n" +
+
+"然后重新建立一套测试数据。\n\n" +
+
+"模块02和模块03不会被修改。"
+)
+){
+
+return;
+
+}
+
+
+const db =
+Module01DB.createEmpty();
+
+
+/*
+测试客户1
+*/
+
+const customer1 = {
+
+id:"CUS-DEMO-001",
+
+name:"济南华丰饲料有限公司",
+
+contact:"张经理",
+
+phone:"13800000001",
+
+type:"饲料厂",
+
+note:"模块01演示客户",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+/*
+测试客户2
+*/
+
+const customer2 = {
+
+id:"CUS-DEMO-002",
+
+name:"山东恒泰饲料有限公司",
+
+contact:"李经理",
+
+phone:"13800000002",
+
+type:"饲料厂",
+
+note:"模块01演示客户2",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+};
+
+
+db.customers.push(
+customer1,
+customer2
+);
+
+
+/*
+需求1
+*/
+
+db.demands.push({
+
+id:"DEM-DEMO-001",
+
+customerId:
+customer1.id,
+
+customerName:
+customer1.name,
+
+material:"豆粕",
+
+specification:"蛋白43%，水分≤12%",
+
+origin:"山东",
+
+quantity:100,
+
+delivery:"济南",
+
+arrivalDate:"2026-09-30",
+
+targetPrice:3200,
+
+paymentMethod:"现款",
+
+status:"待匹配",
+
+note:"需要近期到货，优先山东货源",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+});
+
+
+/*
+需求2
+*/
+
+db.demands.push({
+
+id:"DEM-DEMO-002",
+
+customerId:
+customer1.id,
+
+customerName:
+customer1.name,
+
+material:"玉米",
+
+specification:"水分≤14%，霉变≤2%",
+
+origin:"东北",
+
+quantity:200,
+
+delivery:"济南",
+
+arrivalDate:"2026-10-05",
+
+targetPrice:2350,
+
+paymentMethod:"货到付款",
+
+status:"待匹配",
+
+note:"要求正规发票",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+});
+
+
+/*
+需求3
+*/
+
+db.demands.push({
+
+id:"DEM-DEMO-003",
+
+customerId:
+customer2.id,
+
+customerName:
+customer2.name,
+
+material:"豆粕",
+
+specification:"蛋白43%",
+
+origin:"山东",
+
+quantity:300,
+
+delivery:"淄博",
+
+arrivalDate:"2026-10-10",
+
+targetPrice:3190,
+
+paymentMethod:"账期30天",
+
+status:"待匹配",
+
+note:"可接受分批到货",
+
+createdAt:
+new Date().toISOString(),
+
+updatedAt:
+new Date().toISOString()
+
+});
+
+
+Module01DB.write(
+db
+);
+
+
+selectedDemandId =
+null;
+
+
+render();
+
+
+document
+.getElementById(
+"detail"
+)
+.innerHTML =
+
+`
+
+<div class="notice good">
+
+模块01测试数据已恢复。
+
+<br><br>
+
+已建立：
+
+<br>
+
+客户：2 个
+
+<br>
+
+真实客户需求：3 条
+
+<br><br>
+
+现在这些 Demand 可以直接被模块03读取。
+
+</div>
+
+`;
+
+}
+
+
+
+/*
+============================================================
+初始化
+============================================================
+*/
+
+function init(){
+
+const db =
+Module01DB.read();
+
+
+/*
+第一次打开完全没有数据时，
+不自动塞入测试数据。
+
+必须由用户主动恢复测试数据。
+*/
+
+render();
+
+
+/*
+如果存在需求，
+默认显示第一条。
+*/
+
+if(db.demands.length > 0){
+
+showDemand(
+db.demands[0].id
+);
+
+}
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
